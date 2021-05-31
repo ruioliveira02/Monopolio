@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "vTn2d8wRtGmRF+GDJ6waXilQ9bcieh80HLRsgECHQ0v0uKb1J9CneHqBDAVlD+/Wd/UeW2ovcrT6zfmwCvJILw==",
+  "dgSpecHash": "F2c3G/nNYvzB3CxJ13QFcTWN2DPRjgLU5hZJ9/03qi7pA5p1siiNt3cob7s0ZAMzaKqjwL4fjX6A+Iy9rDTzDg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
+  "projectFilePath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\ASUS\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\Gaming\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }
