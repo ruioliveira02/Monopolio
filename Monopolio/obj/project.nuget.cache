@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "kbScuoEFSQo3bM+XPqlJ3WX+6Ws5ul8vBrGv5J1LQxQWy3eNmZAUq81BmRbVAtPm/Mf5rv3qn3nux0UZdIgNog==",
   "success": true,
-  "projectFilePath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj",
+  "projectFilePath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
