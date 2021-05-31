@@ -161,14 +161,17 @@ namespace Monopolio
         public readonly Type type;
         public readonly Property property;  //se type = property
         public readonly int tax;            //se type = tax
+        public readonly string name;        //se type = tax
 
         public Property.Color Color { get => property.color; }
 
-        public Square(Type type, Property property = null, int tax = 0)
+        [JsonConstructor]
+        public Square(Type type, Property property = null, int tax = 0, string name = null)
         {
             this.type = type;
             this.property = property;
             this.tax = tax;
+            this.name = null;
         }
     }
 }

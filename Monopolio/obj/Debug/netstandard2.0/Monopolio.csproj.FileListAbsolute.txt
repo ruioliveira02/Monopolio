@@ -1,0 +1,4 @@
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.csprojAssemblyReference.cache
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.csproj.CoreCompileInputs.cache

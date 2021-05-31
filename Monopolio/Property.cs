@@ -216,7 +216,14 @@ namespace Monopolio
                 return Owner == null ? 4 * dice : 10 * dice;
             }
             else
-                return ps.Property.Rent(Buildings);
+            {
+                int b = Buildings;
+
+                if (Owner != null && b == 0)
+                    return 2 * ps.Property.Rent(b);
+                else
+                    return ps.Property.Rent(b);
+            }
         }
 
         //Returns false when:

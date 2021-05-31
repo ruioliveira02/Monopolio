@@ -177,13 +177,13 @@ namespace Monopolio
                     case Square.Type.Chance:
                         Card d = Chance.Draw();
                         foreach (Event e in d.Events)
-                            Execute(e);
+                            Execute(e, Players[Turn]);
                         break;
 
                     case Square.Type.CommunityChest:
                         d = CommunityChest.Draw();
                         foreach (Event e in d.Events)
-                            Execute(e);
+                            Execute(e, Players[Turn]);
                         break;
 
                     case Square.Type.Tax:
@@ -300,8 +300,35 @@ namespace Monopolio
                     target.Money += Players.Length * e.X;
                     break;
 
-                //case Event.EventType.PayDoubleRent:
+                case Event.EventType.PayDoubleRent:
+                    Square s = board.GetSquare(target.Position);
+                    if (s.type == Square.Type.Property)
+                    {
+                        PropertyState ps = GetPropertyState(s.property);
+                        if (ps.Owner != null && ps.Owner != target)
+                        {
+                            int rent = 2 * Groups[(int)ps.Color].Rent(ps);
+                            target.Money -= rent;
+                            ps.Owner.Money += rent;
+                        }
+                    }
+                    break;
 
+                case Event.EventType.RepairProperty:
+                    int cost = 0;
+                    foreach (var a in Groups)
+                    {
+                        foreach (var b in a.properties)
+                        {
+                            if (b.Owner == target)
+                            {
+                                cost += b.Houses * e.X;
+                                cost += b.Hotels * e.Y;
+                            }
+                        }
+                    }
+                    target.Money -= cost;
+                    break;
             }
         }
     }

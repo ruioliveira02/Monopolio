@@ -6,7 +6,7 @@ namespace Monopolio
 {
     //represents an action a player can choose to perform. Things like paying rent after
     //landing on someone else's property is automatic, and so isn't considered an Action
-    public struct Action
+    public class Action
     {
         public enum Type
         {

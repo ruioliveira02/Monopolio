@@ -77,7 +77,6 @@ namespace Monopolio
             Receive,        //player gets X money. If X is negative, player loses money
             ReceiveFromEach,//each player gives you X money. If X < 0, you give each X
             PayDoubleRent,  //pay twice the rent of the square you are on (if owned)
-            GetMiddleMoney, //receive all the money in the middle of the board
             RepairProperty, //pay X for each house on your property and Y for each hotel
         }
 
