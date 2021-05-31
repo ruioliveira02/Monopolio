@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Monopolio
 {
@@ -13,57 +15,88 @@ namespace Monopolio
 
         public static Random randomizer = new Random();
 
+        public static State LoadState(string file)
+        {
+            string json = File.ReadAllText(file);
+            return JsonConvert.DeserializeObject<State>(json);
+        }
 
-        readonly Board board; //the board "template"
 
-        Player[] players;
-        int turn; //which player is currently playing
-        bool repeat_turn;
-        int repeated_turns;
+        public Board board { get; } //the board "template"
+        public PropertyGroup[] Groups { get; }
 
-        PropertyGroup[] groups;
-        //cartas (que já saíram? ou todas, já baralhadas?)
-        int middle_money;
+        public Player[] Players { get; }
+        public int Turn { get; private set; } //which player is currently playing
+        public bool RepeatTurn { get; private set; }
+        public int RepeatedTurns { get; private set; }
 
-        //2-long array with integers from 1 to 6
-        public int[] Dice { get; }
+        public int[] Dice { get; } //2-long array with integers from 1 to 6
+
+        public int MiddleMoney { get; private set; }
+        public Deck Chance { get; }
+        public Deck CommunityChest { get; }
+
 
         public State(string[] players) //new game
         {
-            this.players = new Player[players.Length];
+            Players = new Player[players.Length];
 
             for (int i = 0; i < players.Length; i++)
-                this.players[i] = new Player(players[i]);
+                Players[i] = new Player(players[i]);
 
-            board = new Board("default_board.txt"); //TODO
-            groups = board.GetPropertyGroups();
-            turn = -1;
+            board = Board.LoadBoard("default_board.txt");
+            Groups = board.GetPropertyGroups();
+            Turn = -1;
 
             Dice = new int[2];
             Dice[0] = 1;
             Dice[1] = 1;
+            Chance = new Deck(board.Chance);
+            CommunityChest = new Deck(board.CommunityChest);
         }
 
-        public State(string file) //saved game
+        [JsonConstructor]
+        public State(Board board, PropertyGroup[] groups, Player[] players, int turn,
+            bool repeatTurn, int repeatedTurns, int[] dice, int middleMoney,
+            Deck chance, Deck communityChest) //saved game
         {
-            
+            this.board = board;
+            Groups = groups;
+            Players = players;
+            Turn = turn;
+            RepeatTurn = repeatTurn;
+            RepeatedTurns = repeatedTurns;
+            Dice = dice;
+            MiddleMoney = middleMoney;
+            Chance = chance;
+            CommunityChest = communityChest;
+
+            foreach (var a in Groups)
+            {
+                foreach (var b in a.properties)
+                {
+                    b.ResolveOwner(Players);
+                    b.ResolveProperty(board);
+                }
+            }
         }
 
 
-        public void Save(string file) //json?
+        public void Save(string file)
         {
-            
+            string json = JsonConvert.SerializeObject(this);
+            File.WriteAllText(file, json);
         }
 
         public PropertyState GetPropertyState(Property property)
-            => groups[(int)property.color].GetPropertyState(property);
+            => Groups[(int)property.color].GetPropertyState(property);
 
 
         public PropertyState GetPropertyState(string propertyName)
         {
-            foreach (var g in groups)
+            foreach (var g in Groups)
                 foreach (var s in g.properties)
-                    if (s.property.name == propertyName)
+                    if (s.Property.name == propertyName)
                         return s;
 
             return null;
@@ -71,38 +104,33 @@ namespace Monopolio
 
         public Player GetPlayer(string playerName)
         {
-            foreach (Player p in players)
+            foreach (Player p in Players)
                 if (p.name == playerName)
                     return p;
 
             return null;
         }
 
-        public void SetOwner(Property property, Player player)
-        {
-            GetPropertyState(property).Owner = player;
-        }
-
 
         //returns true when 3 doubles have been rolled in a row
         public bool DiceRoll()
         {
-            if (repeat_turn)
-                repeated_turns++;
+            if (RepeatTurn)
+                RepeatedTurns++;
             else
             {
-                turn = (turn + 1) % players.Length;
-                repeated_turns = 0;
+                Turn = (Turn + 1) % Players.Length;
+                RepeatedTurns = 0;
             }
 
             Dice[0] = randomizer.Next(1, 7);
             Dice[1] = randomizer.Next(1, 7);
 
-            repeat_turn = Dice[0] == Dice[1];
+            RepeatTurn = Dice[0] == Dice[1];
             
-            if (repeat_turn && repeated_turns == 2) //3 doubles, send player to jail
+            if (RepeatTurn && RepeatedTurns == 2) //3 doubles, send player to jail
             {
-                repeat_turn = false;
+                RepeatTurn = false;
                 return true;
             }
 
@@ -112,48 +140,65 @@ namespace Monopolio
         public void NextTurn()
         {
             if (DiceRoll())
-                board.SendToJail(players[turn]);
-            else if (players[turn].InJail >= 0)
+                board.SendToJail(Players[Turn]);
+            else if (Players[Turn].InJail >= 0)
             {
                 if (Dice[0] == Dice[1])
                 {
-                    repeat_turn = false;
-                    players[turn].InJail = 0;
+                    RepeatTurn = false;
+                    Players[Turn].InJail = 0;
                 }
-                else if (players[turn].InJail >= 3) //after 3 turns you MUST leave
+                else if (Players[Turn].InJail >= 3) //after 3 turns you MUST leave
                 {
-                    players[turn].Money -= jailFine;
-                    players[turn].InJail = 0;
+                    Players[Turn].Money -= jailFine;
+                    Players[Turn].InJail = 0;
                 }
                 else
-                    players[turn].InJail++;
+                    Players[Turn].InJail++;
             }
 
-            if (players[turn].InJail == 0)
+            if (Players[Turn].InJail == 0)
             {
-                Square s = board.Walk(players[turn], Dice[0] + Dice[1]);
+                Square s = board.Walk(Players[Turn], Dice[0] + Dice[1]);
 
                 switch (s.type)
                 {
-                    case Square.Type.Jail:
-                        break;
-
                     case Square.Type.Property:
                         PropertyState ps = GetPropertyState(s.property);
                         Player owner = ps.Owner;
-                        if (owner != null && owner != players[turn])
+                        if (owner != null && owner != Players[Turn])
                         {
-                            int rent = groups[(int)ps.property.color].Rent(ps);
-                            players[turn].Money -= rent;
+                            int rent = Groups[(int)ps.Property.color].Rent(ps);
+                            Players[Turn].Money -= rent;
                             owner.Money += rent;
                         }
                         break;
 
-                    case Square.Type.GoToJail:
-                        board.SendToJail(players[turn]);
+                    case Square.Type.Chance:
+                        Card d = Chance.Draw();
+                        foreach (Event e in d.Events)
+                            Execute(e);
                         break;
 
-                    //TODO
+                    case Square.Type.CommunityChest:
+                        d = CommunityChest.Draw();
+                        foreach (Event e in d.Events)
+                            Execute(e);
+                        break;
+
+                    case Square.Type.Tax:
+                        Players[Turn].Money -= s.tax;
+                        MiddleMoney += s.tax;
+                        break;
+
+                    case Square.Type.FreeParking:
+                        Players[Turn].Money += MiddleMoney;
+                        MiddleMoney = 0;
+                        break;
+
+                    case Square.Type.GoToJail:
+                        board.SendToJail(Players[Turn]);
+                        break;
                 }
             }
         }
@@ -161,12 +206,12 @@ namespace Monopolio
         //returns wether the Action was successfully executed
         public bool Execute(Action a)
         {
-            if (a.IsTurnAction && players[turn] != a.Player)
+            if (a.IsTurnAction && Players[Turn] != a.Player)
                 return false;
 
             if (a.IsPropertyAction)
             {
-                Square s = board.GetSquare(players[turn].Position);
+                Square s = board.GetSquare(Players[Turn].Position);
 
                 if (s.type != Square.Type.Property)
                     return false;
@@ -181,7 +226,7 @@ namespace Monopolio
                     a.Player.Money -= s.property.price;
                     ps.Owner = a.Player;
                 }
-                else if (!groups[(int)s.property.color].Build(s.property)) //build
+                else if (!Groups[(int)s.property.color].Build(s.property)) //build
                     return false;
             }
             else
@@ -193,7 +238,7 @@ namespace Monopolio
                             return false;
                         a.Player.Money -= jailFine;
                         a.Player.InJail = 0;
-                        if (a.Player == players[turn] && a.Player.InJail == 1)
+                        if (a.Player == Players[Turn] && a.Player.InJail == 1)
                         {
                             NextTurn();
                             return true;
@@ -203,7 +248,7 @@ namespace Monopolio
                     case Action.Type.Mortgage:
                         if (a.property.Owner != a.Player)
                             return false;
-                        if (!groups[(int)a.property.Color].Mortgage(a.property))
+                        if (!Groups[(int)a.property.Color].Mortgage(a.property))
                             return false;
                         break;
 
@@ -226,6 +271,38 @@ namespace Monopolio
                 NextTurn();
 
             return true;
+        }
+
+        public void Execute(Event e, Player target)
+        {
+            switch (e.Type)
+            {
+                case Event.EventType.GoToJail:
+                    board.SendToJail(target);
+                    break;
+
+                case Event.EventType.AdvanceToStart:
+                    board.AdvanceToStart(target);
+                    break;
+
+                case Event.EventType.AdvanceTo:
+                    board.AdvanceToProperty(target, e.Arg);
+                    break;
+
+                case Event.EventType.Receive:
+                    target.Money += e.X;
+                    break;
+
+                case Event.EventType.ReceiveFromEach:
+                    foreach (Player p in Players)
+                        p.Money -= e.X;
+
+                    target.Money += Players.Length * e.X;
+                    break;
+
+                //case Event.EventType.PayDoubleRent:
+
+            }
         }
     }
 }

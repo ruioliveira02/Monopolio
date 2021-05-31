@@ -16,7 +16,7 @@ namespace Monopolio
         public int Position { get; set; } //position on the board
 
         public int InJail { get; set; } //number of turns the player has been in jail
-        public bool GetOutOfJailFreeCard { get; set; } //wether the player has the "Get Out of Jail Free Card"
+        public int GetOutOfJailFreeCards { get; set; } //wether the player has the "Get Out of Jail Free Card"
         //a jogar (falso se já perdeu)
 
         public Player(string name)
@@ -29,6 +29,16 @@ namespace Monopolio
 
             this.name = name;
             Money = State.initial_money;
+        }
+
+        [Newtonsoft.Json.JsonConstructor]
+        public Player(string name, int money, int position, int inJail, int getOutOfJailFreeCards)
+        {
+            this.name = name;
+            Money = money;
+            Position = position;
+            InJail = inJail;
+            GetOutOfJailFreeCards = getOutOfJailFreeCards;
         }
     }
 }

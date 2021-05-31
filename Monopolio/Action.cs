@@ -6,7 +6,7 @@ namespace Monopolio
 {
     //represents an action a player can choose to perform. Things like paying rent after
     //landing on someone else's property is automatic, and so isn't considered an Action
-    public class Action
+    public struct Action
     {
         public enum Type
         {
@@ -106,7 +106,7 @@ namespace Monopolio
             }
         }
 
-        public List<string> WordSplit(string s)
+        public static List<string> WordSplit(string s)
         {
             List<string> ans = new List<string>();
             bool quotes = false;

@@ -1,48 +1,42 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Monopolio
 {
-    public struct Square
-    {
-        public enum Type
-        {
-            Start,
-            Property,
-            CommunityChest,
-            Tax,
-            Chance,
-            Jail,
-            FreeParking,
-            GoToJail,
-        }
-
-        public readonly Type type;
-        public readonly Property property;  //se type = property
-        public readonly int tax;            //se type = tax
-
-        public Property.Color Color { get => property.color; }
-
-        public Square(Type type, Property property = null, int tax = 0)
-        {
-            this.type = type;
-            this.property = property;
-            this.tax = tax;
-        }
-    }
-
     public class Board //não tem setters/acesso público às variáveis
     {
-        Square[] squares;
-        //cartas
-
-        public Board(string file) //load board from file (json?)
+        public static Board LoadBoard(string file)
         {
-            //TODO
+            string json = File.ReadAllText(file);
+            return JsonConvert.DeserializeObject<Board>(json);
+        }
+
+
+        readonly Square[] squares;
+        public Card[] Chance { get; }
+        public Card[] CommunityChest { get; }
+
+        [JsonConstructor]
+        public Board(Square[] squares, Card[] chance, Card[] communityChest)
+        {
+            this.squares = squares;
+            Chance = chance;
+            CommunityChest = communityChest;
         }
 
         public Square GetSquare(int position) => squares[position];
+
+        public Property GetProperty(string propertyName)
+        {
+            foreach (Square s in squares)
+                if (s.type == Square.Type.Property && s.property.name == propertyName)
+                    return s.property;
+
+            return null;
+        }
 
         public PropertyGroup[] GetPropertyGroups()
         {
@@ -69,38 +63,112 @@ namespace Monopolio
             return groups;
         }
 
+        #region movement
+
         //gives the player his salary when passing through the start square
+        //accepts negative values for spaces. the player walks backwards (still receivs
+        //his salary when passing Start)
         public Square Walk(Player player, int spaces)
         {
-            for (int i = 0; i < spaces; i++)
+            int dest = ((player.Position + spaces) % squares.Length + squares.Length) % squares.Length;
+
+            while (player.Position != dest)
             {
-                player.Position = (player.Position + 1) % squares.Length;
+                player.Position = spaces > 0 ? player.Position + 1 : player.Position - 1;
 
                 if (squares[player.Position].type == Square.Type.Start)
                     player.Money += State.salary;
-            }   
+            }
 
             return squares[player.Position];
         }
 
         public Square SendToJail(Player player)
         {
-            if (squares[player.Position].type != Square.Type.Jail)
+            if (squares[player.Position].type == Square.Type.Jail)
             {
-                for (int i = (player.Position + 1) % squares.Length; i != player.Position; i = (i + 1) % squares.Length)
+                if (player.GetOutOfJailFreeCards == 0)
+                    player.InJail = 1;
+
+                return squares[player.Position];
+            }
+
+            for (int i = (player.Position + 1) % squares.Length; i != player.Position; i = (i + 1) % squares.Length)
+            {
+                if (squares[i].type == Square.Type.Jail)
                 {
-                    if (squares[i].type == Square.Type.Jail)
-                    {
-                        player.Position = i;
-                        break;
-                    }
+                    player.Position = i;
+
+                    if (player.GetOutOfJailFreeCards == 0)
+                        player.InJail = 1;
+
+                    return squares[player.Position];
                 }
             }
 
-            if (!player.GetOutOfJailFreeCard)
-                player.InJail = 1;
+            throw new Exception("Prision not found :/");
+        }
 
-            return squares[player.Position];
+        delegate bool Stop(Square s);
+
+        //advances the player until a condition is satisfied. If no square
+        //on the board satisfies the condition, an error is thrown.
+        Square Advance(Player player, Stop condition)
+        {
+            if (condition(squares[player.Position]))
+                return squares[player.Position];
+
+            for (int i = (player.Position + 1) % squares.Length; i != player.Position; i = (i + 1) % squares.Length)
+            {
+                if (squares[i].type == Square.Type.Start)
+                    player.Money += State.salary;
+                else if (condition(squares[i]))
+                {
+                    player.Position = i;
+                    return squares[i];
+                }
+            }
+
+            throw new Exception("Property not found");
+        }
+
+        public Square AdvanceToProperty(Player player, string propertyName)
+            => Advance(player, (Square s) => s.type == Square.Type.Property && s.property.name == propertyName);
+
+        public Square AdvanceToNearest(Player player, Property.Color color)
+            => Advance(player, (Square s) => s.type == Square.Type.Property && s.property.color == color);
+
+        public Square AdvanceToStart(Player player)
+            => Advance(player, (Square s) => s.type == Square.Type.Start);
+
+        #endregion
+    }
+
+    public struct Square
+    {
+        public enum Type
+        {
+            Start,
+            Property,
+            Chance,
+            CommunityChest,
+            Tax,
+            Jail,
+            FreeParking,
+            GoToJail,
+        }
+
+        public readonly Type type;
+        public readonly Property property;  //se type = property
+        public readonly int tax;            //se type = tax
+
+        public Property.Color Color { get => property.color; }
+
+        public Square(Type type, Property property = null, int tax = 0)
+        {
+            this.type = type;
+            this.property = property;
+            this.tax = tax;
         }
     }
 }

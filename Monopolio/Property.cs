@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace Monopolio
     {
         public const string control_caracters = "\"\n";
 
-        //IMPORTANTE!! os valores teem de ir de 0 até n-1
+        //IMPORTANT!!! This enum doensn't support non-default values
         public enum Color
         {
             Brown,
@@ -30,6 +31,7 @@ namespace Monopolio
         public readonly int buildPrice; //if 0, building is not allowed (stations/utilities)
         public readonly int[] rent;
 
+        [JsonConstructor]
         public Property(Color color, string name, int price, int buildPrice, int[] rent)
         {
             if (name.IndexOfAny(control_caracters.ToCharArray()) != -1)
@@ -47,44 +49,87 @@ namespace Monopolio
 
     public class PropertyState
     {
-        public readonly Property property;
+        [JsonIgnore]
+        public Property Property { get; private set; }
         public int Houses { get; set; }
         public int Hotels { get; set; }
 
-        public string Name { get => property.name; }
+        [JsonIgnore]
+        public Player Owner { get; set; }
 
-        public Property.Color Color { get => property.color; }
+        //used for json serializing (to avoid wrong references and stuff. You don't want to know)
+        public string OwnerName { get => Owner.name; }
+        readonly string ownerName;
 
-        //new game
-        public PropertyState(Property property)
+        public string PrpertyName { get => Property.name; }
+        readonly string propertyName;
+
+
+        [JsonIgnore]
+        public string Name { get => Property.name; }
+
+        [JsonIgnore]
+        public Property.Color Color { get => Property.color; }
+
+        [JsonIgnore]
+        public int Buildings { get => Houses + Hotels; }
+
+
+        public PropertyState(Property property) //new game
         {
-            this.property = property;
+            Property = property;
             Houses = 0;
             Hotels = 0;
         }
 
-        //saved game
-        public PropertyState(Property property, int houses, int hotels)
+        [JsonConstructor]
+        public PropertyState(string propertyName, string ownerName, int houses, int hotels) //saved game
         {
-            this.property = property;
+            this.propertyName = propertyName;
+            this.ownerName = ownerName;
             Houses = houses;
             Hotels = hotels;
         }
 
-        public Player Owner { get; set; }
+        public void ResolveOwner(Player[] players)
+        {
+            if (ownerName == null)
+                return;
 
-        public int Buildings { get => Houses + Hotels; }
+            foreach (Player p in players)
+            {
+                if (ownerName == p.name)
+                {
+                    Owner = p;
+                    return;
+                }
+            }
+
+            throw new Exception("ups");
+        }
+
+        public void ResolveProperty(Board board)
+            => Property = board.GetProperty(propertyName);
     }
 
     public struct PropertyGroup
     {
         public readonly PropertyState[] properties;
 
-        public PropertyGroup(int numberOfProperties)
+        public PropertyGroup(int numberOfProperties) //new game
         {
             properties = new PropertyState[numberOfProperties];
         }
 
+        [JsonConstructor]
+        public PropertyGroup(PropertyState[] properties) //saved game
+        {
+            this.properties = properties;
+        }
+
+        #region auxProperties
+
+        [JsonIgnore]
         public Player Owner {
             get
             {
@@ -106,6 +151,7 @@ namespace Monopolio
             }
         }
 
+        [JsonIgnore]
         public int Buildings {
             get
             {
@@ -118,6 +164,7 @@ namespace Monopolio
             }
         }
 
+        [JsonIgnore]
         public bool EvenBuilding {
             get
             {
@@ -140,10 +187,12 @@ namespace Monopolio
             }
         }
 
+        #endregion
+
         public PropertyState GetPropertyState(Property property)
         {
             foreach (var ps in properties)
-                if (ps.property == property)
+                if (ps.Property == property)
                     return ps;
 
             return null;
@@ -167,7 +216,7 @@ namespace Monopolio
                 return Owner == null ? 4 * dice : 10 * dice;
             }
             else
-                return ps.property.Rent(Buildings);
+                return ps.Property.Rent(Buildings);
         }
 
         //Returns false when:
@@ -189,7 +238,7 @@ namespace Monopolio
                 b[i] = properties[i].Buildings;
                 total += b[i];
 
-                if (properties[i].property == property)
+                if (properties[i].Property == property)
                     b[i]++;
             }
 
@@ -230,7 +279,7 @@ namespace Monopolio
         {
             if (Owner == null || Buildings == 0)
             {
-                ps.Owner.Money += ps.property.price / 2;
+                ps.Owner.Money += ps.Property.price / 2;
                 ps.Owner = null;
             }
             else if (ps.Buildings == 0)
@@ -256,7 +305,7 @@ namespace Monopolio
                 }
             }
 
-            ps.Owner.Money += ps.property.buildPrice / 2;
+            ps.Owner.Money += ps.Property.buildPrice / 2;
             return true;
         }
     }
