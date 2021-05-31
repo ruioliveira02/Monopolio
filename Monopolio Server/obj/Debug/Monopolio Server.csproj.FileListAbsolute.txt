@@ -1,0 +1,24 @@
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Monopolio Server.exe.config
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Monopolio Server.exe
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Monopolio Server.pdb
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\ConsoleTables.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.Devices.Bluetooth.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.Net.Personal.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Network.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\System.ValueTuple.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\ConsoleTables.pdb
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.pdb
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.xml
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.Devices.Bluetooth.pdb
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.Devices.Bluetooth.xml
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\InTheHand.Net.Personal.xml
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Network.xml
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\System.ValueTuple.xml
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.csprojAssemblyReference.cache
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.csproj.CoreCompileInputs.cache
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.csproj.CopyComplete
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.exe
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.pdb
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\NetworkModel.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\NetworkModel.pdb

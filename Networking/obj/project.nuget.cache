@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "skmYU5IereU5iuIDV3cLWiMVxKIzoS/NVDvTwuoXM84+smZyafxklj/OppKex57/L11ArZK7ZGzXBcktoDjQIg==",
+  "success": true,
+  "projectFilePath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Networking\\Networking.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gaming\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

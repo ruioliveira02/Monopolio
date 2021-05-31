@@ -1,0 +1,2505 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>InTheHand</name>
+    </assembly>
+    <members>
+        <member name="T:InTheHand.ApplicationModel.Package">
+            <summary>
+            Provides information about a package.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.Current">
+            <summary>
+            Gets the package for the current app.
+            </summary>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.Description">
+            <summary>
+            Gets the description of the package.
+            </summary>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.DisplayName">
+            <summary>
+            Gets the display name of the package.
+            </summary>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.Id">
+            <summary>
+            Gets the package identity of the current package.
+            </summary>
+            <value>The package identity.</value>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.InstalledDate">
+            <summary>
+            Gets the date the application package was installed on the user's phone.
+            </summary>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.InstalledLocation">
+            <summary>
+            Gets the location of the installed package.
+            </summary>
+            <remarks>This folder is read-only except for Windows Desktop applications.</remarks>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.IsDevelopmentMode">
+            <summary>
+            Indicates whether the package is installed in development mode.
+            </summary>
+            <remarks>A Boolean value that indicates whether the package is installed in development mode.
+            TRUE indicates that the package is installed in development mode; otherwise FALSE.</remarks>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.Logo">
+            <summary>
+            Gets the logo of the package.
+            </summary>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.Package.PublisherDisplayName">
+            <summary>
+            Gets the publisher display name of the package.
+            </summary>
+            <remarks>Android and iOS don't provide a way to query the publisher at runtime.</remarks>
+        </member>
+        <member name="T:InTheHand.ApplicationModel.PackageId">
+            <summary>
+            Provides package identification info, such as name, version, and publisher.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.PackageId.Architecture">
+            <summary>
+            Gets the processor architecture for which the package was created.
+            </summary>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.PackageId.FullName">
+            <summary>
+            Gets the name of the package.
+            </summary>
+            <value>The package name.</value>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.PackageId.Name">
+            <summary>
+            Gets the name of the package.
+            </summary>
+            <value>The package name.</value>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.PackageId.ProductId">
+            <summary>
+            Gets the value of the ProductID attribute associated with this application package.
+            </summary>
+            <value>The value of the ProductID attribute associated with this application package.</value>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.PackageId.Publisher">
+            <summary>
+            Gets the publisher of the package.
+            </summary>
+            <remarks>Not supported on iOS or Android.</remarks>
+        </member>
+        <member name="P:InTheHand.ApplicationModel.PackageId.Version">
+            <summary>
+            Gets the package version info.
+            </summary>
+            <value>The package version information.</value>
+        </member>
+        <member name="T:InTheHand.DateTimeOffsetHelper">
+            <summary>
+            Helper class for <see cref="T:System.DateTimeOffset"/>.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.DateTimeOffsetHelper.FromUnixTimeSeconds(System.Int64)">
+            <summary>
+            Converts a Unix time expressed as the number of seconds that have elapsed since 1970-01-01T00:00:00Z to a <see cref="T:System.DateTimeOffset"/> value. 
+            </summary>
+            <param name="seconds">A Unix time, expressed as the number of seconds that have elapsed since 1970-01-01T00:00:00Z (January 1, 1970, at 12:00 AM UTC).
+            For Unix times before this date, its value is negative.</param>
+            <returns>A date and time value that represents the same moment in time as the Unix time. </returns>
+        </member>
+        <member name="M:InTheHand.DateTimeOffsetHelper.FromUnixTimeMilliseconds(System.Int64)">
+            <summary>
+            Converts a Unix time expressed as the number of milliseconds that have elapsed since 1970-01-01T00:00:00Z to a <see cref="T:System.DateTimeOffset"/> value.
+            </summary>
+            <param name="milliseconds">A Unix time, expressed as the number of milliseconds that have elapsed since 1970-01-01T00:00:00Z (January 1, 1970, at 12:00 AM UTC).
+            For Unix times before this date, its value is negative.</param>
+            <returns>A date and time value that represents the same moment in time as the Unix time. </returns>
+        </member>
+        <member name="M:InTheHand.DateTimeOffsetHelper.ToUnixTimeSeconds(System.DateTimeOffset)">
+            <summary>
+            Returns the number of seconds that have elapsed since 1970-01-01T00:00:00Z. 
+            </summary>
+            <param name="date">The DateTimeOffset value.</param>
+            <returns>The number of seconds that have elapsed since 1970-01-01T00:00:00Z. </returns>
+            <remarks>Unix time represents the number of seconds that have elapsed since 1970-01-01T00:00:00Z (January 1, 1970, at 12:00 AM UTC).
+            It does not take leap seconds into account.
+            <para>This method first converts the current instance to UTC before returning its Unix time.
+            For date and time values before 1970-01-01T00:00:00Z, this method returns a negative value.</para></remarks>
+        </member>
+        <member name="M:InTheHand.DateTimeOffsetHelper.ToUnixTimeMilliseconds(System.DateTimeOffset)">
+            <summary>
+            Returns the number of milliseconds that have elapsed since 1970-01-01T00:00:00.000Z. 
+            </summary>
+            <param name="date">The DateTimeOffset value.</param>
+            <returns>The number of milliseconds that have elapsed since 1970-01-01T00:00:00.000Z.</returns>
+            <remarks>Unix time represents the number of seconds that have elapsed since 1970-01-01T00:00:00Z (January 1, 1970, at 12:00 AM UTC).
+            It does not take leap seconds into account.
+            This method returns the number of milliseconds in Unix time. 
+            <para>This method first converts the current instance to UTC before returning the number of milliseconds in its Unix time.
+            For date and time values before 1970-01-01T00:00:00Z, this method returns a negative value.</para></remarks>
+        </member>
+        <member name="T:InTheHand.Devices.Input.KeyboardCapabilities">
+            <summary>
+            Supports the ability to determine the capabilities of any connected hardware keyboards.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 8 or later</description></item></list></remarks>
+        </member>
+        <member name="M:InTheHand.Devices.Input.KeyboardCapabilities.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:InTheHand.Devices.Input.KeyboardCapabilities"/> class.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Devices.Input.KeyboardCapabilities.KeyboardPresent">
+            <summary>
+            Gets a value that indicates whether a device identifying itself as a keyboard is detected.
+            </summary>
+            <value>Returns 1 if a device identifying itself as a keyboard is detected. Otherwise, returns 0.</value>
+        </member>
+        <member name="T:InTheHand.Environment">
+            <summary>
+            Provides information about the Operating System.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+            <seealso cref="T:System.Environment"/>
+        </member>
+        <member name="P:InTheHand.Environment.OSVersion">
+            <summary>
+            Gets an OperatingSystem object that contains the current platform identifier and version number.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.Collections.IObservableMap`2">
+            <summary>
+            Notifies listeners of dynamic changes to a map, such as when items are added or removed.
+            </summary>
+            <typeparam name="K">The type of the keys in the map.</typeparam>
+            <typeparam name="V">The type of the values in the map.</typeparam>
+        </member>
+        <member name="E:InTheHand.Foundation.Collections.IObservableMap`2.MapChanged">
+            <summary>
+            Occurs when the map changes.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.Collections.MapChangedEventHandler`2">
+            <summary>
+            Represents the method that handles the changed event of an observable map.
+            </summary>
+            <typeparam name="K">The type of the keys in the map.</typeparam>
+            <typeparam name="V">The type of the values in the map.</typeparam>
+            <param name="sender"></param>
+            <param name="eventArgs"></param>
+        </member>
+        <member name="T:InTheHand.Foundation.Collections.IMapChangedEventArgs`1">
+            <summary>
+            Provides data for the changed event of a map collection.
+            </summary>
+            <typeparam name="K">The type of the keys in the map.</typeparam>
+        </member>
+        <member name="P:InTheHand.Foundation.Collections.IMapChangedEventArgs`1.CollectionChange">
+            <summary>
+            Gets the type of change that occurred in the map.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Foundation.Collections.IMapChangedEventArgs`1.Key">
+            <summary>
+            Gets the key of the item that changed.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.Collections.IPropertySet">
+            <summary>
+            Represents a collection of key-value pairs, correlating several other collection interfaces.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.Collections.CollectionChange">
+            <summary>
+            Describes the action that causes a change to a collection.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Foundation.Collections.CollectionChange.Reset">
+            <summary>
+            The collection is changed.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Foundation.Collections.CollectionChange.ItemInserted">
+            <summary>
+            An item is added to the collection.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Foundation.Collections.CollectionChange.ItemRemoved">
+            <summary>
+            An item is removed from the collection.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Foundation.Collections.CollectionChange.ItemChanged">
+            <summary>
+            An item is changed in the collection.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.Metadata.ApiInformation">
+            <summary>
+            Enables you to detect whether a specified member, type, or API contract is present so that you can safely make API calls across a variety of devices.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsApiContractPresent(System.String,System.UInt16)">
+            <summary>
+            Returns true or false to indicate whether the API contract with the specified name and major version number is present.
+            </summary>
+            <param name="contractName">The name of the API contract.</param>
+            <param name="majorVersion">The major version number of the API contract.</param>
+            <returns>True if the specified API contract is present; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsApiContractPresent(System.String,System.UInt16,System.UInt16)">
+            <summary>
+            Returns true or false to indicate whether the API contract with the specified name and major and minor version number is present.
+            </summary>
+            <param name="contractName">The name of the API contract.</param>
+            <param name="majorVersion">The major version number of the API contract.</param>
+            <param name="minorVersion">The minor version number of the API contract.</param>
+            <returns>True if the specified API contract is present; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsEnumNamedValuePresent(System.String,System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified named constant is present for a specified enumeration.
+            </summary>
+            <param name="enumTypeName">The namespace-qualified name of the type.</param>
+            <param name="valueName">The name of the constant.</param>
+            <returns>True if the specified constant is present; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsEventPresent(System.String,System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified event is present for a specified type.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <param name="eventName">The name of the event.</param>
+            <returns>True if the specified event is present for the type; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsMethodPresent(System.String,System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified method is present for a specified type.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <param name="methodName">The name of the method.</param>
+            <returns>True if the specified method is present for the type; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsMethodPresent(System.String,System.String,System.UInt32)">
+            <summary>
+            Returns true or false to indicate whether a specified method overload with the specified number of input parameters is present for a specified type.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <param name="methodName">The name of the method.</param>
+            <param name="inputParameterCount">The number of input parameters for the overload.</param>
+            <returns>True if the specified method is present for the type; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsPropertyPresent(System.String,System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified property (writeable or read-only) is present for a specified type.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <param name="propertyName">The name of the property.</param>
+            <returns>True if the specified property is present for the type; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsReadOnlyPropertyPresent(System.String,System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified read-only property is present for a specified type.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <param name="propertyName">The name of the property.</param>
+            <returns>True if the specified property is present for the type; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsWriteablePropertyPresent(System.String,System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified writeable property is present for a specified type.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <param name="propertyName">The name of the property.</param>
+            <returns>True if the specified property is present for the type; otherwise, false.</returns>
+        </member>
+        <member name="M:InTheHand.Foundation.Metadata.ApiInformation.IsTypePresent(System.String)">
+            <summary>
+            Returns true or false to indicate whether a specified type is present.
+            </summary>
+            <param name="typeName">The namespace-qualified name of the type.</param>
+            <returns>True if the specified type is present; otherwise, false.</returns>
+        </member>
+        <member name="T:InTheHand.Foundation.Point">
+            <summary>
+            Represents x- and y-coordinate values that define a point in a two-dimensional plane.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Foundation.Point.X">
+            <summary>
+            The horizontal position of the point.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Foundation.Point.Y">
+            <summary>
+            The vertical position of the point.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.Rect">
+            <summary>
+            Contains number values that represent the location and size of a rectangle.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Foundation.Rect.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a Rect structure that has the specified x-coordinate, y-coordinate, width, and height. 
+            </summary>
+            <param name="x">The x-coordinate of the top-left corner of the rectangle.</param>
+            <param name="y">The y-coordinate of the top-left corner of the rectangle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+        </member>
+        <member name="P:InTheHand.Foundation.Rect.X">
+            <summary>
+            The x-coordinate location of the left side of the rectangle.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Foundation.Rect.Y">
+            <summary>
+            The y-coordinate location of the top side of the rectangle.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Foundation.Rect.Width">
+            <summary>
+            A value that represents the Width of the rectangle.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Foundation.Rect.Height">
+            <summary>
+            A value that represents the Height of the rectangle.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Foundation.TypedEventHandler`2">
+            <summary>
+            Represents a method that handles general events.
+            </summary>
+            <typeparam name="TSender">The event source.</typeparam>
+            <typeparam name="TResult">The event data. If there is no event data, this parameter will be null.</typeparam>
+            <param name="sender">The event source.</param>
+            <param name="args">The event data. If there is no event data, this parameter will be null.</param>
+        </member>
+        <member name="T:InTheHand.MathHelper">
+            <summary>
+            Provides additional Math operations.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.MathHelper.Clamp``1(``0,``0,``0)">
+            <summary>
+            Restricts a value to be within a specified range. 
+            </summary>
+            <param name="value">The value to clamp.</param>
+            <param name="minimum">The minimum value. 
+            If value is less than min, min will be returned. </param>
+            <param name="maximum">The maximum value. 
+            If value is greater than max, max will be returned. </param>
+            <returns></returns>
+        </member>
+        <member name="T:InTheHand.Storage.ApplicationData">
+            <summary>
+            Provides access to the application data store.
+            Application data consists of settings that are local.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationData.Current">
+            <summary>
+            Provides access to the app data store associated with the app's app package.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationData.ClearAsync">
+            <summary>
+            Removes all application data from the local, roaming, and temporary app data stores.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationData.ClearAsync(InTheHand.Storage.ApplicationDataLocality)">
+            <summary>
+            Removes all application data from the specified app data store.
+            </summary>
+            <param name="locality">One of the enumeration values.</param>
+            <returns></returns>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationData.LocalFolder">
+            <summary>
+            Gets the root folder in the local app data store.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationData.LocalSettings">
+            <summary>
+            Gets the application settings container in the local app data store.
+            </summary>
+            <value>The application settings container.</value>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationData.RoamingFolder">
+            <summary>
+            Gets the root folder in the roaming app data store.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationData.RoamingSettings">
+            <summary>
+            Gets the application settings container in the local app data store.
+            </summary>
+            <value>The application settings container.</value>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationData.TemporaryFolder">
+            <summary>
+            Gets the root folder in the temporary app data store.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.ApplicationDataContainer">
+            <summary>
+            Represents a container for app settings.
+            The methods and properties of this class support creating, deleting, enumerating, and traversing the container hierarchy.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainer.CreateContainer(System.String,InTheHand.Storage.ApplicationDataCreateDisposition)">
+            <summary>
+            Creates or opens the specified settings container in the current settings container.
+            </summary>
+            <param name="name">The name of the container.</param>
+            <param name="disposition">One of the enumeration values.</param>
+            <remarks>On iOS the name must be a value Shared App Group name and disposition must be Existing.</remarks>
+            <returns>The settings container.</returns>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainer.Locality">
+            <summary>
+            Gets the type (local or roaming) of the app data store that is associated with the current settings container.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainer.Name">
+            <summary>
+            Gets the name of the current settings container.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainer.Values">
+            <summary>
+            Gets an object that represents the settings in this settings container.
+            </summary>
+            <value>The settings map object.</value>
+        </member>
+        <member name="T:InTheHand.Storage.ApplicationDataContainerSettings">
+            <summary>
+            Provides access to the settings in a settings container.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="E:InTheHand.Storage.ApplicationDataContainerSettings.MapChanged">
+            <summary>
+            Occurs when the map changes.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.Add(System.String,System.Object)">
+            <summary>
+            Adds an item to the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>. 
+            </summary>
+            <param name="key">The key of the item to add.</param>
+            <param name="value">The item value to add.</param>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.ContainsKey(System.String)">
+            <summary>
+            Returns a value that indicates whether a specified key exists in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.
+            </summary>
+            <param name="key">The key to check for in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.</param>
+            <returns>true if an item with that key exists in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>; otherwise, false. </returns>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainerSettings.Keys">
+            <summary>
+            Gets an ICollection object containing the keys of the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.Remove(System.String)">
+            <summary>
+            Removes a specific item from the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.
+            </summary>
+            <param name="key">The key of the item to remove.</param>
+            <returns>true if the item was removed, otherwise false.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.TryGetValue(System.String,System.Object@)">
+            <summary>
+            Returns a value that indicates whether a specified key exists in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.
+            If an item with that key exists, the item is retrieved as an out parameter.
+            </summary>
+            <param name="key">The key to check for in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.</param>
+            <param name="value">The item, if it exists.
+            Contains null if the item does not exist in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.</param>
+            <returns>true if an item with that key exists in the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>; otherwise, false.</returns>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainerSettings.Values">
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> object containing the values of the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainerSettings.Item(System.String)">
+            <summary>
+            Gets or sets the element value at the specified key index.
+            </summary>
+            <param name="key"></param>
+            <returns>The element value at the specified key index.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.Add(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Adds a new key-value pair to the ApplicationDataContainerSettings. 
+            </summary>
+            <param name="item">The key-value pair to add.</param>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.Clear">
+            <summary>
+            Removes all related application settings.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.Contains(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Returns a value that indicates whether a specified key-value pair exists in the ApplicationDataContainerSettings.
+            </summary>
+            <param name="item">The key-value pair to check for in the ApplicationDataContainerSettings.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.CopyTo(System.Collections.Generic.KeyValuePair{System.String,System.Object}[],System.Int32)">
+            <summary>
+            Copies the elements of the collection to an array, starting at a particular array index. 
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination of the elements copied from the collection.
+            The Array must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins. </param>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainerSettings.Count">
+            <summary>
+            Gets the number of elements contained in the collection.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.ApplicationDataContainerSettings.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the dictionary is read-only. 
+            </summary>
+            <value>true if the dictionary is read-only; otherwise, false.</value>
+        </member>
+        <member name="M:InTheHand.Storage.ApplicationDataContainerSettings.Remove(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Removes a specific key-value pair from the <see cref="T:InTheHand.Storage.ApplicationDataContainerSettings"/>. 
+            </summary>
+            <param name="item">The key-value pair to remove.</param>
+            <returns>true if the item was removed, otherwise false.</returns>
+        </member>
+        <member name="T:InTheHand.Storage.ApplicationDataCreateDisposition">
+            <summary>
+            Specifies options for creating application data containers or returning existing containers.
+            <para>This enumeration is used by the <see cref="M:InTheHand.Storage.ApplicationDataContainer.CreateContainer(System.String,InTheHand.Storage.ApplicationDataCreateDisposition)"/> method.</para>
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataCreateDisposition.Always">
+            <summary>
+            Always returns the specified container.
+            Creates the container if it does not exist.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataCreateDisposition.Existing">
+            <summary>
+            Returns the specified container only if it already exists.
+            Raises an exception of type System.Exception if the specified container does not exist.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.ApplicationDataLocality">
+            <summary>
+            Provides access to the application data store.
+            Application data consists of settings that are local.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataLocality.Local">
+            <summary>
+            The data resides in the local application data store.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataLocality.Roaming">
+            <summary>
+            The data resides in the roaming application data store.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataLocality.Temporary">
+            <summary>
+            The data resides in the temporary application data store.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataLocality.LocalCache">
+            <summary>
+            The data resides in the local cache for the application data store.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.ApplicationDataLocality.SharedLocal">
+            <summary>
+            The data resides in the shared application data store.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.CreationCollisionOption">
+            <summary>
+            Represents a file.
+            Provides information about the file and its content, and ways to manipulate them.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.CreationCollisionOption.GenerateUniqueName">
+            <summary>
+            Automatically append a number to the base of the specified name if the file or folder already exists.
+            For example, if MyFile.txt already exists, then the new file is named MyFile(2).txt.
+            If MyFolder already exists, then the new folder is named MyFolder(2).
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.CreationCollisionOption.ReplaceExisting">
+            <summary>
+            Replace the existing item if the file or folder already exists.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.CreationCollisionOption.FailIfExists">
+            <summary>
+            Raise an exception of type System.Exception if the file or folder already exists.
+            Methods that don't explicitly pass a value from the CreationCollisionOption enumeration use the FailIfExists value as the default when you try to create, rename, copy, or move a file or folder.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.CreationCollisionOption.OpenIfExists">
+            <summary>
+            Return the existing item if the file or folder already exists.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.FileAttributes">
+            <summary>
+            Describes the attributes of a file or folder.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileAttributes.Normal">
+            <summary>
+            The item is normal.
+            That is, the item doesn't have any of the other values in the enumeration.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileAttributes.ReadOnly">
+            <summary>
+            The item is read-only.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileAttributes.Directory">
+            <summary>
+            The item is a directory.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileAttributes.Archive">
+            <summary>
+            The item is archived.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileAttributes.Temporary">
+            <summary>
+            The item is a temporary file.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.FileIO">
+            <summary>
+            Provides helper methods for reading and writing files that are represented by objects of type <see cref="T:InTheHand.Storage.IStorageFile"/>.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.AppendLinesAsync(InTheHand.Storage.IStorageFile,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends lines of text to the specified file.
+            </summary>
+            <param name="file">The file that the lines are appended to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.AppendLinesAsync(InTheHand.Storage.IStorageFile,System.Collections.Generic.IEnumerable{System.String},InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Appends lines of text to the specified file using the specified character encoding.
+            </summary>
+            <param name="file">The file that the lines are appended to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.AppendTextAsync(InTheHand.Storage.IStorageFile,System.String)">
+            <summary>
+            Appends text to the specified file.
+            </summary>
+            <param name="file">The file that the text is appended to.</param>
+            <param name="contents">The text to append.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.AppendTextAsync(InTheHand.Storage.IStorageFile,System.String,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Appends text to the specified file using the specified character encoding.
+            </summary>
+            <param name="file">The file that the text is appended to.</param>
+            <param name="contents">The text to append.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.ReadLinesAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Reads the contents of the specified file and returns lines of text.
+            </summary>
+            <param name="file">The file to read.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a list (type IVector) of lines of text.
+            Each line of text in the list is represented by a String object.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.ReadLinesAsync(InTheHand.Storage.IStorageFile,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Reads the contents of the specified file using the specified character encoding and returns lines of text.
+            </summary>
+            <param name="file">The file to read.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a list (type IVector) of lines of text.
+            Each line of text in the list is represented by a String object.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.ReadTextAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Reads the contents of the specified file and returns text.
+            </summary>
+            <param name="file">The file to read.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a text string.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.ReadTextAsync(InTheHand.Storage.IStorageFile,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Reads the contents of the specified file using the specified character encoding and returns text.
+            </summary>
+            <param name="file">The file to read.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a text string.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.WriteLinesAsync(InTheHand.Storage.IStorageFile,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Writes lines of text to the specified file.
+            </summary>
+            <param name="file">The file that the lines are written to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.WriteLinesAsync(InTheHand.Storage.IStorageFile,System.Collections.Generic.IEnumerable{System.String},InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Writes lines of text to the specified file using the specified character encoding.
+            </summary>
+            <param name="file">The file that the lines are written to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.WriteTextAsync(InTheHand.Storage.IStorageFile,System.String)">
+            <summary>
+            Writes text to the specified file.
+            </summary>
+            <param name="file">The file that the text is written to.</param>
+            <param name="contents">The text to write.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.FileIO.WriteTextAsync(InTheHand.Storage.IStorageFile,System.String,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Writes text to the specified file using the specified character encoding.
+            </summary>
+            <param name="file">The file that the text is written to.</param>
+            <param name="contents">The text to write.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="T:InTheHand.Storage.FileProperties.BasicProperties">
+            <summary>
+            Provides access to the basic properties, like the size of the item or the date the item was last modified, of the item (like a file or folder).
+            </summary>
+            <seealso cref="M:InTheHand.Storage.IStorageItem.GetBasicPropertiesAsync"/>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.Storage.FileProperties.BasicProperties.DateModified">
+            <summary>
+            Gets the timestamp of the last time the file was modified.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.FileProperties.BasicProperties.Size">
+            <summary>
+            Gets the size of the file in bytes.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.FileProperties.ThumbnailMode">
+            <summary>
+            Describes the purpose of the thumbnail to determine how to adjust the thumbnail image to retrieve.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileProperties.ThumbnailMode.MediaView">
+            <summary>
+            To display previews of picture or video files.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileProperties.ThumbnailMode.ListView">
+            <summary>
+            To display previews of files (or other items) in a list.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.FileProperties.ThumbnailMode.SingleItem">
+            <summary>
+            To display a preview of any single item (like a file, folder, or file group).
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.IStorageFile">
+            <summary>
+            Represents a file.
+            Provides information about the file and its contents, and ways to manipulate them.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFile.CopyAndReplaceAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Replaces the specified file with a copy of the current file.
+            </summary>
+            <param name="fileToReplace">The file to replace.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFile.CopyAsync(InTheHand.Storage.IStorageFolder)">
+            <summary>
+            Creates a copy of the file in the specified folder.
+            </summary>
+            <param name="destinationFolder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFile.CopyAsync(InTheHand.Storage.IStorageFolder,System.String)">
+            <summary>
+            Creates a copy of the file in the specified folder, using the desired name.
+            </summary>
+            <param name="destinationFolder"></param>
+            <param name="desiredNewName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFile.MoveAndReplaceAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Moves the current file to the location of the specified file and replaces the specified file in that location.
+            </summary>
+            <param name="fileToReplace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFile.MoveAsync(InTheHand.Storage.IStorageFolder)">
+            <summary>
+            Moves the current file to the specified folder.
+            </summary>
+            <param name="destinationFolder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFile.MoveAsync(InTheHand.Storage.IStorageFolder,System.String)">
+            <summary>
+            Moves the current file to the specified folder and renames the file according to the desired name.
+            </summary>
+            <param name="destinationFolder"></param>
+            <param name="desiredNewName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:InTheHand.Storage.IStorageFile.ContentType">
+            <summary>
+            Gets the MIME type of the contents of the file.
+            </summary>
+            <value>The MIME type of the file contents.
+            For example, a music file might have the "audio/mpeg" MIME type.</value>
+        </member>
+        <member name="P:InTheHand.Storage.IStorageFile.FileType">
+            <summary>
+            Gets the type (file name extension) of the file.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.IStorageFolder">
+            <summary>
+            Manipulates folders and their contents, and provides information about them.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.CreateFileAsync(System.String)">
+            <summary>
+            Creates a new file in the current folder.
+            </summary>
+            <param name="desiredName">The desired name of the file to create.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.CreateFileAsync(System.String,InTheHand.Storage.CreationCollisionOption)">
+            <summary>
+            Creates a new file in the current folder, and specifies what to do if a file with the same name already exists in the current folder.
+            </summary>
+            <param name="desiredName">The desired name of the file to create.</param>
+            <param name="options">The enum value that determines what to do if the desiredName is the same as the name of an existing file in the current folder.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.CreateFolderAsync(System.String)">
+            <summary>
+            Creates a new folder in the current folder.
+            </summary>
+            <param name="desiredName">The desired name of the folder to create.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.CreateFolderAsync(System.String,InTheHand.Storage.CreationCollisionOption)">
+            <summary>
+            Creates a new folder in the current folder, and specifies what to do if a folder with the same name already exists in the current folder.
+            </summary>
+            <param name="desiredName">The desired name of the folder to create.</param>
+            <param name="options">The enum value that determines what to do if the desiredName is the same as the name of an existing folder in the current folder.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.GetFileAsync(System.String)">
+            <summary>
+            Gets the specified file from the current folder.
+            </summary>
+            <param name="filename">The name (or path relative to the current folder) of the file to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.GetFilesAsync">
+            <summary>
+            Gets the files from the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.GetFolderAsync(System.String)">
+            <summary>
+            Gets the specified folder from the current folder.
+            </summary>
+            <param name="name">The name of the child folder to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.GetFoldersAsync">
+            <summary>
+            Gets the folders in the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.GetItemAsync(System.String)">
+            <summary>
+            Gets the specified item from the <see cref="T:InTheHand.Storage.IStorageFolder"/>.
+            </summary>
+            <param name="name">The name of the item to retrieve.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.GetItemsAsync">
+            <summary>
+            Gets the items from the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageFolder.TryGetItemAsync(System.String)">
+            <summary>
+            Try to get a single file or sub-folder from the current folder by using the name of the item.
+            </summary>
+            <param name="name">The name (or path relative to the current folder) of the file or sub-folder to try to retrieve.</param>
+            <returns>When this method completes successfully, it returns the file or folder (type <see cref="T:InTheHand.Storage.IStorageItem"/>).</returns>
+        </member>
+        <member name="T:InTheHand.Storage.IStorageItem">
+            <summary>
+            Manipulates storage items (files and folders) and their contents, and provides information about them.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageItem.DeleteAsync">
+            <summary>
+            Deletes the current item. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageItem.DeleteAsync(InTheHand.Storage.StorageDeleteOption)">
+            <summary>
+            Deletes the current item, optionally deleting it permanently. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageItem.GetBasicPropertiesAsync">
+            <summary>
+            Gets the basic properties of the current item (like a file or folder).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageItem.IsOfType(InTheHand.Storage.StorageItemTypes)">
+            <summary>
+            Determines whether the current IStorageItem matches the specified StorageItemTypes value.
+            </summary>
+            <param name="type">The value to match against.</param>
+            <returns></returns>
+            <seealso cref="T:InTheHand.Storage.StorageItemTypes"/>
+        </member>
+        <member name="P:InTheHand.Storage.IStorageItem.Attributes">
+            <summary>
+            Gets the attributes of a storage item.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.IStorageItem.DateCreated">
+            <summary>
+            Gets the date and time when the current item was created. 
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.IStorageItem.Name">
+            <summary>
+            Gets the name of the item including the file name extension if there is one.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.IStorageItem.Path">
+            <summary>
+            Gets the full file-system path of the item, if the item has a path.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageItem.GetParentAsync">
+            <summary>
+            Gets the parent folder of the current storage item.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.IStorageItem.IsEqual(InTheHand.Storage.IStorageItem)">
+            <summary>
+            Indicates whether the current item is the same as the specified item.
+            </summary>
+            <param name="item">The <see cref="T:InTheHand.Storage.IStorageItem"/> object that represents a storage item to compare against.</param>
+            <returns>Returns true if the current storage item is the same as the specified storage item; otherwise false.</returns>
+        </member>
+        <member name="T:InTheHand.Storage.KnownFolders">
+            <summary>
+            Provides access to common locations that contain user content.
+            This includes content from a user's local libraries (such as Documents, Pictures, Music, and Videos).
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.Storage.KnownFolders.CameraRoll">
+            <summary>
+            Gets the Camera Roll folder.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.Storage.KnownFolders.DocumentsLibrary">
+            <summary>
+            Gets the Documents library.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.KnownFolders.MusicLibrary">
+            <summary>
+            Gets the Music library.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.KnownFolders.PicturesLibrary">
+            <summary>
+            Gets the Pictures library.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.KnownFolders.VideosLibrary">
+            <summary>
+            Gets the Videos library.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.NameCollisionOption">
+            <summary>
+            Specifies what to do if a file or folder with the specified name already exists in the current folder when you copy, move, or rename a file or folder.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.NameCollisionOption.GenerateUniqueName">
+            <summary>
+            Automatically append a number to the base of the specified name if the file or folder already exists.
+            For example, if MyFile.txt already exists, then the new file is named MyFile(2).txt.
+            If MyFolder already exists, then the new folder is named MyFolder(2).
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.NameCollisionOption.ReplaceExisting">
+            <summary>
+            Replace the existing item if the file or folder already exists.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.NameCollisionOption.FailIfExists">
+            <summary>
+            Raise an exception of type System.Exception if the file or folder already exists.
+            Methods that don't explicitly pass a value from the NameCollisionOption enumeration use the FailIfExists value as the default when you try to create, rename, copy, or move a file or folder.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.PathIO">
+            <summary>
+            Provides helper methods for reading and writing a file using the absolute path or URI of the file.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.AppendLinesAsync(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Appends lines of text to the file at the specified path or URI.
+            </summary>
+            <param name="absolutePath">The path or URI of the file that the lines are appended to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.AppendLinesAsync(System.String,System.Collections.Generic.IEnumerable{System.String},InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Appends lines of text to the file at the specified path or URI using the specified character encoding.
+            </summary>
+            <param name="absolutePath">The path or URI of the file that the lines are appended to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.AppendTextAsync(System.String,System.String)">
+            <summary>
+            Appends text to the file at the specified path or URI.
+            </summary>
+            <param name="absolutePath">The path of the file that the text is appended to.</param>
+            <param name="contents">The text to append.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.AppendTextAsync(System.String,System.String,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Appends text to the file at the specified path or URI using the specified character encoding.
+            </summary>
+            <param name="absolutePath">The path of the file that the text is appended to.</param>
+            <param name="contents">The text to append.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.ReadLinesAsync(System.String)">
+            <summary>
+            Reads the contents of the file at the specified path or URI and returns lines of text.
+            </summary>
+            <param name="absolutePath">The path of the file to read.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a list (type IVector) of lines of text.
+            Each line of text in the list is represented by a String object.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.ReadLinesAsync(System.String,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Reads the contents of the file at the specified path or URI using the specified character encoding and returns lines of text.
+            </summary>
+            <param name="absolutePath">The path of the file to read.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a list (type IVector) of lines of text.
+            Each line of text in the list is represented by a String object.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.ReadTextAsync(System.String)">
+            <summary>
+            Reads the contents of the file at the specified path or URI and returns text.
+            </summary>
+            <param name="absolutePath">The path of the file to read.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a text string.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.ReadTextAsync(System.String,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Reads the contents of the file at the specified path or URI using the specified character encoding and returns text.
+            </summary>
+            <param name="absolutePath">The path of the file to read.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>When this method completes successfully, it returns the contents of the file as a text string.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.WriteLinesAsync(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Writes lines of text to the file at the specified path or URI.
+            </summary>
+            <param name="absolutePath">The path of the file that the lines are written to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.WriteLinesAsync(System.String,System.Collections.Generic.IEnumerable{System.String},InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Writes lines of text to the file at the specified path or URI using the specified character encoding.
+            </summary>
+            <param name="absolutePath">The path of the file that the lines are written to.</param>
+            <param name="lines">The list of text strings to append as lines.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.WriteTextAsync(System.String,System.String)">
+            <summary>
+            Writes text to the file at the specified path or URI.
+            </summary>
+            <param name="absolutePath">The path of the file that the text is written to.</param>
+            <param name="contents">The text to write.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.PathIO.WriteTextAsync(System.String,System.String,InTheHand.Storage.Streams.UnicodeEncoding)">
+            <summary>
+            Writes text to the file at the specified path or URI using the specified character encoding.
+            </summary>
+            <param name="absolutePath">The path of the file that the text is written to.</param>
+            <param name="contents">The text to write.</param>
+            <param name="encoding">The character encoding of the file.</param>
+            <returns>No object or value is returned when this method completes.</returns>
+        </member>
+        <member name="T:InTheHand.Storage.StorageDeleteOption">
+            <summary>
+            Specifies whether a deleted item is moved to the Recycle Bin or permanently deleted.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.StorageDeleteOption.Default">
+            <summary>
+            Specifies the default behavior.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.StorageDeleteOption.PermanentDelete">
+            <summary>
+            Permanently deletes the item.
+            The item is not moved to the Recycle Bin.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.StorageFile">
+            <summary>
+            Represents a file.
+            Provides information about the file and its content, and ways to manipulate them.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.GetFileFromPathAsync(System.String)">
+            <summary>
+            Gets a StorageFile object to represent the file at the specified path.
+            </summary>
+            <param name="path">The path of the file to get a StorageFile to represent.
+            If your path uses slashes, make sure you use backslashes(\).
+            Forward slashes(/) are not accepted by this method.</param>
+            <returns>When this method completes, it returns the file as a StorageFile.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.CopyAndReplaceAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Replaces the specified file with a copy of the current file.
+            </summary>
+            <param name="fileToReplace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.CopyAsync(InTheHand.Storage.IStorageFolder)">
+            <summary>
+            Creates a copy of the file in the specified folder.
+            </summary>
+            <param name="destinationFolder">The destination folder where the copy of the file is created.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.CopyAsync(InTheHand.Storage.IStorageFolder,System.String)">
+            <summary>
+            Creates a copy of the file in the specified folder and renames the copy.
+            </summary>
+            <param name="destinationFolder">The destination folder where the copy of the file is created.</param>
+            <param name="desiredNewName">The new name for the copy of the file created in the destinationFolder.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.DeleteAsync">
+            <summary>
+            Deletes the current file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.DeleteAsync(InTheHand.Storage.StorageDeleteOption)">
+            <summary>
+            Deletes the current file, optionally deleting the item permanently.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.GetBasicPropertiesAsync">
+            <summary>
+            Gets the basic properties of the current file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.GetThumbnailAsync(InTheHand.Storage.FileProperties.ThumbnailMode)">
+            <summary>
+            Retrieves an adjusted thumbnail image for the file, determined by the purpose of the thumbnail.
+            </summary>
+            <param name="mode">The enum value that describes the purpose of the thumbnail and determines how the thumbnail image is adjusted.</param>
+            <returns>When this method completes successfully, it returns a <see cref="T:InTheHand.Storage.FileProperties.StorageItemThumbnail"/> that represents the thumbnail image or null if there is no thumbnail image associated with the file.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.GetParentAsync">
+            <summary>
+            Gets the parent folder of the current file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.MoveAsync(InTheHand.Storage.IStorageFolder)">
+            <summary>
+            Moves the current file to the specified folder and renames the file according to the desired name.
+            </summary>
+            <param name="destinationFolder">The destination folder where the file is moved.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.MoveAsync(InTheHand.Storage.IStorageFolder,System.String)">
+            <summary>
+            Moves the current file to the specified folder and renames the file according to the desired name.
+            </summary>
+            <param name="destinationFolder">The destination folder where the file is moved.</param>
+            <param name="desiredNewName">The desired name of the file after it is moved.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.MoveAndReplaceAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Moves the current file to the location of the specified file and replaces the specified file in that location.
+            </summary>
+            <param name="fileToReplace">The file to replace.</param>
+            <returns>No object or value is returned by this method.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.RenameAsync(System.String)">
+            <summary>
+            Renames the current file.
+            </summary>
+            <param name="desiredName">The desired, new name of the current item.</param>
+            <returns>No object or value is returned by this method when it completes.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.RenameAsync(System.String,InTheHand.Storage.NameCollisionOption)">
+            <summary>
+            Renames the current file.
+            This method also specifies what to do if an existing item in the current file's location has the same name.
+            </summary>
+            <param name="desiredName">The desired, new name of the current file.
+            <para>If there is an existing item in the current file's location that already has the specified desiredName, the specified <see cref="T:InTheHand.Storage.NameCollisionOption"/>  determines how the system responds to the conflict.</para></param>
+            <param name="option">The enum value that determines how the system responds if the desiredName is the same as the name of an existing item in the current file's location.</param>
+            <returns>No object or value is returned by this method when it completes.</returns>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFile.Attributes">
+            <summary>
+            Gets the attributes of a file.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFile.DateCreated">
+            <summary>
+            Gets the date and time when the current file was created. 
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFile.ContentType">
+            <summary>
+            Gets the MIME type of the contents of the file.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFile.FileType">
+            <summary>
+            Gets the type (file name extension) of the file.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFile.Name">
+            <summary>
+            Gets the name of the file including the file name extension.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFile.Path">
+            <summary>
+            Gets the full file-system path of the current file, if the file has a path.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.IsEqual(InTheHand.Storage.IStorageItem)">
+            <summary>
+            Indicates whether the current file is equal to the specified file.
+            </summary>
+            <param name="item">The <see cref="T:InTheHand.Storage.IStorageItem"/>  object that represents a file to compare against.</param>
+            <returns>Returns true if the current file is equal to the specified file; otherwise false.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFile.IsOfType(InTheHand.Storage.StorageItemTypes)">
+            <summary>
+            Determines whether the current <see cref="T:InTheHand.Storage.StorageFile"/> matches the specified <see cref="T:InTheHand.Storage.StorageItemTypes"/> value.
+            </summary>
+            <param name="type">The value to match against.</param>
+            <returns>True if the <see cref="T:InTheHand.Storage.StorageFile"/> matches the specified value; otherwise false.</returns>
+            <seealso cref="T:InTheHand.Storage.StorageItemTypes"/>
+        </member>
+        <member name="T:InTheHand.Storage.StorageFolder">
+            <summary>
+            Manages folders and their contents and provides information about them.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetFolderFromPathAsync(System.String)">
+            <summary>
+            Gets a StorageFile object to represent the file at the specified path.
+            </summary>
+            <param name="path">The path of the file to get a StorageFile to represent.
+            If your path uses slashes, make sure you use backslashes(\).
+            Forward slashes(/) are not accepted by this method.</param>
+            <returns>When this method completes, it returns the file as a StorageFile.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.CreateFileAsync(System.String)">
+            <summary>
+            Creates a new file with the specified name in the current folder.
+            </summary>
+            <param name="desiredName">The name of the new file to create in the current folder.</param>
+            <returns>When this method completes, it returns a StorageFile that represents the new file.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.CreateFileAsync(System.String,InTheHand.Storage.CreationCollisionOption)">
+            <summary>
+            Creates a new file with the specified name in the current folder.
+            </summary>
+            <param name="desiredName">The name of the new file to create in the current folder.</param>
+            <param name="options">One of the enumeration values that determines how to handle the collision if a file with the specified desiredName already exists in the current folder.</param>
+            <returns>When this method completes, it returns a StorageFile that represents the new file.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.CreateFolderAsync(System.String)">
+            <summary>
+            Creates a new subfolder with the specified name in the current folder.
+            </summary>
+            <param name="desiredName">The name of the new subfolder to create in the current folder.</param>
+            <returns>When this method completes, it returns a StorageFolder that represents the new subfolder.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.CreateFolderAsync(System.String,InTheHand.Storage.CreationCollisionOption)">
+            <summary>
+            Creates a new subfolder with the specified name in the current folder.
+            This method also specifies what to do if a subfolder with the same name already exists in the current folder. 
+            </summary>
+            <param name="desiredName">The name of the new subfolder to create in the current folder.</param>
+            <param name="options">One of the enumeration values that determines how to handle the collision if a subfolder with the specified desiredName already exists in the current folder.</param>
+            <returns>When this method completes, it returns a StorageFolder that represents the new subfolder.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.DeleteAsync">
+            <summary>
+            Deletes the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.DeleteAsync(InTheHand.Storage.StorageDeleteOption)">
+            <summary>
+            Deletes the current folder.
+            This method also specifies whether to delete the folder permanently.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetBasicPropertiesAsync">
+            <summary>
+            Gets the basic properties of the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetFileAsync(System.String)">
+            <summary>
+            Gets the file with the specified name from the current folder. 
+            </summary>
+            <param name="filename"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetFilesAsync">
+            <summary>
+            Gets the files in the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetFolderAsync(System.String)">
+            <summary>
+            Gets the specified folder from the current folder. 
+            </summary>
+            <param name="name">The name of the child folder to retrieve.</param>
+            <returns>When this method completes successfully, it returns a StorageFolder that represents the child folder.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetFoldersAsync">
+            <summary>
+            Gets the folders in the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetItemAsync(System.String)">
+            <summary>
+            Gets the file or folder with the specified name from the current folder.
+            </summary>
+            <param name="name">The name (or path relative to the current folder) of the file or folder to get.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetItemsAsync">
+            <summary>
+            Gets the items in the current folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.GetParentAsync">
+            <summary>
+            Gets the parent folder of the current folder.
+            </summary>
+            <returns>When this method completes, it returns the parent folder as a <see cref="T:InTheHand.Storage.StorageFolder"/>.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.TryGetItemAsync(System.String)">
+            <summary>
+            Tries to get the file or folder with the specified name from the current folder.
+            Returns null instead of raising a FileNotFoundException if the specified file or folder is not found.
+            </summary>
+            <param name="name">The name (or path relative to the current folder) of the file or folder to get.</param>
+            <returns>When this method completes successfully, it returns an IStorageItem that represents the specified file or folder.
+            If the specified file or folder is not found, this method returns null instead of raising an exception.</returns>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFolder.Attributes">
+            <summary>
+            Gets the attributes of the current folder.
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFolder.DateCreated">
+            <summary>
+            Gets the date and time that the current folder was created. 
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFolder.Name">
+            <summary>
+            Gets the name of the current folder. 
+            </summary>
+        </member>
+        <member name="P:InTheHand.Storage.StorageFolder.Path">
+            <summary>
+            Gets the full path of the current folder in the file system, if the path is available.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.IsEqual(InTheHand.Storage.IStorageItem)">
+            <summary>
+            Indicates whether the current folder is equal to the specified folder.
+            </summary>
+            <param name="item">The <see cref="T:InTheHand.Storage.IStorageItem"/> object that represents the folder to compare against.</param>
+            <returns>Returns true if the current folder is equal to the specified folder; otherwise false.</returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolder.IsOfType(InTheHand.Storage.StorageItemTypes)">
+            <summary>
+            Indicates whether the current <see cref="T:InTheHand.Storage.StorageFolder"/> matches the specified <see cref="T:InTheHand.Storage.StorageItemTypes"/> value.
+            </summary>
+            <param name="type">The enum value that determines the object type to match against.</param>
+            <returns>True if the <see cref="T:InTheHand.Storage.StorageFolder"/> matches the specified <see cref="T:InTheHand.Storage.StorageItemTypes"/> value; otherwise false.</returns>
+            <seealso cref="T:InTheHand.Storage.StorageItemTypes"/>
+        </member>
+        <member name="T:InTheHand.Storage.StorageFolderExtensions">
+            <summary>
+            Provides additional methods for <see cref="T:InTheHand.Storage.StorageFolder"/>.
+            </summary>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolderExtensions.DeleteAllItems(InTheHand.Storage.StorageFolder)">
+            <summary>
+            Deletes all contents of a folder without deleting the folder itself.
+            </summary>
+            <param name="folder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.Storage.StorageFolderExtensions.GetFolderSizeAsync(InTheHand.Storage.IStorageFolder)">
+            <summary>
+            Returns the size, in bytes, of the folder and all of its contents.
+            </summary>
+            <param name="folder">The folder to measure</param>
+            <returns>The size, in bytes, of the folder and all of its contents.</returns>
+        </member>
+        <member name="T:InTheHand.Storage.StorageItemTypes">
+            <summary>
+            Describes whether an item that implements the <see cref="T:InTheHand.Storage.IStorageItem"/> interface is a file or a folder.
+            </summary>
+            <seealso cref="M:InTheHand.Storage.IStorageItem.IsOfType(InTheHand.Storage.StorageItemTypes)"/>
+        </member>
+        <member name="F:InTheHand.Storage.StorageItemTypes.None">
+            <summary>
+            A storage item that is neither a file nor a folder.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.StorageItemTypes.File">
+            <summary>
+            A file that is represented as a <see cref="T:InTheHand.Storage.StorageFile"/> instance.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.StorageItemTypes.Folder">
+            <summary>
+            A folder that is represented as a <see cref="T:InTheHand.Storage.StorageFolder"/> instance.
+            </summary>
+        </member>
+        <member name="T:InTheHand.Storage.Streams.UnicodeEncoding">
+            <summary>
+            Specifies the type of character encoding for a stream.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.Streams.UnicodeEncoding.Utf8">
+            <summary>
+            The encoding is UTF-8.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.Streams.UnicodeEncoding.Utf16LE">
+            <summary>
+            The encoding is UTF-16, with the least significant byte first in the two eight-bit bytes.
+            </summary>
+        </member>
+        <member name="F:InTheHand.Storage.Streams.UnicodeEncoding.Utf16BE">
+            <summary>
+            The encoding is UTF-16, with the most significant byte first in the two eight-bit bytes.
+            </summary>
+        </member>
+        <member name="T:InTheHand.System.ProcessorArchitecture">
+            <summary>
+            Specifies the processor architecture supported by an app.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="F:InTheHand.System.ProcessorArchitecture.X86">
+            <summary>
+            The x86 processor architecture.
+            </summary>
+        </member>
+        <member name="F:InTheHand.System.ProcessorArchitecture.Arm">
+            <summary>
+            The ARM processor architecture.
+            </summary>
+        </member>
+        <member name="F:InTheHand.System.ProcessorArchitecture.X64">
+            <summary>
+            The x64 processor architecture.
+            </summary>
+        </member>
+        <member name="F:InTheHand.System.ProcessorArchitecture.Neutral">
+            <summary>
+            A neutral processor architecture.
+            </summary>
+        </member>
+        <member name="F:InTheHand.System.ProcessorArchitecture.Unknown">
+            <summary>
+            An unknown processor architecture.
+            </summary>
+        </member>
+        <member name="T:InTheHand.System.Profile.AnalyticsInfo">
+            <summary>
+            Provides information about the device for profiling purposes.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.System.Profile.AnalyticsInfo.DeviceForm">
+            <summary>
+            Gets the device form factor.
+            For example, the app could be running on a phone, tablet, desktop, and so on.
+            </summary>
+        </member>
+        <member name="P:InTheHand.System.Profile.AnalyticsInfo.VersionInfo">
+            <summary>
+            Gets version info about the device family.
+            </summary>
+        </member>
+        <member name="T:InTheHand.System.Profile.AnalyticsVersionInfo">
+            <summary>
+            Provides version information about the device family.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.System.Profile.AnalyticsVersionInfo.DeviceFamily">
+            <summary>
+            Gets a string that represents the type of device the application is running on.
+            </summary>
+        </member>
+        <member name="P:InTheHand.System.Profile.AnalyticsVersionInfo.DeviceFamilyVersion">
+            <summary>
+            Gets the version within the device family.
+            </summary>
+        </member>
+        <member name="T:InTheHand.UI.Color">
+            <summary>
+            Describes a color in terms of alpha, red, green, and blue channels.
+            Can be implicitly converted into a variety of platform-specific types.
+            </summary>
+            <remarks>
+            <list type="table">
+            <listheader><term>Platform</term><description>Platform Type</description></listheader>
+            <item><term>Android</term><description>Android.Graphics.Color</description></item>
+            <item><term>iOS, tvOS, macOS, watchOS</term><description>CoreGraphics.CGColor</description></item>
+            <item><term>iOS, tvOS, macOS</term><description>CoreImage.CIColor</description></item>
+            <item><term>iOS, tvOS</term><description>UIKit.UIColor</description></item>
+            <item><term>macOS</term><description>AppKit.NSColor</description></item>
+            <item><term>Windows UWP, Windows Store, Windows Phone Store</term><description>Windows.UI.Color</description></item>
+            <item><term>Windows Phone Silverlight</term><description>System.Windows.Media.Color</description></item></list>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Color.FromArgb(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Creates a new <see cref="T:InTheHand.UI.Color"/> structure by using the specified sRGB color channel values.
+            </summary>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.UI.Color.FromArgb(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Creates a new <see cref="T:InTheHand.UI.Color"/> structure by using the specified sRGB alpha channel and color channel values.
+            </summary>
+            <param name="a"></param>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.UI.Color.Equals(InTheHand.UI.Color)">
+            <summary>
+            Compares two <see cref="T:InTheHand.UI.Color"/> structures for equality.
+            </summary>
+            <param name="color">The <see cref="T:InTheHand.UI.Color"/> structure to compare to this <see cref="T:InTheHand.UI.Color"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.UI.Color.ToArgb">
+            <summary>
+            Returns the color value as a UInt32 of the form 0xBBGGRRAA.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.UI.Color.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:InTheHand.UI.Color.A">
+            <summary>
+            Gets or sets the sRGB alpha channel value of the color.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Color.B">
+            <summary>
+            Gets or sets the sRGB blue channel value of the color.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Color.G">
+            <summary>
+            Gets or sets the sRGB green channel value of the color.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Color.R">
+            <summary>
+            Gets or sets the sRGB red channel value of the color.
+            </summary>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.BadgeNotification">
+            <summary>
+            Defines the content, associated metadata, and expiration time of an update to a tile's badge overlay.
+            A badge can display a number from 1 to 999 (beyond this truncation will occur)
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list></remarks>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.BadgeNotificationCreator">
+            <summary>
+            Simplifies creation of badges without the need to build XML documents.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.BadgeNotificationCreator.CreateBadgeNotification(System.UInt32)">
+            <summary>
+            Creates a badge notification with the required numerical value.
+            </summary>
+            <param name="value">Value to show on the badge. Zero will hide the badge.</param>
+            <returns></returns>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.BadgeUpdateManager">
+            <summary>
+            Creates <see cref="T:InTheHand.UI.Notifications.BadgeUpdater"/> objects that you use to manipulate a tile's badge overlay.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.BadgeUpdateManager.CreateBadgeUpdaterForApplication">
+            <summary>
+            Creates and initializes a new instance of the <see cref="T:InTheHand.UI.Notifications.BadgeUpdater"/>, which lets you change the appearance or content of the badge on the calling app's tile.
+            </summary>
+            <returns>The object you will use to send changes to the app tile's badge.</returns>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.BadgeUpdater">
+            <summary>
+            Updates a badge overlay on the specific tile that the updater is bound to.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.BadgeUpdater.Clear">
+            <summary>
+            Removes the badge from the tile that the updater is bound to.
+            </summary>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.BadgeUpdater.Update(InTheHand.UI.Notifications.BadgeNotification)">
+            <summary>
+            Applies a change to the badge's number.
+            </summary>
+            <param name="notification">The object that supplies the new XML definition for the badge.</param>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.ScheduledToastNotification">
+            <summary>
+            Contains the definition of the toast notification that will display at the scheduled time.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+            <seealso cref="T:InTheHand.UI.Notifications.ToastNotificationCreator"/>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ScheduledToastNotification.DeliveryTime">
+            <summary>
+            Gets the time that this toast notification is scheduled to be displayed.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ScheduledToastNotification.Group">
+            <summary>
+            Gets or sets the group identifier for the notification.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ScheduledToastNotification.SuppressPopup">
+            <summary>
+            Gets or sets whether a toast's pop-up UI is displayed on the user's screen.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ScheduledToastNotification.Tag">
+            <summary>
+            Gets or sets the unique identifier of this notification within the notification Group.
+            </summary>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.ToastNotification">
+            <summary>
+            Defines the content, associated metadata and events, and expiration time of a toast notification.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+            <seealso cref="T:InTheHand.UI.Notifications.ToastNotificationCreator"/>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ToastNotification.Group">
+            <summary>
+            Gets or sets the group identifier for the notification.
+            </summary>
+            <value>The group identifier for the notification.</value>
+            <remarks>Not used on macOS. On iOS this maps to the CategoryIdentifier property.</remarks>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ToastNotification.SuppressPopup">
+            <summary>
+            Gets or sets whether a toast's pop-up UI is displayed on the user's screen.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Notifications.ToastNotification.Tag">
+            <summary>
+            Gets or sets the unique identifier of this notification within the notification Group.
+            </summary>
+            <remarks>
+            On iOS this maps to the ThreadIdentifier property and on macOS the Identifier property.</remarks>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.ToastNotificationCreator">
+            <summary>
+            Simplifies creation of toasts without the need to build XML documents.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotificationCreator.CreateToastNotification(System.String,System.String)">
+            <summary>
+            Creates a toast notification with the required values.
+            </summary>
+            <param name="content">Text content.</param>
+            <param name="title">Toast title.</param>
+            <returns></returns>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotificationCreator.CreateScheduledToastNotification(System.String,System.String,System.DateTimeOffset)">
+            <summary>
+            Creates a scheduled toast notification with the required values.
+            </summary>
+            <param name="content">Text content.</param>
+            <param name="title">Toast title.</param>
+            <param name="deliveryTime">When to display the toast.</param>
+            <returns></returns>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.ToastNotificationManager">
+            <summary>
+            Creates ToastNotifier objects which let you display toast notifications.
+            </summary>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotificationManager.CreateToastNotifierForApplication">
+            <summary>
+            Creates and initializes a new instance of the ToastNotifier, which lets you display toast notifications.
+            </summary>
+            <returns></returns>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="T:InTheHand.UI.Notifications.ToastNotifier">
+            <summary>
+            Raises a toast notification to the specific app to which the ToastNotifier is bound.
+            This class also lets you schedule and remove toast notifications.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>watchOS</term><description>watchOS 2.0 and later</description></item>
+            <item><term>Tizen</term><description>Tizen 3.0</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.1 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotifier.Show(InTheHand.UI.Notifications.ToastNotification)">
+            <summary>
+            Shows a toast notification.
+            </summary>
+            <param name="notification">The object that supplies the new XML definition for the toast.</param>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotifier.Hide(InTheHand.UI.Notifications.ToastNotification)">
+            <summary>
+            Hides a toast notification.
+            </summary>
+            <param name="notification">The object that supplies the new XML definition for the toast.</param>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotifier.AddToSchedule(InTheHand.UI.Notifications.ScheduledToastNotification)">
+            <summary>
+            Adds a <see cref="T:InTheHand.UI.Notifications.ScheduledToastNotification"/> for later display.
+            </summary>
+            <param name="scheduledToast">The scheduled toast notification, which includes its content and timing instructions.</param>
+        </member>
+        <member name="M:InTheHand.UI.Notifications.ToastNotifier.RemoveFromSchedule(InTheHand.UI.Notifications.ScheduledToastNotification)">
+            <summary>
+            Cancels the scheduled display of a specified <see cref="T:InTheHand.UI.Notifications.ScheduledToastNotification"/>.
+            </summary>
+            <param name="scheduledToast">The scheduled toast notification, which includes its content and timing instructions.</param>
+        </member>
+        <member name="T:InTheHand.UI.Popups.IUICommand">
+            <summary>
+            Represents a command in a context menu or message dialog box.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="P:InTheHand.UI.Popups.IUICommand.Id">
+            <summary>
+            Gets or sets the identifier of the command.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Popups.IUICommand.Invoked">
+            <summary>
+            Ges or sets the handler for the event that is fired when the user invokes the command.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Popups.IUICommand.Label">
+            <summary>
+            Gets or sets the label for the command.
+            </summary>
+        </member>
+        <member name="T:InTheHand.UI.Popups.UICommandInvokedHandler">
+            <summary>
+            Represents a callback function that handles the event that is fired when the user invokes a context menu command.
+            </summary>
+            <param name="command">Represents the invoked command.</param>
+        </member>
+        <member name="T:InTheHand.UI.Popups.MessageDialog">
+            <summary>
+            Represents a dialog.
+            </summary>
+            <remarks>
+            The dialog has a command bar that can support up to three commands.
+            If you don't specify any commands, then a default command is added to close the dialog.
+            <para>The dialog dims the screen behind it and blocks touch events from passing to the app's canvas until the user responds.</para>
+            <para>Message dialogs should be used sparingly, and only for critical messages or simple questions that must block the user's flow.</para>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Popups.MessageDialog.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:InTheHand.UI.Popups.MessageDialog"/> class to display an untitled message dialog box that can be used to ask your user simple questions.
+            </summary>
+            <param name="content">The message you want displayed to the user.</param>
+        </member>
+        <member name="M:InTheHand.UI.Popups.MessageDialog.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:InTheHand.UI.Popups.MessageDialog"/> class to display a titled message dialog box that can be used to ask your user simple questions.
+            </summary>
+            <param name="content">The message you want displayed to the user.</param>
+            <param name="title">The title you want displayed on the dialog box.</param>
+        </member>
+        <member name="M:InTheHand.UI.Popups.MessageDialog.ShowAsync">
+            <summary>
+            Begins an asynchronous operation showing a dialog.
+            </summary>
+            <returns>An object that represents the asynchronous operation.
+            For more on the async pattern, see Asynchronous programming in the Windows Runtime.</returns>
+            <remarks>In some cases, such as when the dialog is closed by the system out of your control, your result can be an empty command.
+            Returns either the command selected which destroyed the dialog, or an empty command.
+            For example, a dialog hosted in a charms window will return an empty command if the charms window has been dismissed.</remarks>
+        </member>
+        <member name="P:InTheHand.UI.Popups.MessageDialog.Commands">
+            <summary>
+            Gets the set of commands that appear in the command bar of the message dialog.
+            </summary>
+            <remarks>This is the array of commands that makes the dialog actionable.
+            Get this array and add your dialog commands to it.</remarks>
+            <value>The commands.</value>
+        </member>
+        <member name="P:InTheHand.UI.Popups.MessageDialog.Content">
+            <summary>
+            Gets or sets the message to be displayed to the user.
+            </summary>
+            <value>The message to be displayed to the user.</value>
+            <remarks>Use the content to convey the objective of the dialog.
+            Present the message, error or blocking question as simply as possible without extraneous information.
+            <para>When a title is used, use the content to present additional information helpful to understanding or using the dialog.
+            You can use this area to provide more detail or define terminology.
+            Don't repeat the title with slightly different wording.</para></remarks>
+        </member>
+        <member name="P:InTheHand.UI.Popups.MessageDialog.CancelCommandIndex">
+            <summary>
+            Gets or sets the index of the command you want to use as the cancel command.
+            This is the command that fires when users press the ESC key.
+            <para>Add the commands before you set the index.</para>
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Popups.MessageDialog.DefaultCommandIndex">
+            <summary>
+            Gets or sets the index of the command you want to use as the default.
+            This is the command that fires by default when users press the ENTER key instead of a specific command, for example.
+            </summary>
+            <remarks>Add the commands before you set the index.</remarks>
+            <value>The index of the default command.</value>
+        </member>
+        <member name="P:InTheHand.UI.Popups.MessageDialog.Title">
+            <summary>
+            Gets or sets the title to display on the dialog box, if any. 
+            </summary>
+            <value>The title you want to display on the dialog.
+            If the title is not set, this will return an empty string.</value>
+            <remarks>Use the title as a concise main instruction to convey the objective of the dialog.
+            <para>Long titles do not wrap and will be truncated.</para>
+            <para>If you're using the dialog to deliver a simple message, error or question, omit the title.
+            Rely on the <see cref="P:InTheHand.UI.Popups.MessageDialog.Content"/> to deliver that core information.</para></remarks>
+        </member>
+        <member name="T:InTheHand.UI.Popups.UICommand">
+            <summary>
+            Represents a command in a context menu.
+            </summary>
+            <remarks>
+            <para/><list type="table">
+            <listheader><term>Platform</term><description>Version supported</description></listheader>
+            <item><term>Android</term><description>Android 4.4 and later</description></item>
+            <item><term>iOS</term><description>iOS 9.0 and later</description></item>
+            <item><term>macOS</term><description>OS X 10.7 and later</description></item>
+            <item><term>tvOS</term><description>tvOS 9.0 and later</description></item>
+            <item><term>Windows UWP</term><description>Windows 10</description></item>
+            <item><term>Windows Store</term><description>Windows 8.1 or later</description></item>
+            <item><term>Windows Phone Store</term><description>Windows Phone 8.1 or later</description></item>
+            <item><term>Windows Phone Silverlight</term><description>Windows Phone 8.0 or later</description></item>
+            <item><term>Windows (Desktop Apps)</term><description>Windows 7 or later</description></item></list>
+            </remarks>
+        </member>
+        <member name="M:InTheHand.UI.Popups.UICommand.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:InTheHand.UI.Popups.UICommand"/> class.
+            </summary>
+        </member>
+        <member name="M:InTheHand.UI.Popups.UICommand.#ctor(System.String,InTheHand.UI.Popups.UICommandInvokedHandler)">
+            <summary>
+            Initializes a new instance of the UICommand class, using the specified label and event handler.
+            </summary>
+            <param name="label">The label for the new command.</param>
+            <param name="action">The event handler for the new command. </param>
+        </member>
+        <member name="M:InTheHand.UI.Popups.UICommand.#ctor(System.String,InTheHand.UI.Popups.UICommandInvokedHandler,System.Object)">
+            <summary>
+            Initializes a new instance of the UICommand class, using the specified label, event handler, and command identifier.
+            </summary>
+            <param name="label">The label for the new command.</param>
+            <param name="action">The event handler for the new command.</param>
+            <param name="commandId">The command identifier for the new command.</param>
+        </member>
+        <member name="P:InTheHand.UI.Popups.UICommand.Id">
+            <summary>
+            Gets or sets the identifier of the command.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Popups.UICommand.Invoked">
+            <summary>
+            Gets or sets the handler for the event that is raised when the user selects the command.
+            </summary>
+        </member>
+        <member name="P:InTheHand.UI.Popups.UICommand.Label">
+            <summary>
+            Gets or sets the label for the command.
+            </summary>
+        </member>
+        <member name="T:System.IO.InTheHandRuntimeStorageExtensions">
+            <summary>
+            Contains extension methods for the IStorageFile and IStorageFolder interfaces for .NET interop.
+            </summary>
+        </member>
+        <member name="M:System.IO.InTheHandRuntimeStorageExtensions.OpenStreamForReadAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Retrieves a stream for reading from a specified file.
+            </summary>
+            <param name="windowsRuntimeFile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.IO.InTheHandRuntimeStorageExtensions.OpenStreamForReadAsync(InTheHand.Storage.IStorageFolder,System.String)">
+            <summary>
+            Retrieves a stream for reading from a file in the specified parent folder.
+            </summary>
+            <param name="rootDirectory">The Windows Runtime IStorageFolder object that contains the file to read from.</param>
+            <param name="relativePath">The path, relative to the root folder, to the file to read from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.IO.InTheHandRuntimeStorageExtensions.OpenStreamForWriteAsync(InTheHand.Storage.IStorageFile)">
+            <summary>
+            Retrieves a stream for writing to a specified file.
+            </summary>
+            <param name="windowsRuntimeFile">The Windows Runtime IStorageFile object to write to.</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.IO.InTheHandRuntimeStorageExtensions.OpenStreamForWriteAsync(InTheHand.Storage.IStorageFolder,System.String,InTheHand.Storage.CreationCollisionOption)">
+            <summary>
+            Retrieves a stream for writing from a file in the specified parent folder.
+            </summary>
+            <param name="rootDirectory">The Windows Runtime IStorageFolder object that contains the file to write to.</param>
+            <param name="relativePath">The path, relative to the root folder, to the file to write to.</param>
+            <param name="creationCollisionOption"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
