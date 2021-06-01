@@ -1,5 +1,6 @@
 ﻿using Network;
 using NetworkModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace ClientTest
             Console.ReadLine();
         }
 
-        System.Net.Sockets.TcpClient clientSocket  = new System.Net.Sockets.TcpClient();
+        TcpClient clientSocket  = new TcpClient();
         NetworkStream serverStream  = default(NetworkStream);
         string readData = null;
 
@@ -35,18 +36,21 @@ namespace ClientTest
         public void button2_Click()
         {
             readData = "Conected to Chat Server ...";
-            clientSocket.Connect("2.80.236.204", 25565);
+            //clientSocket.Connect("2.80.236.204", 25565);
+            clientSocket.Connect("127.0.0.1", 25565);
             serverStream = clientSocket.GetStream();
 
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes("ola$");
-            serverStream.Write(outStream, 0, outStream.Length);
-            serverStream.Flush();
+            IdentRequest request = new IdentRequest("membro");
 
-            Thread ctThread = new Thread(getMessage);
+            byte[] outStream = Encoding.ASCII.GetBytes(request.ToJSON());
+            serverStream.Write(outStream, 0, outStream.Length);
+            //serverStream.Flush();
+
+            Thread ctThread = new Thread(GetMessage);
             ctThread.Start();
         }
 
-        private void getMessage()
+        private void GetMessage()
         {
             while (true)
             {
@@ -55,9 +59,18 @@ namespace ClientTest
                 byte[] inStream = new byte[100025];
                 buffSize = clientSocket.ReceiveBufferSize;
                 serverStream.Read(inStream, 0, buffSize);
-                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
-                readData = "" + returndata;
-                Console.WriteLine(readData);
+                string returndata = Encoding.ASCII.GetString(inStream);
+                if(returndata != null && returndata != "")
+                {
+                    JsonSerializerSettings settings = new JsonSerializerSettings
+                    {
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                        TypeNameHandling = TypeNameHandling.All
+                    };
+                    returndata = returndata.Replace("MonopolioServer", "ClientTest").Replace("Monopolio Server", "ClientTest");
+                    Response response = JsonConvert.DeserializeObject(returndata, settings) as Response;
+                    response.Execute();
+                }
             }
         }
     }
