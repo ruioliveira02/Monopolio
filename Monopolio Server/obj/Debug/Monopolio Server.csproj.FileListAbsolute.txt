@@ -22,3 +22,5 @@ J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopol
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.pdb
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\NetworkModel.dll
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\NetworkModel.pdb
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Newtonsoft.Json.dll
+J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Newtonsoft.Json.xml

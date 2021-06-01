@@ -8,178 +8,122 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace Monopolio_Server
 {
+    /// <summary>
+    /// Class which handles the server logic, mainly accepting new connections from clients
+    /// </summary>
     public class Server
     {
-        /*private ServerConnectionContainer secureServerConnectionContainer;
-        const int Port = 8080;
+        /// <summary>
+        /// Whether the server is still running or not
+        /// </summary>
+        public static bool Running = true;
 
-        internal void Demo()
+        /// <summary>
+        /// The table with all the currently connected clients, hashed by the username
+        /// </summary>
+        public static Hashtable ClientsList = new Hashtable();
+
+        /// <summary>
+        /// The ip of the server we are using
+        /// </summary>
+        private const string ip = "2.80.236.204";
+
+        /// <summary>
+        /// The port being used
+        /// </summary>
+        private const int port = 25565;
+
+        /// <summary>
+        /// The size of the buffer used to read bytes from the network stream
+        /// </summary>
+        public static readonly int BufferSize = 65536;
+
+        /// <summary>
+        /// Opens and runs the server until closure
+        /// </summary>
+        public void Run()
         {
-            //1. Start to listen on a port
-            secureServerConnectionContainer = ConnectionFactory.CreateSecureServerConnectionContainer(Port);
-            //2. Apply optional settings.
+            TcpListener serverSocket = new TcpListener(IPAddress.Parse(ip), port);
+            TcpClient clientSocket = new TcpClient();
 
-            #region Optional settings
+            serverSocket.Start();
+            Console.WriteLine("Monopolio Server Started ....");
 
-            secureServerConnectionContainer.ConnectionLost += (a, b, c) => Console.WriteLine($"{secureServerConnectionContainer.Count} {b.ToString()} Connection lost {a.IPRemoteEndPoint.Port}. Reason {c.ToString()}");
-            secureServerConnectionContainer.ConnectionEstablished += ConnectionEstablished;
-#if NET46
-            secureServerConnectionContainer.AllowBluetoothConnections = true;
-#endif
-            secureServerConnectionContainer.AllowUDPConnections = true;
-            secureServerConnectionContainer.UDPConnectionLimit = 20;
+            while (Running)
+            {
+                IdentRequest request = GetRequest(ref serverSocket);
 
-            #endregion Optional settings
-            //Call start here, because we had to enable the bluetooth property at first.
-            secureServerConnectionContainer.Start();
+                Console.WriteLine(request.Message());
+                Response response = request.Execute();
+                Console.WriteLine(response.Message());
 
-            //Don't close the application.
+                if (request.Accepted)
+                {
+                    AddClient(request, response, ref clientSocket);
+                }
+            }
+
+            clientSocket.Close();
+            serverSocket.Stop();
+            Console.WriteLine("exit");
             Console.ReadLine();
         }
 
         /// <summary>
-        /// We got a connection.
+        /// Broadcasts a server response
         /// </summary>
-        /// <param name="connection">The connection we got. (TCP or UDP)</param>
-        private void ConnectionEstablished(Connection connection, ConnectionType type)
+        public static void Broadcast(Response msg)
         {
-            Console.WriteLine($"{secureServerConnectionContainer.Count} {connection.GetType()} connected on port {connection.IPRemoteEndPoint.Port}");
+            foreach (DictionaryEntry Item in ClientsList)
+            {
+                TcpClient broadcastSocket;
+                broadcastSocket = (TcpClient)Item.Value;
+                NetworkStream broadcastStream = broadcastSocket.GetStream();
 
-            //3. Register packet listeners.
-            //connection.RegisterStaticPacketHandler<IdentRequest>(CalculationReceived);
-            //connection.RegisterStaticPacketHandler<string>(addStudentReceived);
-            //connection.RegisterRawDataHandler("HelloWorld", (rawData, con) => Console.WriteLine($"RawDataPacket received. Data: {rawData.ToUTF8String()}"));
-            //connection.RegisterRawDataHandler("BoolValue", (rawData, con) => Console.WriteLine($"RawDataPacket received. Data: {rawData.ToBoolean()}"));
-            //connection.RegisterRawDataHandler("DoubleValue", (rawData, con) => Console.WriteLine($"RawDataPacket received. Data: {rawData.ToDouble()}"));
+                byte[] broadcastBytes = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(msg));
+
+                broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
+                broadcastStream.Flush();
+            }
         }
 
         /// <summary>
-        /// If the client sends us a calculation request, it will end up here.
+        /// Gets the latest connection request from the socket.
         /// </summary>
-        /// <param name="packet">The calculation packet.</param>
-        /// <param name="connection">The connection who was responsible for the transmission.</param>
-        private static void CalculationReceived(IdentRequest packet, Connection connection)
+        /// <paramref name="serverSocket"/> The socket the is listening on
+        /// 
+        /// <returns>The lastest <cref>IdentRequest</cref> from the socket</returns>
+        private IdentRequest GetRequest(ref TcpListener serverSocket)
         {
-            Console.WriteLine(string.Format("Incoming Ident Request from user {0}", packet.Username));
-            //TODO:: Modify this line to accomodate server logic
-            bool accepted = true;
-            Console.WriteLine(((accepted) ? "User accepted" : "User denied"));
+            TcpClient clientSocket = serverSocket.AcceptTcpClient();
 
-            connection.Send(new IdentResponse(accepted, packet));
-        }*/
+            byte[] bytesFrom = new byte[BufferSize];
 
-        public static Hashtable clientsList = new Hashtable();
+            NetworkStream networkStream = clientSocket.GetStream();
+            networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
+            string dataFromClient = Encoding.ASCII.GetString(bytesFrom);
 
-            public void Chat()
-            {
-                TcpListener serverSocket = new TcpListener(IPAddress.Parse("2.80.236.204"), 25565);
-                TcpClient clientSocket = default;
-                int counter = 0;
+            return JsonConvert.DeserializeObject<IdentRequest>(dataFromClient);
+        }
 
-                serverSocket.Start();
-                Console.WriteLine("Chat Server Started ....");
-                counter = 0;
-                while ((true))
-                {
-                    counter += 1;
-                    clientSocket = serverSocket.AcceptTcpClient();
-
-                    byte[] bytesFrom = new byte[100025];
-                    string dataFromClient = null;
-
-                    NetworkStream networkStream = clientSocket.GetStream();
-                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-
-                    clientsList.Add(dataFromClient, clientSocket);
-
-                    broadcast(dataFromClient + " Joined ", dataFromClient, false);
-
-                    Console.WriteLine(dataFromClient + " Joined chat room ");
-                    handleClinet client = new handleClinet();
-                    client.startClient(clientSocket, dataFromClient, clientsList);
-                }
-
-                clientSocket.Close();
-                serverSocket.Stop();
-                Console.WriteLine("exit");
-                Console.ReadLine();
-            }
-
-            public static void broadcast(string msg, string uName, bool flag)
-            {
-                foreach (DictionaryEntry Item in clientsList)
-                {
-                    TcpClient broadcastSocket;
-                    broadcastSocket = (TcpClient)Item.Value;
-                    NetworkStream broadcastStream = broadcastSocket.GetStream();
-                    Byte[] broadcastBytes = null;
-
-                    if (flag == true)
-                    {
-                        broadcastBytes = Encoding.ASCII.GetBytes(uName + " says : " + msg);
-                    }
-                    else
-                    {
-                        broadcastBytes = Encoding.ASCII.GetBytes(msg);
-                    }
-
-                    broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
-                    broadcastStream.Flush();
-                }
-            }  //end broadcast function
-        }//end Main class
-
-
-        public class handleClinet
+        /// <summary>
+        /// Adds the requested client to the list of clients
+        /// </summary>
+        /// <param name="request">The client's request</param>
+        /// <param name="response">The response of the server</param>
+        ///
+        /// <paramref name="socket"> The socket the is client listening on</paramref>
+        /// 
+        private void AddClient(Request request, Response response, ref TcpClient socket)
         {
-            TcpClient clientSocket;
-            string clNo;
-            Hashtable clientsList;
-
-            public void startClient(TcpClient inClientSocket, string clineNo, Hashtable cList)
-            {
-                this.clientSocket = inClientSocket;
-                this.clNo = clineNo;
-                this.clientsList = cList;
-                Thread ctThread = new Thread(doChat);
-                ctThread.Start();
-            }
-
-            private void doChat()
-            {
-                int requestCount = 0;
-                byte[] bytesFrom = new byte[100025];
-                string dataFromClient = null;
-                Byte[] sendBytes = null;
-                string serverResponse = null;
-                string rCount = null;
-                requestCount = 0;
-
-                while ((true))
-                {
-                    try
-                    {
-                        requestCount = requestCount + 1;
-                        NetworkStream networkStream = clientSocket.GetStream();
-                        networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                        dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                        dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                        Console.WriteLine("From client - " + clNo + " : " + dataFromClient);
-                        rCount = Convert.ToString(requestCount);
-                    Console.WriteLine(dataFromClient);
-                        Server.broadcast(dataFromClient, clNo, true);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-                }//end while
-            }//end doChat
-
-}
+            ClientsList.Add(request.SenderID, socket);
+            Broadcast(response);
+            HandleClient client = new HandleClient();
+            client.StartClient(socket, request.SenderID);
+        }
+    }     
 }

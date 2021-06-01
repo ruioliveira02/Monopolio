@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Monopolio_Server
 {
+    /// <summary>
+    /// Class containing the main.
+    /// </summary> 
     class Program
     {
+        /// <summary>
+        /// The entry point of the application
+        /// </summary> 
+        /// 
+        /// <param name="args">The program's arguments</param>
         static void Main(string[] args)
         {
             Server server = new Server();
-            server.Chat();
+            server.Run();
             Console.ReadLine();
         }
     }
