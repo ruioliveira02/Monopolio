@@ -62,6 +62,8 @@ namespace Monopolio
             undrawn = drawn;
             drawn = new List<Card>();
         }
+
+        public void Add(Card c) => undrawn.Add(c);
     }
 
     public struct Event
@@ -69,15 +71,20 @@ namespace Monopolio
         public enum EventType
         {
             //Movement
-            GoToJail,       //go to jail without passing Start
-            AdvanceToStart, //advance to the Start square and receive 200
-            AdvanceTo,      //advance to property named Arg (receive 200 passing Start)
+            GoToJail,           //go to jail without passing Start
+            AdvanceToStart,     //advance to the Start square and receive 200
+            AdvanceToStation,   //advance to the closest station
+            AdvanceTo,          //advance to property named Arg (receive 200 at Start)
+            Walk,               //walk X spaces forward (if X < 0, walk backwards)
 
             //Money
-            Receive,        //player gets X money. If X is negative, player loses money
-            ReceiveFromEach,//each player gives you X money. If X < 0, you give each X
-            PayDoubleRent,  //pay twice the rent of the square you are on (if owned)
-            RepairProperty, //pay X for each house on your property and Y for each hotel
+            Receive,            //player gets X money. If X < 0, player loses money
+            ReceiveFromEach,    //each player gives you X. If X < 0, you give each X
+            PayXRent,           //pay X times the rent of where you are (if owned)
+            RepairProperty,     //pay X for each house you own and Y for each hotel
+
+            //Anti-Prision
+            OutOfJailFree,      //the player receives a get-out-of-jail-free card
         }
 
         public EventType Type { get; }

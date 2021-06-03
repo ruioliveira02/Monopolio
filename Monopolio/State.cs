@@ -9,7 +9,10 @@ namespace Monopolio
 
     public class State
     {
-        public const int initial_money = 1500;
+        public const int housesPerHotel = 4;
+        public const int maxBuildings = 5;
+
+        public const int initialMoney = 1500;
         public const int salary = 200;
         public const int jailFine = 50;
 
@@ -35,6 +38,20 @@ namespace Monopolio
         public int MiddleMoney { get; private set; }
         public Deck Chance { get; }
         public Deck CommunityChest { get; }
+
+        [JsonIgnore]
+        public int AlivePlayers {
+            get
+            {
+                int ans = 0;
+
+                foreach (Player p in Players)
+                    if (!p.Bankrupt)
+                        ans++;
+
+                return ans;
+            }
+        }
 
 
         public State(string[] players) //new game
@@ -79,6 +96,9 @@ namespace Monopolio
                     b.ResolveProperty(board);
                 }
             }
+
+            foreach (Player p in Players)
+                p.ResolveCreditor(Players);
         }
 
 
@@ -87,6 +107,8 @@ namespace Monopolio
             string json = JsonConvert.SerializeObject(this);
             File.WriteAllText(file, json);
         }
+
+        #region getters
 
         public PropertyState GetPropertyState(Property property)
             => Groups[(int)property.color].GetPropertyState(property);
@@ -111,15 +133,62 @@ namespace Monopolio
             return null;
         }
 
+        #endregion
+
+        //when a player lost the game (can't pay)
+        void Bankrupcy(Player p)
+        {
+            int aux = 0;
+
+            foreach (var a in Groups)
+            {
+                foreach (var b in a.properties)
+                {
+                    aux += b.Property.buildPrice * b.Buildings / 2;
+                    b.Houses = 0;
+                    b.Hotels = 0;
+                    b.Owner = p.Creditor;
+                    //TODO: auction properties if the creditor is the bank (null)
+                }
+            }
+
+            if (p.Creditor != null)
+            {
+                p.Creditor.Money += aux;
+                p.Creditor.GetOutOfJailFreeCards += p.GetOutOfJailFreeCards;
+            }
+            else
+            {
+                //return get-out-of-jail-free cards to their decks
+                //TODO: decide to which deck (currently only chance)
+                foreach (Card c in board.Chance)
+                {
+                    if (c.Events.Length > 0 &
+                        c.Events[0].Type == Event.EventType.OutOfJailFree)
+                    {
+                        while (p.GetOutOfJailFreeCards-- > 0)
+                            Chance.Add(c);
+
+                        break;
+                    }
+                }
+            }
+
+            p.Bankrupt = true;
+        }
+
+        #region gameFlow
 
         //returns true when 3 doubles have been rolled in a row
-        public bool DiceRoll()
+        bool DiceRoll()
         {
-            if (RepeatTurn)
+            if (RepeatTurn && !Players[Turn].Bankrupt)
                 RepeatedTurns++;
             else
             {
-                Turn = (Turn + 1) % Players.Length;
+                do
+                    Turn = (Turn + 1) % Players.Length;
+                while (Players[Turn].Bankrupt);
                 RepeatedTurns = 0;
             }
 
@@ -137,8 +206,17 @@ namespace Monopolio
             return false;
         }
 
-        public void NextTurn()
+        void NextTurn()
         {
+            //check wether anyone lost in the previous turn
+            foreach (var p in Players)
+                if (!p.Bankrupt && p.Money < 0)
+                    Bankrupcy(p);
+
+            //game over
+            if (AlivePlayers <= 1)
+                return;
+
             if (DiceRoll())
                 board.SendToJail(Players[Turn]);
             else if (Players[Turn].InJail >= 0)
@@ -150,6 +228,9 @@ namespace Monopolio
                 }
                 else if (Players[Turn].InJail >= 3) //after 3 turns you MUST leave
                 {
+                    //TODO: bug fix
+                    //if the player contracts debt to pay the fine and then contracts
+                    //debt to another player, the debts will get mixed
                     Players[Turn].Money -= jailFine;
                     Players[Turn].InJail = 0;
                 }
@@ -165,12 +246,10 @@ namespace Monopolio
                 {
                     case Square.Type.Property:
                         PropertyState ps = GetPropertyState(s.property);
-                        Player owner = ps.Owner;
-                        if (owner != null && owner != Players[Turn])
+                        if (ps.Owner != null && ps.Owner != Players[Turn])
                         {
                             int rent = Groups[(int)ps.Property.color].Rent(ps);
-                            Players[Turn].Money -= rent;
-                            owner.Money += rent;
+                            Players[Turn].Give(rent, ps.Owner);
                         }
                         break;
 
@@ -187,6 +266,8 @@ namespace Monopolio
                         break;
 
                     case Square.Type.Tax:
+                        //TODO: alternative 10% total worth (because
+                        //income tax can't cause bankrupcy)
                         Players[Turn].Money -= s.tax;
                         MiddleMoney += s.tax;
                         break;
@@ -203,68 +284,77 @@ namespace Monopolio
             }
         }
 
+        #endregion
+
+        #region executes
+
         //returns wether the Action was successfully executed
         public bool Execute(Action a)
         {
+            //game over
+            if (AlivePlayers <= 1)
+                return false;
+
+            //dead men tell no tales
+            if (a.Player.Bankrupt)
+                return false;
+
+            //wait for your turn
             if (a.IsTurnAction && Players[Turn] != a.Player)
                 return false;
 
-            if (a.IsPropertyAction)
+            switch (a.type)
             {
-                Square s = board.GetSquare(Players[Turn].Position);
+                case Action.Type.Buy:
+                    Square s = board.GetSquare(Players[Turn].Position);
 
-                if (s.type != Square.Type.Property)
-                    return false;
+                    if (s.type != Square.Type.Property)
+                        return false;
 
-                PropertyState ps = GetPropertyState(s.property);
-
-                if (a.type == Action.Type.Buy) //buy
-                {
-                    if (ps.Owner != null)
+                    PropertyState ps = GetPropertyState(s.property);
+                    if (ps.Owner != null || a.Player.Money < s.property.price)
                         return false;
 
                     a.Player.Money -= s.property.price;
                     ps.Owner = a.Player;
-                }
-                else if (!Groups[(int)s.property.color].Build(s.property)) //build
-                    return false;
-            }
-            else
-            {
-                switch (a.type)
-                {
-                    case Action.Type.PayJailFine:
-                        if (a.Player.InJail == 0 || a.Player.Money < jailFine)
-                            return false;
-                        a.Player.Money -= jailFine;
-                        a.Player.InJail = 0;
-                        if (a.Player == Players[Turn] && a.Player.InJail == 1)
-                        {
-                            NextTurn();
-                            return true;
-                        }
-                        break;
+                    break;
 
-                    case Action.Type.Mortgage:
-                        if (a.property.Owner != a.Player)
-                            return false;
-                        if (!Groups[(int)a.property.Color].Mortgage(a.property))
-                            return false;
-                        break;
+                case Action.Type.PayJailFine:
+                    if (a.Player.InJail == 0 || a.Player.Money < jailFine)
+                        return false;
+                    a.Player.Money -= jailFine;
+                    a.Player.InJail = 0;
+                    if (a.Player == Players[Turn] && a.Player.InJail == 1)
+                    {
+                        NextTurn();
+                        return true;
+                    }
+                    break;
 
-                    case Action.Type.Give:
-                        if (a.Player.Money < a.amount)
-                            return false;
-                        a.Player.Money -= a.amount;
-                        a.target.Money += a.amount;
-                        break;
+                case Action.Type.Build:
+                    if (a.property.Owner != a.Player
+                        || !Groups[(int)a.property.Color].Build(a.property))
+                        return false;
+                    break;
 
-                    case Action.Type.GiveProperty:
-                        if (a.property.Owner != a.Player)
-                            return false;
-                        a.property.Owner = a.target;
-                        break;
-                }
+                case Action.Type.Mortgage:
+                    if (a.property.Owner != a.Player
+                        || !Groups[(int)a.property.Color].Mortgage(a.property))
+                        return false;
+                    break;
+
+                case Action.Type.Give:
+                    if (a.Player.Money < a.amount)
+                        return false;
+                    a.Player.Give(a.amount, a.target);
+                    break;
+
+                case Action.Type.GiveProperty:
+                    if (a.property.Owner != a.Player)
+                        return false;
+                    //TODO: pay interest if new owner doesn't immediately lift mortgage
+                    a.property.Owner = a.target;
+                    break;
             }
 
             if (a.IsTurnAction)
@@ -273,7 +363,7 @@ namespace Monopolio
             return true;
         }
 
-        public void Execute(Event e, Player target)
+        void Execute(Event e, Player target)
         {
             switch (e.Type)
             {
@@ -285,8 +375,16 @@ namespace Monopolio
                     board.AdvanceToStart(target);
                     break;
 
+                case Event.EventType.AdvanceToStation:
+                    board.AdvanceToNearest(target, Property.Color.Station);
+                    break;
+
                 case Event.EventType.AdvanceTo:
                     board.AdvanceToProperty(target, e.Arg);
+                    break;
+
+                case Event.EventType.Walk:
+                    board.Walk(target, e.X);
                     break;
 
                 case Event.EventType.Receive:
@@ -295,21 +393,19 @@ namespace Monopolio
 
                 case Event.EventType.ReceiveFromEach:
                     foreach (Player p in Players)
-                        p.Money -= e.X;
-
-                    target.Money += Players.Length * e.X;
+                        if (p != target)
+                            p.Give(e.X, target);
                     break;
 
-                case Event.EventType.PayDoubleRent:
+                case Event.EventType.PayXRent:
                     Square s = board.GetSquare(target.Position);
                     if (s.type == Square.Type.Property)
                     {
                         PropertyState ps = GetPropertyState(s.property);
                         if (ps.Owner != null && ps.Owner != target)
                         {
-                            int rent = 2 * Groups[(int)ps.Color].Rent(ps);
-                            target.Money -= rent;
-                            ps.Owner.Money += rent;
+                            int rent = e.X * Groups[(int)ps.Color].Rent(ps);
+                            target.Give(rent, ps.Owner);
                         }
                     }
                     break;
@@ -329,7 +425,16 @@ namespace Monopolio
                     }
                     target.Money -= cost;
                     break;
+
+                case Event.EventType.OutOfJailFree:
+                    target.GetOutOfJailFreeCards++;
+                    break;
+
+                default:
+                    throw new NotImplementedException("Event not implemented");
             }
         }
+
+        #endregion
     }
 }

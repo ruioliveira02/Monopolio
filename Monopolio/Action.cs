@@ -13,13 +13,13 @@ namespace Monopolio
             //turn actions (require that it is the player's turn and finish the turn on successful completion)
             Skip,           //skips the player's turn
             Buy,            //buy the property the player is standing on
-            Build,          //build a house/hotel on the property the player is standing on
 
             //has his own category (he's kind of a loner)
             PayJailFine,    //the player pays his fine and leaves the jail with the dice he rolled before.
                             //if executed in the same turn the player was sent to jail it terminates his turn
 
             //instant actions (can be performed at any time, by any player)
+            Build,          //build a house/hotel on target property
             Mortgage,       //return a property to the bank for half of its price. If there is a building
                             //on the property it is mortgaged instead (respecting the building rules in reverse)
             Give,           //give another player a certain amount of money
@@ -35,10 +35,7 @@ namespace Monopolio
         public readonly PropertyState property;
         public readonly int amount;
 
-        public bool IsTurnAction { get => type < Type.Give; }
-
-        //turn actions that require the player to be on a property space
-        public bool IsPropertyAction { get => IsTurnAction && type >= Type.Buy; }
+        public bool IsTurnAction { get => type == Type.Skip || type == Type.Buy; }
 
         //action must be formatted as:
         //instruction "player_arg" "property_arg" int_arg

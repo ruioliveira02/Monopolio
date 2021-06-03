@@ -75,7 +75,7 @@ namespace Monopolio_Server
 
             public void Chat()
             {
-                TcpListener serverSocket = new TcpListener(IPAddress.Parse("2.80.236.204"), 25565);
+                TcpListener serverSocket = new TcpListener(IPAddress.Parse("192.168.1.98"), 25565);
                 TcpClient clientSocket = default;
                 int counter = 0;
 
