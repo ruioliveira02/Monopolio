@@ -10,7 +10,8 @@
       "NetworkModel/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.3",
-          "Network": "6.2.4.21"
+          "Network": "6.2.4.21",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "NetworkModel.dll": {}
@@ -59,6 +60,14 @@
           "lib/netstandard2.0/Network.dll": {
             "assemblyVersion": "6.2.4.21",
             "fileVersion": "6.2.4.21"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
           }
         }
       },
@@ -396,6 +405,13 @@
       "sha512": "sha512-QrsAUIAADi33pXWEqJBW/VDl8zeZLT/7FRolp4f1kb1Ij0x9EqEFy0A9X3FRi4x1CE7V8BgA/ZCARNMoHaN7lw==",
       "path": "network/6.2.4.21",
       "hashPath": "network.6.2.4.21.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",
