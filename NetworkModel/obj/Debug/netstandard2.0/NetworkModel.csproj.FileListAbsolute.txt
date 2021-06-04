@@ -1,6 +1,7 @@
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.deps.json
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.dll
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.pdb
+J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csprojAssemblyReference.cache
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.AssemblyInfoInputs.cache
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.AssemblyInfo.cs
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.CoreCompileInputs.cache
