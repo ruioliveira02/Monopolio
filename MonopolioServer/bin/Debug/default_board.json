@@ -1,0 +1,419 @@
+{
+	"squares": [
+		{
+			"type": 0
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 0,
+				"name": "Uni",
+				"price": 60,
+				"buildPrice": 50,
+				"rent": [ 2, 10, 30, 90, 160, 250 ]
+			}
+		},
+		{
+			"type": 3
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 0,
+				"name": "Castro",
+				"price": 60,
+				"buildPrice": 50,
+				"rent": [ 4, 20, 60, 180, 320, 450 ]
+			}
+		},
+		{
+			"type": 4,
+			"name": "TODO",
+			"tax": 200
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 8,
+				"name": "TODO",
+				"price": 200
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 1,
+				"name": "Pizzaria",
+				"price": 100,
+				"buildPrice": 50,
+				"rent": [ 6, 30, 90, 270, 400, 550 ]
+			}
+		},
+		{
+			"type": 2
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 1,
+				"name": "De Gema",
+				"price": 100,
+				"buildPrice": 50,
+				"rent": [ 6, 30, 90, 270, 400, 550 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 1,
+				"name": "Pingo Doce",
+				"price": 120,
+				"buildPrice": 50,
+				"rent": [ 8, 40, 100, 300, 450, 600 ]
+			}
+		},
+		{
+			"type": 5 //Prisão - Dom Diogo
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 2,
+				"name": "Islândia",
+				"price": 140,
+				"buildPrice": 100,
+				"rent": [ 10, 50, 150, 450, 625, 750 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 9,
+				"name": "TODO",
+				"price": 150,
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 2,
+				"name": "Castelo do Queijo",
+				"price": 140,
+				"buildPrice": 100,
+				"rent": [ 10, 50, 150, 450, 625, 750 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 2,
+				"name": "Freiburgo",
+				"price": 160,
+				"buildPrice": 100,
+				"rent": [ 12, 60, 180, 500, 700, 900 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 8,
+				"name": "TODO",
+				"price": 200
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 3,
+				"name": "TODO",
+				"price": 180,
+				"buildPrice": 100,
+				"rent": [ 14, 70, 200, 550, 750, 950 ]
+			}
+		},
+		{
+			"type": 3
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 3,
+				"name": "TODO",
+				"price": 180,
+				"buildPrice": 100,
+				"rent": [ 14, 70, 200, 550, 750, 950 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 3,
+				"name": "TODO",
+				"price": 200,
+				"buildPrice": 100,
+				"rent": [ 16, 80, 220, 600, 800, 1000 ]
+			}
+		},
+		{
+			"type": 6 //Estacionamento Livre - iate
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 4,
+				"name": "Macedo de Cavaleiros",
+				"price": 220,
+				"buildPrice": 150,
+				"rent": [ 18, 90, 250, 700, 875, 1050 ]
+			}
+		},
+		{
+			"type": 2
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 4,
+				"name": "Mafra",
+				"price": 220,
+				"buildPrice": 150,
+				"rent": [ 18, 90, 250, 700, 875, 1050 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 4,
+				"name": "Évora",
+				"price": 240,
+				"buildPrice": 150,
+				"rent": [ 20, 100, 300, 750, 925, 1100 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 8,
+				"name": "TODO",
+				"price": 200
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 5,
+				"name": "Elvas",
+				"price": 260,
+				"buildPrice": 150,
+				"rent": [ 22, 110, 330, 800, 975, 1150 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 5,
+				"name": "Ofir",
+				"price": 260,
+				"buildPrice": 150,
+				"rent": [ 22, 110, 330, 800, 975, 1150 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 9,
+				"name": "TODO",
+				"price": 150,
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 5,
+				"name": "Esposende",
+				"price": 280,
+				"buildPrice": 150,
+				"rent": [ 24, 120, 360, 850, 1025, 1200 ]
+			}
+		},
+		{
+			"type": 7
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 6,
+				"name": "Porto",
+				"price": 300,
+				"buildPrice": 200,
+				"rent": [ 26, 130, 390, 900, 1100, 1275 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 6,
+				"name": "Espanha",
+				"price": 300,
+				"buildPrice": 200,
+				"rent": [ 26, 130, 390, 900, 1100, 1275 ]
+			}
+		},
+		{
+			"type": 3
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 6,
+				"name": "Famacity",
+				"price": 320,
+				"buildPrice": 200,
+				"rent": [ 28, 150, 450, 1000, 1200, 1400 ]
+			}
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 8,
+				"name": "TODO", //Estação de Famacity?
+				"price": 200
+			}
+		},
+		{
+			"type": 2
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 7,
+				"name": "Acima do Olimpo",
+				"price": 350,
+				"buildPrice": 200,
+				"rent": [ 35, 175, 500, 1100, 1300, 1500 ]
+			}
+		},
+		{
+			"type": 4,
+			"name": "TODO",
+			"tax": 100
+		},
+		{
+			"type": 1,
+			"property": {
+				"color": 7,
+				"name": "Casa do Povo",
+				"price": 400,
+				"buildPrice": 200,
+				"rent": [ 50, 200, 600, 1400, 1700, 2000 ]
+			}
+		},
+	],
+
+	"chance": [
+		{
+			"name": "O Bueso diz penteia-te!",
+			"text": "Recua três casas para te afastares dele",
+			"events": [
+				{
+					"type": 4,
+					"x": -3
+				}
+			]
+		},
+		{
+			"name": "Quadrado no Porto",
+			"text": "Vai para o Porto e faz um quadrado!",
+			"events": [
+				{
+					"type": 3,
+					"arg": "Porto"
+				}
+			]
+		},
+		{
+			"name": "Tens teste sábado de manhã!",
+			"text": "Vai para o Dom Diogo",
+			"events": [
+				{
+					"type": 0
+				}
+			]
+		},
+		{
+			"name": "O turco senta-se ao teu lado",
+			"text": "Avança até à estação mais próxima enquanto segues o turco no insta",
+			"events": [
+				{
+					"type": 2
+				}
+			]
+		},
+		{
+			"name": "Carta anti-Dom Diogo",
+			"text": "Tens as faltas justificadas e podes sair quando te apetecer",
+			"events": [
+				{
+					"type":  9
+				}
+			]
+		}
+	],
+
+	"communityChest": [
+		{
+			"name" : "É segunda-feira",
+			"text": "Avança para a casa partida e recebe o dinheiro dos almoços",
+			"events": [
+				{
+					"type": 1
+				}
+			]
+		},
+		{
+			"name": "Milka Oreo está em promoção!",
+			"text": "Recebe 25€",
+			"events": [
+				{
+					"type": 5,
+					"x": 25
+				}
+			]
+		},
+		{
+			"name": "O Membro assalta o banco",
+			"text": "...e partilha contigo 100€",
+			"events": [
+				{
+					"type": 5,
+					"x": 100
+				}
+			]
+		},
+		{
+			"name": "É o teu aniversário!",
+			"text": "Recebes uma prenda conjunta. Cada jogador contribui com 10€",
+			"events": [
+				{
+					"type": 6,
+					"x": 10
+				}
+			]
+		},
+
+		{
+			"name": "Festival em 2022",
+			"text": "Paga 67€ pelo bilhete do festival",
+			"events": [
+				{
+					"type": 5,
+					"x": -67
+				}
+			]
+		},
+		/*{
+			"name": "Rodelas sem orégãos",
+			"text": "Pediste a mesma coisa que a Diana. Arrependeste-te. Paga 50€"
+		}*/
+	]
+}

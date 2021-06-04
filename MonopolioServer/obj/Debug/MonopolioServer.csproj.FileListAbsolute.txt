@@ -24,3 +24,31 @@ J:\Dados\Programação\Aplicações\Monopolio\MonopolioServer\obj\Debug\Monopoli
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioServer\obj\Debug\MonopolioServer.csproj.CopyComplete
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioServer\obj\Debug\Monopolio Server.exe
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioServer\obj\Debug\Monopolio Server.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Monopolio Server.exe.config
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Monopolio Server.exe
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Monopolio Server.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\ConsoleTables.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.Devices.Bluetooth.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.Net.Personal.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Monopolio.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Network.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\NetworkModel.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\System.ValueTuple.dll
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Monopolio.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\NetworkModel.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\ConsoleTables.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.xml
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.Devices.Bluetooth.pdb
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.Devices.Bluetooth.xml
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Network.xml
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\bin\Debug\System.ValueTuple.xml
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\obj\Debug\MonopolioServer.csprojAssemblyReference.cache
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\obj\Debug\MonopolioServer.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\obj\Debug\MonopolioServer.csproj.CopyComplete
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\obj\Debug\Monopolio Server.exe
+C:\Users\ASUS\source\repos\Monopolio\MonopolioServer\obj\Debug\Monopolio Server.pdb

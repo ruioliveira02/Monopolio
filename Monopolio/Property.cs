@@ -59,7 +59,7 @@ namespace Monopolio
         public bool Mortgaged { get; set; }
 
         //used for json serializing (to avoid wrong references and stuff. You don't want to know)
-        public string OwnerName { get => Owner.name; }
+        public string OwnerName { get => Owner?.name; }
         readonly string ownerName;
 
         public string PrpertyName { get => Property.name; }
@@ -250,7 +250,7 @@ namespace Monopolio
             return null;
         }
 
-        public int Rent(PropertyState ps)
+        public int Rent(PropertyState ps, State s)
         {
             if (ps.Mortgaged)
                 return 0;
@@ -267,7 +267,8 @@ namespace Monopolio
             else if (ps.Color == Property.Color.Utility)
             {
                 //TODO: check
-                int dice = State.randomizer.Next(1, 7) + State.randomizer.Next(1, 7);
+                s.ThrowDice();
+                int dice = s.Dice[0] + s.Dice[1];
                 return Owner == null ? 4 * dice : 10 * dice;
             }
             else
