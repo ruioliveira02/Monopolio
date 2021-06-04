@@ -2,3 +2,8 @@ C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopoli
 C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.AssemblyInfoInputs.cache
 C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.AssemblyInfo.cs
 C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\bin\Debug\netstandard2.0\Monopolio.deps.json
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\bin\Debug\netstandard2.0\Monopolio.dll
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\bin\Debug\netstandard2.0\Monopolio.pdb
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.dll
+C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.pdb

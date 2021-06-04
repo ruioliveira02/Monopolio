@@ -89,6 +89,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Monopolio\Monopolio.csproj">
+      <Project>{6b4a603b-8249-40e3-a4d5-09a6550081b8}</Project>
+      <Name>Monopolio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkModel\NetworkModel.csproj">
       <Project>{fe3b97c4-3509-4d19-b9f7-ccc429f01c66}</Project>
       <Name>NetworkModel</Name>

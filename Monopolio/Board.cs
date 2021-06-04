@@ -74,7 +74,8 @@ namespace Monopolio
 
             while (player.Position != dest)
             {
-                player.Position = spaces > 0 ? player.Position + 1 : player.Position - 1;
+                player.Position = ((spaces > 0 ? player.Position + 1 : player.Position - 1)
+                    % squares.Length + squares.Length) % squares.Length;
 
                 if (squares[player.Position].type == Square.Type.Start)
                     player.Money += State.salary;
@@ -86,27 +87,18 @@ namespace Monopolio
         public Square SendToJail(Player player)
         {
             if (squares[player.Position].type == Square.Type.Jail)
-            {
-                if (player.GetOutOfJailFreeCards == 0)
-                    player.InJail = 1;
-
                 return squares[player.Position];
-            }
 
             for (int i = (player.Position + 1) % squares.Length; i != player.Position; i = (i + 1) % squares.Length)
             {
                 if (squares[i].type == Square.Type.Jail)
                 {
                     player.Position = i;
-
-                    if (player.GetOutOfJailFreeCards == 0)
-                        player.InJail = 1;
-
                     return squares[player.Position];
                 }
             }
 
-            throw new Exception("Prision not found :/");
+            throw new Exception("Jail not found :/");
         }
 
         delegate bool Stop(Square s);
@@ -129,7 +121,7 @@ namespace Monopolio
                 }
             }
 
-            throw new Exception("Property not found");
+            throw new Exception("Square not found");
         }
 
         public Square AdvanceToProperty(Player player, string propertyName)

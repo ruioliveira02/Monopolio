@@ -56,9 +56,10 @@ namespace Monopolio
 
         [JsonIgnore]
         public Player Owner { get; set; }
+        public bool Mortgaged { get; set; }
 
         //used for json serializing (to avoid wrong references and stuff. You don't want to know)
-        public string OwnerName { get => Owner.name; }
+        public string OwnerName { get => Owner?.name; }
         readonly string ownerName;
 
         public string PrpertyName { get => Property.name; }
@@ -72,7 +73,8 @@ namespace Monopolio
         public Property.Color Color { get => Property.color; }
 
         [JsonIgnore]
-        public int Buildings { get => Houses + Hotels; }
+        public int Buildings { get => Houses + 5 * Hotels; } //since 4 houses are removed when 
+                                                             //upgrading to a hotel, 1 hotel = 5 houses
 
 
         public PropertyState(Property property) //new game
@@ -83,10 +85,12 @@ namespace Monopolio
         }
 
         [JsonConstructor]
-        public PropertyState(string propertyName, string ownerName, int houses, int hotels) //saved game
+        public PropertyState(string propertyName, string ownerName,
+            bool mortgaged, int houses, int hotels) //saved game
         {
             this.propertyName = propertyName;
             this.ownerName = ownerName;
+            Mortgaged = mortgaged;
             Houses = houses;
             Hotels = hotels;
         }
@@ -110,6 +114,41 @@ namespace Monopolio
 
         public void ResolveProperty(Board board)
             => Property = board.GetProperty(propertyName);
+
+
+        public bool Upgrade()
+        {
+            if (Buildings >= State.maxBuildings)
+                return false;
+
+            if (Houses == State.housesPerHotel)
+            {
+                Houses = 0;
+                Hotels++;
+            }
+            else
+                Hotels++;
+
+            return true;
+        }
+
+        public bool Downgrade()
+        {
+            if (Houses == 0)
+            {
+                if (Hotels == 0)
+                    return false;
+                else
+                {
+                    Houses = 4;
+                    Hotels--;
+                }
+            }
+            else
+                Houses--;
+
+            return true;
+        }
     }
 
     public struct PropertyGroup
@@ -152,6 +191,19 @@ namespace Monopolio
         }
 
         [JsonIgnore]
+        public bool Mortgaged {
+            get
+            {
+                bool ans = false;
+
+                foreach (var ps in properties)
+                    ans |= ps.Mortgaged;
+
+                return ans;
+            }
+        }
+
+        [JsonIgnore]
         public int Buildings {
             get
             {
@@ -175,7 +227,7 @@ namespace Monopolio
 
                 int min = 0, max = 0;
 
-                for (int i = 0; i < properties.Length; i++)
+                for (int i = 1; i < properties.Length; i++)
                 {
                     if (b[i] < b[min])
                         min = i;
@@ -183,7 +235,7 @@ namespace Monopolio
                         max = i;
                 }
 
-                return max - min <= 1;
+                return b[max] - b[min] <= 1;
             }
         }
 
@@ -198,9 +250,11 @@ namespace Monopolio
             return null;
         }
 
-        public int Rent(PropertyState ps)
+        public int Rent(PropertyState ps, State s)
         {
-            if (ps.Color == Property.Color.Station)
+            if (ps.Mortgaged)
+                return 0;
+            else if (ps.Color == Property.Color.Station)
             {
                 int stations = 0;
 
@@ -212,7 +266,9 @@ namespace Monopolio
             }
             else if (ps.Color == Property.Color.Utility)
             {
-                int dice = State.randomizer.Next(1, 7);
+                //TODO: check
+                s.ThrowDice();
+                int dice = s.Dice[0] + s.Dice[1];
                 return Owner == null ? 4 * dice : 10 * dice;
             }
             else
@@ -226,94 +282,75 @@ namespace Monopolio
             }
         }
 
+        #region builds
+
+        //when checkOnly is true, no changes are made to the property
+        //If the property is mortgaged, it is unmortgaged (provided the owner has enough money)
         //Returns false when:
+        //-the owner can't pay
         //-the group isn't a monopoly
-        //-the build doesn't respect the even building rule (in a group, the difference
-        // between the maximum and minimum number of buildings must be 1 or less)
-        //-the group already has the maximum number of buildings (4 houses + 1 hotel)
+        //-the build doesn't respect the even building rule: in a group, the difference
+        // between the maximum and minimum number of buildings must be 1 or less (1 hotel = 5 houses)
+        //-the property can't be upgraded anymore (already has 1 hotel)
         //-the buildPrice of the property is 0 (signaling that building on the property is not allowed)
-        public bool CanBuild(Property property)
+        public bool Build(PropertyState property, bool checkOnly = false)
         {
+            if (Mortgaged)
+            {
+                int cost = (int)(0.55 * property.Property.price);
+
+                if (property.Owner.Money < cost)
+                    return false;
+
+                property.Owner.Money -= cost;
+                return true;
+            }
+
             if (Owner == null)
                 return false;
 
-            int[] b = new int[properties.Length];
-            int total = 0;
+            bool aux = property.Upgrade();
+            bool ans = aux && EvenBuilding && property.Owner.Money >= property.Property.buildPrice;
 
-            for (int i = 0; i < properties.Length; i++)
-            {
-                b[i] = properties[i].Buildings;
-                total += b[i];
+            if (checkOnly && aux)
+                property.Downgrade();
 
-                if (properties[i].Property == property)
-                    b[i]++;
-            }
+            if (!checkOnly && ans)
+                property.Owner.Money -= property.Property.buildPrice;
 
-            if (total >= 5 || property.buildPrice == 0)
-                return false;
-
-            int min = 0, max = 0;
-
-            for (int i = 0; i < properties.Length; i++)
-            {
-                if (b[i] < b[min])
-                    min = i;
-                else if (b[i] > b[max])
-                    max = i;
-            }
-
-            return max - min <= 1;
+            return ans;
         }
 
-        public bool Build(Property property)
-        {
-            if (CanBuild(property))
-            {
-                var ps = GetPropertyState(property);
-
-                if (Buildings >= 4)
-                    ps.Hotels++;
-                else
-                    ps.Houses++;
-
-                return true;
-            }
-            else
-                return false;
-        }
-
+        //If the property has houses/hotels, one of them is returned to the bank.
+        //Otherwise, the property is mortgaged. TODO: change?
         public bool Mortgage(PropertyState ps)
         {
-            if (Owner == null || Buildings == 0)
-            {
-                ps.Owner.Money += ps.Property.price / 2;
-                ps.Owner = null;
-            }
-            else if (ps.Buildings == 0)
+            if (ps.Owner == null)
                 return false;
-            else if (ps.Hotels > 0)
+            else if (ps.Buildings == 0)
             {
-                ps.Hotels--;
-
-                if (!EvenBuilding)
-                {
-                    ps.Hotels++;
+                if (Buildings > 0)
                     return false;
-                }
+
+                ps.Owner.Money += ps.Property.price / 2;
+                ps.Mortgaged = true;
             }
             else
             {
-                ps.Houses--;
+                ps.Downgrade();
 
-                if (!EvenBuilding)
+                if (EvenBuilding)
+                    ps.Owner.Money += ps.Property.buildPrice / 2;
+                else
                 {
-                    ps.Houses++;
+                    ps.Upgrade();
                     return false;
                 }
             }
 
-            ps.Owner.Money += ps.Property.buildPrice / 2;
             return true;
         }
+
+        #endregion
     }
 }
