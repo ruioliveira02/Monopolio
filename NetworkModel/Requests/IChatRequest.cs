@@ -4,7 +4,8 @@ using System.Text;
 
 namespace NetworkModel
 {
-    class SkipRequest
+    public interface IChatRequest : IRequest
     {
+        string Message { get; set; }
     }
 }
