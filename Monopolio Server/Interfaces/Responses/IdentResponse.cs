@@ -1,10 +1,10 @@
-﻿using Network.Attributes;
-using Network.Packets;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace NetworkModel
+namespace Monopolio_Server.Interfaces.Responses
 {
     /// <summary>
     /// The server's response to a <cref>IdentRequest</cref>

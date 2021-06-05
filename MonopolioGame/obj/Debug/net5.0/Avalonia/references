@@ -26,6 +26,7 @@ C:\Users\Gaming\.nuget\packages\avalonia\0.10.3\lib\netcoreapp2.0\Avalonia.Theme
 C:\Users\Gaming\.nuget\packages\avalonia\0.10.3\lib\netcoreapp2.0\Avalonia.Visuals.dll
 C:\Users\Gaming\.nuget\packages\avalonia.win32\0.10.3\lib\netstandard2.0\Avalonia.Win32.dll
 C:\Users\Gaming\.nuget\packages\avalonia.x11\0.10.3\lib\netstandard2.0\Avalonia.X11.dll
+C:\Users\Gaming\.nuget\packages\consoletables\2.3.0\lib\netstandard1.3\ConsoleTables.dll
 C:\Users\Gaming\.nuget\packages\dynamicdata\7.1.1\lib\net5.0\DynamicData.dll
 C:\Users\Gaming\.nuget\packages\harfbuzzsharp\2.6.1.7\lib\netstandard2.0\HarfBuzzSharp.dll
 C:\Users\Gaming\.nuget\packages\jetbrains.annotations\10.3.0\lib\netstandard1.0\JetBrains.Annotations.dll
@@ -39,6 +40,9 @@ C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\Microso
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Win32.Primitives.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\mscorlib.dll
 C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\5.0.0\ref\net5.0\netstandard.dll
+C:\Users\Gaming\.nuget\packages\network\6.2.4.21\lib\netstandard2.0\Network.dll
+J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.dll
+C:\Users\Gaming\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll
 C:\Users\Gaming\.nuget\packages\reactiveui\13.2.10\lib\net5.0\ReactiveUI.dll
 C:\Users\Gaming\.nuget\packages\skiasharp\2.80.2\lib\netstandard2.0\SkiaSharp.dll
 C:\Users\Gaming\.nuget\packages\splat\10.0.1\lib\net5.0\Splat.dll

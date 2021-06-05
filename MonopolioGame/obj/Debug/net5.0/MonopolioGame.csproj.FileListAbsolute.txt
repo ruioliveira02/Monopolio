@@ -132,3 +132,8 @@ J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\obj\Debug\net5.0\Mon
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\obj\Debug\net5.0\ref\MonopolioGame.dll
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.pdb
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.genruntimeconfig.cache
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\ConsoleTables.dll
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\Network.dll
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\Newtonsoft.Json.dll
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\NetworkModel.dll
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\NetworkModel.pdb

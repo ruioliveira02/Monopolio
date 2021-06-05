@@ -1,4 +1,6 @@
-﻿using NetworkModel;
+﻿using Monopolio_Server.Interfaces.Requests;
+using Monopolio_Server.Interfaces.Responses;
+using NetworkModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections;

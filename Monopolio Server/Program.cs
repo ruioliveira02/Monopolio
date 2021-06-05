@@ -19,7 +19,7 @@ namespace Monopolio_Server
         /// <param name="args">The program's arguments</param>
         static void Main(string[] args)
         {
-            string[] players = { "bace", "vasques", "manela", "sid" };
+           /* string[] players = { "bace", "vasques", "manela", "sid" };
             State s = new State("default_board.json", players);
             s.DiceThrowHandler = new State.DiceThrow((int[] dice) =>
             {
@@ -77,10 +77,10 @@ namespace Monopolio_Server
             else
                 Console.WriteLine(winner.name + " wins!");
 
-
-            //Server server = new Server();
-            //server.Run();
-            //Console.ReadLine();
+            */
+            Server server = new Server();
+            server.Run();
+            Console.ReadLine();
         }
     }
 }

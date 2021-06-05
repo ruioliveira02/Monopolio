@@ -12,6 +12,39 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="1*"></RowDefinition>
+      </Grid.RowDefinitions>
 
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"></ColumnDefinition>
+        <ColumnDefinition Width="8*"></ColumnDefinition>
+        <ColumnDefinition Width="2*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+         
+      <TextBlock Grid.Row="1" Grid.Column="1" Text="Monopólio das Antas" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+      <TextBlock Grid.Row="3" Grid.Column="1" Text="Nome" HorizontalAlignment="Center"/>
+      <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Username}"></TextBox>
+        
+      <TextBlock Grid.Row="7" Grid.Column="1" Text="Ip do servidor" HorizontalAlignment="Center"/>
+      <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ServerIp}"></TextBox>
+      <Button Grid.Row="11" Grid.Column="1" Content="Conectar" HorizontalAlignment="Center" Command="{Binding ConnectCommand}"></Button>
+    </Grid>
 </Window>

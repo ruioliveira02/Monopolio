@@ -9,6 +9,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using Monopolio_Server.Interfaces.Requests;
+using Monopolio_Server.Interfaces.Responses;
 
 namespace Monopolio_Server
 {
@@ -30,7 +32,7 @@ namespace Monopolio_Server
         /// <summary>
         /// The ip of the server we are using
         /// </summary>
-        private const string ip = "2.80.236.204";
+        private const string ip = "127.0.0.1";
 
         /// <summary>
         /// The port being used
@@ -55,7 +57,7 @@ namespace Monopolio_Server
 
             while (Running)
             {
-                IdentRequest request = GetRequest(ref serverSocket);
+                IdentRequest request = GetRequest(ref serverSocket, ref clientSocket);
 
                 Console.WriteLine(request.Message());
                 Response response = request.Execute();
@@ -97,9 +99,9 @@ namespace Monopolio_Server
         /// <paramref name="serverSocket"/> The socket the is listening on
         /// 
         /// <returns>The lastest <cref>IdentRequest</cref> from the socket</returns>
-        private IdentRequest GetRequest(ref TcpListener serverSocket)
+        private IdentRequest GetRequest(ref TcpListener serverSocket, ref TcpClient clientSocket)
         {
-            TcpClient clientSocket = serverSocket.AcceptTcpClient();
+            clientSocket = serverSocket.AcceptTcpClient();
 
             byte[] bytesFrom = new byte[BufferSize];
 
