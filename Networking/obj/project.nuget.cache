@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "OzArUnt+B8kAofUeGavezGbuYP/r7zuG0fMDLYIto9kZWUg49/sMYkRHbHMCf4fVjXkiwR6LKogD6c+kw3SNtQ==",
+  "dgSpecHash": "skmYU5IereU5iuIDV3cLWiMVxKIzoS/NVDvTwuoXM84+smZyafxklj/OppKex57/L11ArZK7ZGzXBcktoDjQIg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Networking\\Networking.csproj",
+  "projectFilePath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Networking\\Networking.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ASUS\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\ASUS\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\Gaming\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {}
+    "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
+    "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
+        "projectUniqueName": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj",
         "projectName": "Monopolio",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\obj\\",
+        "projectPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj",
+        "packagesPath": "C:\\Users\\Gaming\\.nuget\\packages\\",
+        "outputPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Gaming\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
