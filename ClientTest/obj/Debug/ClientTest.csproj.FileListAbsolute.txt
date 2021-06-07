@@ -7,7 +7,6 @@ J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\InTheHand.dll
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\InTheHand.Net.Personal.dll
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\Network.dll
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\NetworkModel.dll
-J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\Newtonsoft.Json.dll
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\System.ValueTuple.dll
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\NetworkModel.pdb
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\ConsoleTables.pdb
@@ -17,8 +16,8 @@ J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\InTheHand.Dev
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\InTheHand.Devices.Bluetooth.xml
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\InTheHand.Net.Personal.xml
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\Network.xml
-J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\Newtonsoft.Json.xml
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\bin\Debug\System.ValueTuple.xml
+J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.csprojAssemblyReference.cache
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CoreCompileInputs.cache
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CopyComplete
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.exe

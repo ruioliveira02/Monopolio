@@ -48,9 +48,6 @@
     <Reference Include="Network, Version=6.2.4.21, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Network.6.2.4.21\lib\net46\Network.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -79,10 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\Requests\IdentRequest.cs" />
-    <Compile Include="Interfaces\Requests\Request.cs" />
-    <Compile Include="Interfaces\Responses\IdentResponse.cs" />
-    <Compile Include="Interfaces\Responses\Response.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +89,5 @@
       <Name>NetworkModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

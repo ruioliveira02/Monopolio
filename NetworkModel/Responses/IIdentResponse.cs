@@ -6,19 +6,9 @@ using System.Text;
 
 namespace NetworkModel
 {
-    /// <summary>
-    /// Interface for the Identification Responses from the server
-    /// </summary>
-    public interface IIdentResponse
+    public interface IIdentResponse : IResponse
     {
-        /// <summary>
-        /// Whether the user was accepted or not
-        /// </summary> 
+        string Username { get; set; }
         bool Accepted { get; set; }
-
-        /// <summary>
-        /// The name of the user who made the request
-        /// </summary> 
-        string User { get; set; }
     }
 }
