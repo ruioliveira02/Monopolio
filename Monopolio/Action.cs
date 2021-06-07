@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Monopolio
 {
-    //represents an action a player can choose to perform. Things like paying rent after
-    //landing on someone else's property is automatic, and so isn't considered an Action
+    /// <summary>
+    /// Represents a player action/input in the game. Paying rent and othe mandatory plays are
+    /// not choices (are automaticaly performed), therefore acn't be represented as Actions
+    /// </summary>
     public class Action
     {
         public enum Type
@@ -28,12 +30,12 @@ namespace Monopolio
         }
 
         public Player Player { get; }
-        public readonly Type type;
+        public Type type;
 
         //arguments
-        public readonly Player target;
-        public readonly PropertyState property;
-        public readonly int amount;
+        public Player target;
+        public PropertyState property;
+        public int amount;
 
         public bool IsTurnAction { get => type == Type.Skip || type == Type.Buy
                 || type == Type.Build; }
@@ -44,6 +46,13 @@ namespace Monopolio
         //action must be formatted as:
         //instruction "player_arg" "property_arg" int_arg
         //(args are optional, but are expected for respective instructions)
+
+        /// <summary>
+        /// Creates a player action from a string
+        /// </summary>
+        /// <param name="state">The current game state</param>
+        /// <param name="playerName">The name of the player executing the action</param>
+        /// <param name="action">The action</param>
         public Action(State state, string playerName, string action)
         {
             Player = state.GetPlayer(playerName);
@@ -106,6 +115,10 @@ namespace Monopolio
             }
         }
 
+        /// <summary>
+        /// Converts the action to a string, effectively reversing the constructor
+        /// </summary>
+        /// <returns>The action, as a string</returns>
         public override string ToString()
         {
             switch (type)
@@ -123,6 +136,14 @@ namespace Monopolio
             }
         }
 
+        /// <summary>
+        /// Splits the string into words, keeping the spaces inside quotes.
+        /// Ex: 'give_property "bace" "Castelo do Queijo"' turns into [ 'give_property', 'bace',
+        /// 'Castelo do Queijo' ]
+        /// Throws an error if unclosed quotes are found
+        /// </summary>
+        /// <param name="s">The string to split</param>
+        /// <returns>The list of words</returns>
         public static List<string> WordSplit(string s)
         {
             List<string> ans = new List<string>();

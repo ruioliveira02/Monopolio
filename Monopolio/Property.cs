@@ -5,8 +5,15 @@ using System.Text;
 
 namespace Monopolio
 {
+    /// <summary>
+    /// Represents one property. Does not contain information regading the state of
+    /// the property during the game
+    /// </summary>
     public class Property
     {
+        /// <summary>
+        /// Caracters not allowed in a Property's name
+        /// </summary>
         public const string control_caracters = "\"\n";
 
         //IMPORTANT!!! This enum doensn't support non-default values
@@ -31,6 +38,17 @@ namespace Monopolio
         public readonly int buildPrice; //if 0, building is not allowed (stations/utilities)
         public readonly int[] rent;
 
+        /// <summary>
+        /// Creates a Property object from a previously saved Porperty
+        /// (used for JSON deserialization)
+        /// </summary>
+        /// <param name="color">The color of the proeprty</param>
+        /// <param name="name">The name of the property (mustn't contain control caracters,
+        /// otherwise an error is thrown)</param>
+        /// <param name="price">The price of the property</param>
+        /// <param name="buildPrice">The preice of building in the property</param>
+        /// <param name="rent">A 6-long array, containing the rent when no buildings are
+        /// placed, when 1-4 houses are placed and when 1 hotel is placed</param>
         [JsonConstructor]
         public Property(Color color, string name, int price, int buildPrice, int[] rent)
         {
@@ -44,9 +62,17 @@ namespace Monopolio
             this.rent = rent;
         }
 
+        /// <summary>
+        /// Calculates the rent of the property, given a number of buildings
+        /// </summary>
+        /// <param name="buildings">The number of buildings (1 hotel = 5 houses)</param>
+        /// <returns>The corresponding rent</returns>
         public int Rent(int buildings) => rent[buildings];
     }
 
+    /// <summary>
+    /// Represents the state of a property during the game
+    /// </summary>
     public class PropertyState
     {
         [JsonIgnore]
@@ -62,7 +88,7 @@ namespace Monopolio
         public string OwnerName { get => Owner?.name; }
         readonly string ownerName;
 
-        public string PrpertyName { get => Property.name; }
+        public string PropertyName { get => Property.name; }
         readonly string propertyName;
 
 
@@ -76,14 +102,26 @@ namespace Monopolio
         public int Buildings { get => Houses + 5 * Hotels; } //since 4 houses are removed when 
                                                              //upgrading to a hotel, 1 hotel = 5 houses
 
-
-        public PropertyState(Property property) //new game
+        /// <summary>
+        /// Creates an empty property state for a given property (new game)
+        /// </summary>
+        /// <param name="property">The given property</param>
+        public PropertyState(Property property)
         {
             Property = property;
             Houses = 0;
             Hotels = 0;
         }
 
+        /// <summary>
+        /// Creates a property state from a previously saved state
+        /// (used for JSON deserialization)
+        /// </summary>
+        /// <param name="propertyName">The name of the property</param>
+        /// <param name="ownerName">The owner's name</param>
+        /// <param name="mortgaged">Wether the property is mortgaged</param>
+        /// <param name="houses">The number of houses on the property</param>
+        /// <param name="hotels">The number of hotels on the property</param>
         [JsonConstructor]
         public PropertyState(string propertyName, string ownerName,
             bool mortgaged, int houses, int hotels) //saved game
@@ -95,6 +133,11 @@ namespace Monopolio
             Hotels = hotels;
         }
 
+        /// <summary>
+        /// Sets the Owner, searching from among the given players the one with the correct name.
+        /// If the owner wasn't found, an error is thrown
+        /// </summary>
+        /// <param name="players">The given array of players</param>
         public void ResolveOwner(Player[] players)
         {
             if (ownerName == null)
@@ -112,10 +155,20 @@ namespace Monopolio
             throw new Exception("ups");
         }
 
+        /// <summary>
+        /// Sets the Property, searching in the board the one with the correct name.
+        /// If the property wasn't found, Property is set as null
+        /// </summary>
+        /// <param name="board">The board</param>
         public void ResolveProperty(Board board)
             => Property = board.GetProperty(propertyName);
 
-
+        /// <summary>
+        /// Increases the number of buildings, following standart monopoly rules
+        /// (no buildings -> 1 house -> 2 houses -> 3 houses -> 4 houses -> 1 hotel)
+        /// </summary>
+        /// <returns>False if the proeprty already has the maximum allowed number of buildings,
+        /// in which case no action is performed. True otherwise</returns>
         public bool Upgrade()
         {
             if (Buildings >= State.maxBuildings)
@@ -132,6 +185,10 @@ namespace Monopolio
             return true;
         }
 
+        /// <summary>
+        /// Removes a building from the property, effectively reversing a call to Upgrade().
+        /// </summary>
+        /// <returns>False if there are no buildings to remove, true otherwise</returns>
         public bool Downgrade()
         {
             if (Houses == 0)
@@ -151,15 +208,29 @@ namespace Monopolio
         }
     }
 
+    /// <summary>
+    /// Represents a group of property states during the game. Relevant because multiple
+    /// operations over properties require knowlage about the whole group to be executed
+    /// </summary>
     public struct PropertyGroup
     {
         public readonly PropertyState[] properties;
 
-        public PropertyGroup(int numberOfProperties) //new game
+        /// <summary>
+        /// Creates a new group of properties (new game)
+        /// </summary>
+        /// <param name="numberOfProperties">The number of properties the group contains</param>
+        public PropertyGroup(int numberOfProperties)
         {
             properties = new PropertyState[numberOfProperties];
         }
 
+        /// <summary>
+        /// Creates a property group based on a previously loaded property group
+        /// (used for JSON deserialization)
+        /// </summary>
+        /// <param name="properties">The array with the properties in the group
+        /// (should all have the same color)</param>
         [JsonConstructor]
         public PropertyGroup(PropertyState[] properties) //saved game
         {
@@ -241,6 +312,12 @@ namespace Monopolio
 
         #endregion
 
+        /// <summary>
+        /// Retrieves the state of the given property.
+        /// If the property isn't in the group, null is returned (compared by reference)
+        /// </summary>
+        /// <param name="property">The given property</param>
+        /// <returns>The state of the property, or null if no match was found</returns>
         public PropertyState GetPropertyState(Property property)
         {
             foreach (var ps in properties)
@@ -250,6 +327,13 @@ namespace Monopolio
             return null;
         }
 
+        /// <summary>
+        /// Calculates the rent of a property, based on its state and the current state
+        /// of the game.
+        /// </summary>
+        /// <param name="ps">The state of the property</param>
+        /// <param name="s">The current game state</param>
+        /// <returns>The rent of the property</returns>
         public int Rent(PropertyState ps, State s)
         {
             if (ps.Mortgaged)
@@ -284,15 +368,22 @@ namespace Monopolio
 
         #region builds
 
-        //when checkOnly is true, no changes are made to the property
-        //If the property is mortgaged, it is unmortgaged (provided the owner has enough money)
-        //Returns false when:
-        //-the owner can't pay
-        //-the group isn't a monopoly
-        //-the build doesn't respect the even building rule: in a group, the difference
-        // between the maximum and minimum number of buildings must be 1 or less (1 hotel = 5 houses)
-        //-the property can't be upgraded anymore (already has 1 hotel)
-        //-the buildPrice of the property is 0 (signaling that building on the property is not allowed)
+        /// <summary>
+        /// Increases the number of buildings on the given property by 1, or unmorgages the
+        /// property if it is currently mortgaged (provided the owner has enough money)
+        /// </summary>
+        /// <param name="property">The given property</param>
+        /// <param name="checkOnly">If true, no changes are made to the state, only 
+        /// calculating the return value</param>
+        /// <returns>False when:
+        /// -the owner can't pay
+        /// -the group isn't a monopoly
+        /// -the property already has the maximum allowed number of buildings (1 hotel = 5 houses)
+        /// -the build doesn't respect the even building rule: in a group, the difference
+        ///  between the maximum and minimum number of buildings must be 1 or less 
+        /// -the property isn't mortgaged and the buildPrice of the property is 0
+        ///  (signaling that building on the property is not allowed)
+        /// </returns>
         public bool Build(PropertyState property, bool checkOnly = false)
         {
             if (Mortgaged)
@@ -323,13 +414,19 @@ namespace Monopolio
 
         //If the property has houses/hotels, one of them is returned to the bank.
         //Otherwise, the property is mortgaged. TODO: change?
+        /// <summary>
+        /// If the property has buildings, one is sold back to the bank. (If its sale isn't
+        /// against the even building rule). Otherwise, the property is mortgaged.
+        /// </summary>
+        /// <param name="ps">The property</param>
+        /// <returns>True if successfully executed, false otherwise</returns>
         public bool Mortgage(PropertyState ps)
         {
             if (ps.Owner == null)
                 return false;
             else if (ps.Buildings == 0)
             {
-                if (Buildings > 0)
+                if (Buildings > 0 || ps.Mortgaged)
                     return false;
 
                 ps.Owner.Money += ps.Property.price / 2;

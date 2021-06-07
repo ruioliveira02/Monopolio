@@ -20,7 +20,8 @@ namespace MonopolioServer
         static void Main(string[] args)
         {
             string[] players = { "bace", "vasques", "manela", "sid" };
-            State s = new State("default_board.json", players);
+            //State s = new State("default_board.json", players);
+            State s = State.LoadState("game.mpy");
             s.DiceThrowHandler = new State.DiceThrow((int[] dice) =>
             {
                 Console.WriteLine("-------------------------------------");

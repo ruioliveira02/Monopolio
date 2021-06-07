@@ -6,6 +6,9 @@ using System.IO;
 
 namespace Monopolio
 {
+    /// <summary>
+    /// Represents the current game state
+    /// </summary>
     public class State
     {
         public const int housesPerHotel = 4;
@@ -28,6 +31,11 @@ namespace Monopolio
 
         public static Random randomizer = new Random();
 
+        /// <summary>
+        /// Loads a state in JSON format from the specified file
+        /// </summary>
+        /// <param name="file">The specified file</param>
+        /// <returns>The stored game state</returns>
         public static State LoadState(string file)
         {
             string json = File.ReadAllText(file);
@@ -56,8 +64,12 @@ namespace Monopolio
         [JsonIgnore]
         public CardDraw CardDrawHandler { get; set; }
 
-
-        public State(string board, string[] players) //new game
+        /// <summary>
+        /// Creates a new game state (new game)
+        /// </summary>
+        /// <param name="board">The board template</param>
+        /// <param name="players">The playesr's names</param>
+        public State(string board, string[] players)
         {
             Players = new Player[players.Length];
 
@@ -75,6 +87,20 @@ namespace Monopolio
             CommunityChest = new Deck(this.board.CommunityChest);
         }
 
+        /// <summary>
+        /// Creates a game state from a previosly saved game
+        /// (used for JSON deserialization)
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="groups"></param>
+        /// <param name="players"></param>
+        /// <param name="turn"></param>
+        /// <param name="repeatTurn"></param>
+        /// <param name="repeatedTurns"></param>
+        /// <param name="dice"></param>
+        /// <param name="middleMoney"></param>
+        /// <param name="chance"></param>
+        /// <param name="communityChest"></param>
         [JsonConstructor]
         public State(Board board, PropertyGroup[] groups, Player[] players, int turn,
             bool repeatTurn, int repeatedTurns, int[] dice, int middleMoney,
@@ -104,13 +130,26 @@ namespace Monopolio
                 p.ResolveCreditor(Players);
         }
 
-
+        /// <summary>
+        /// Saves a game state to a file
+        /// </summary>
+        /// <param name="file">The file</param>
         public void Save(string file)
         {
-            string json = JsonConvert.SerializeObject(this);
+            JsonSerializerSettings s = new JsonSerializerSettings()
+            {
+                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
+                Formatting = Formatting.None
+
+            };
+            string json = JsonConvert.SerializeObject(this, s);
             File.WriteAllText(file, json);
         }
 
+        /// <summary>
+        /// Assigns both dice a random integer value from 1 to 6
+        /// and calls the DiceThrowHandler, if set
+        /// </summary>
         public void ThrowDice()
         {
             Dice[0] = randomizer.Next(1, 7);
@@ -120,10 +159,19 @@ namespace Monopolio
 
         #region getters
 
+        /// <summary>
+        /// Retrieves the state of a given property (searches all properties)
+        /// </summary>
+        /// <param name="property">The given property</param>
+        /// <returns>The corresponding state</returns>
         public PropertyState GetPropertyState(Property property)
             => Groups[(int)property.color].GetPropertyState(property);
 
-
+        /// <summary>
+        /// Retrieves the state of a given property (searches all properties)
+        /// </summary>
+        /// <param name="propertyName">The given property's name</param>
+        /// <returns>The corresponding state</returns>
         public PropertyState GetPropertyState(string propertyName)
         {
             foreach (var g in Groups)
@@ -134,6 +182,11 @@ namespace Monopolio
             return null;
         }
 
+        /// <summary>
+        /// Given a player's name, retrieves his Player object
+        /// </summary>
+        /// <param name="playerName">The player's name</param>
+        /// <returns>The corresponding Player object</returns>
         public Player GetPlayer(string playerName)
         {
             foreach (Player p in Players)
@@ -183,6 +236,10 @@ namespace Monopolio
 
         #region gameFlow
 
+        /// <summary>
+        /// Starts the game
+        /// </summary>
+        /// <returns>True if successful. False if the game is already ongoing</returns>
         public bool Start()
         {
             if (Turn != -1)
@@ -192,6 +249,12 @@ namespace Monopolio
             return true;
         }
 
+        /// <summary>
+        /// Starts the next turn.
+        /// Sets the turn and rolls the dice.
+        /// </summary>
+        /// <returns>True if a double is rolled 3 times in a row
+        /// for the same player</returns>
         //returns true when 3 doubles have been rolled in a row
         bool DiceRoll()
         {
@@ -217,6 +280,9 @@ namespace Monopolio
             return false;
         }
 
+        /// <summary>
+        /// Plays the next turn
+        /// </summary>
         void NextTurn()
         {
             //check wether anyone lost in the previous turn
@@ -262,6 +328,12 @@ namespace Monopolio
             }
         }
 
+        /// <summary>
+        /// Calculates the result of the specified player falling into
+        /// his current position (ex: if the player is on a chance square,
+        /// a chance card is drawn)
+        /// </summary>
+        /// <param name="p">The specified player</param>
         void CalculateSquare(Player p)
         {
             Square s = board.GetSquare(p.Position);
@@ -312,6 +384,11 @@ namespace Monopolio
         }
 
         //when a player loses the game (can't pay)
+        /// <summary>
+        /// Sells/returns to the bank all the specified player's assets
+        /// (including get-out-of-jail-free cards) and sets him as bankrupt
+        /// </summary>
+        /// <param name="p">The specified player</param>
         void Bankruptcy(Player p)
         {
             int aux = 0;
@@ -357,7 +434,11 @@ namespace Monopolio
 
         #region executes
 
-        //returns wether the Action was successfully executed
+        /// <summary>
+        /// Executes the given player action.
+        /// </summary>
+        /// <param name="a">The given action</param>
+        /// <returns>True if the Action was successfully executed</returns>
         public bool Execute(Action a)
         {
             //it ain't started yet
@@ -469,6 +550,11 @@ namespace Monopolio
             return true;
         }
 
+        /// <summary>
+        /// Executes the event on the target player
+        /// </summary>
+        /// <param name="e">The event</param>
+        /// <param name="target">The target player</param>
         void Execute(Event e, Player target)
         {
             switch (e.Type)
