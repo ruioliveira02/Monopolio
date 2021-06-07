@@ -11,40 +11,88 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
+  <Grid>
+    <Panel IsVisible="True">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="3*"></ColumnDefinition>
+          <ColumnDefinition Width="1*"></ColumnDefinition>
+          <ColumnDefinition Width="10*"></ColumnDefinition>
+          <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Panel Background="Red" Grid.Column="0"></Panel>
+        <Panel Background="Blue" Grid.Column="2" Margin="30">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="2*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="1*"></ColumnDefinition>
+              <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-    <Grid>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-        <RowDefinition Height="1*"></RowDefinition>
-      </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="2*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>
+              <RowDefinition Height="1*"></RowDefinition>              
+              <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="2*"></ColumnDefinition>
-        <ColumnDefinition Width="8*"></ColumnDefinition>
-        <ColumnDefinition Width="2*"></ColumnDefinition>
-      </Grid.ColumnDefinitions>
-         
-      <TextBlock Grid.Row="1" Grid.Column="1" Text="Monopólio das Antas" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-      <TextBlock Grid.Row="3" Grid.Column="1" Text="Nome" HorizontalAlignment="Center"/>
-      <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Username}"></TextBox>
-        
-      <TextBlock Grid.Row="7" Grid.Column="1" Text="Ip do servidor" HorizontalAlignment="Center"/>
-      <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ServerIp}"></TextBox>
-      <Button Grid.Row="11" Grid.Column="1" Content="Conectar" HorizontalAlignment="Center" Command="{Binding ConnectCommand}"></Button>
-    </Grid>
+            <Panel Background="GreenYellow" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="9" Grid.RowSpan="9"></Panel>
+            <Panel Background="Gray" Grid.Row="10" Grid.Column="2"></Panel>
+          </Grid>
+        </Panel>
+      </Grid>
+    </Panel>
+    <Panel IsVisible="False">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+          <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="2*"></ColumnDefinition>
+          <ColumnDefinition Width="8*"></ColumnDefinition>
+          <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Monopólio das Antas" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Nome" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Username}"></TextBox>
+
+        <TextBlock Grid.Row="7" Grid.Column="1" Text="Ip do servidor" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ServerIp}"></TextBox>
+        <Button Grid.Row="11" Grid.Column="1" Content="Conectar" HorizontalAlignment="Center" Command="{Binding ConnectCommand}"></Button>
+      </Grid>
+    </Panel>
+  </Grid>  
 </Window>

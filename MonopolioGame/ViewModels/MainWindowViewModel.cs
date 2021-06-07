@@ -11,12 +11,17 @@ namespace MonopolioGame.ViewModels
         public string Username { get; set; }
         public string ServerIp { get; set; }  // "2.80.236.204:25565"
 
+        public bool LoginScreen { get; set; }
+        public bool GameScreen { get; set; }
+
         GameHandler handler = new GameHandler();
 
         public MainWindowViewModel()
         {
             Username = "Anta";
             ServerIp = "2.80.236.204:25565";
+            LoginScreen = true;
+            GameScreen = false;
         }
 
         public void ConnectCommand()
