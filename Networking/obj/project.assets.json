@@ -179,27 +179,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Gaming\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Networking\\Networking.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Networking\\Networking.csproj",
       "projectName": "Networking",
-      "projectPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Networking\\Networking.csproj",
-      "packagesPath": "C:\\Users\\Gaming\\.nuget\\packages\\",
-      "outputPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Networking\\obj\\",
+      "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Networking\\Networking.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Networking\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Gaming\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"

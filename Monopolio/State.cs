@@ -69,15 +69,15 @@ namespace Monopolio
         /// </summary>
         /// <param name="board">The board template</param>
         /// <param name="players">The playesr's names</param>
-        public State(string board, string[] players)
+        public State(Board board, string[] players)
         {
             Players = new Player[players.Length];
 
             for (int i = 0; i < players.Length; i++)
                 Players[i] = new Player(players[i]);
 
-            this.board = Board.LoadBoard(board);
-            Groups = this.board.GetPropertyGroups();
+            this.board = board;
+            Groups = board.GetPropertyGroups();
             Turn = -1;
 
             Dice = new int[2];
@@ -212,7 +212,8 @@ namespace Monopolio
         }
 
         [JsonIgnore]
-        public Player Winner {
+        public Player Winner
+        {
             get
             {
                 Player winner = null;
@@ -555,7 +556,7 @@ namespace Monopolio
         /// </summary>
         /// <param name="e">The event</param>
         /// <param name="target">The target player</param>
-        void Execute(Event e, Player target)
+        public void Execute(Event e, Player target)
         {
             switch (e.Type)
             {

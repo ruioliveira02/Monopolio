@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Monopolio_Server
 {
@@ -19,7 +20,27 @@ namespace Monopolio_Server
         /// <param name="args">The program's arguments</param>
         static void Main(string[] args)
         {
-           /* string[] players = { "bace", "vasques", "manela", "sid" };
+            string board = "default_board.json";
+
+            Console.Write("Game: ");
+            string game = Console.ReadLine() + ".json";
+            Server s;
+
+            if (File.Exists(game))
+                s = new Server(State.LoadState(game));
+            else
+                s = new Server(Board.LoadBoard(board));
+
+            s.Run();
+
+            Console.WriteLine("Saving game...");
+            s.State.Save(game);
+            Console.WriteLine("Press any key to close");
+            Console.ReadKey();
+
+
+            /*
+            string[] players = { "bace", "vasques", "manela", "sid" };
             State s = new State("default_board.json", players);
             s.DiceThrowHandler = new State.DiceThrow((int[] dice) =>
             {
@@ -76,11 +97,7 @@ namespace Monopolio_Server
                 Console.WriteLine("It's a draw!");
             else
                 Console.WriteLine(winner.name + " wins!");
-
             */
-            Server server = new Server();
-            server.Run();
-            Console.ReadLine();
         }
     }
 }

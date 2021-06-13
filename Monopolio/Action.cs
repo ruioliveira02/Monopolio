@@ -37,11 +37,15 @@ namespace Monopolio
         public PropertyState property;
         public int amount;
 
-        public bool IsTurnAction { get => type == Type.Skip || type == Type.Buy
-                || type == Type.Build; }
+        public bool IsTurnAction
+        {
+            get => type == Type.Skip || type == Type.Buy || type == Type.Build;
+        }
 
-        public bool IsGetOutOfJail { get => type == Type.PayJailFine
-                || type == Type.UseGetOutOfJailFreeCard; }
+        public bool IsGetOutOfJail
+        {
+            get => type == Type.PayJailFine || type == Type.UseGetOutOfJailFreeCard;
+        }
 
         //action must be formatted as:
         //instruction "player_arg" "property_arg" int_arg
@@ -58,60 +62,65 @@ namespace Monopolio
             Player = state.GetPlayer(playerName);
             List<string> words = WordSplit(action);
 
-            using (var word = words.GetEnumerator())
+            switch (words[0])
             {
-                word.MoveNext();
-                switch (word.Current)
-                {
-                    case "skip":
-                        type = Type.Skip;
-                        break;
+                case "skip":
+                    type = Type.Skip;
+                    break;
 
-                    case "buy":
-                        type = Type.Buy;
-                        break;
+                case "buy":
+                    type = Type.Buy;
+                    break;
 
-                    case "build":
-                        type = Type.Build;
-                        break;
+                case "build":
+                    type = Type.Build;
+                    property = state.GetPropertyState(words[1]);
+                    if (property == null)
+                        throw new ArgumentException("Property not recognized");
+                    break;
 
-                    case "pay_jail_fine":
-                        type = Type.PayJailFine;
-                        break;
+                case "pay_jail_fine":
+                    type = Type.PayJailFine;
+                    break;
 
-                    case "use_get_out_of_jail_free_card":
-                        type = Type.UseGetOutOfJailFreeCard;
-                        break;
+                case "use_get_out_of_jail_free_card":
+                    type = Type.UseGetOutOfJailFreeCard;
+                    break;
 
-                    case "mortgage":
-                        type = Type.Mortgage;
-                        word.MoveNext();
-                        property = state.GetPropertyState(word.Current);
-                        break;
+                case "mortgage":
+                    type = Type.Mortgage;
+                    property = state.GetPropertyState(words[1]);
+                    if (property == null)
+                        throw new ArgumentException("Property not recognized");
+                    break;
 
-                    case "give":
-                        type = Type.Give;
-                        word.MoveNext();
-                        target = state.GetPlayer(word.Current);
-                        word.MoveNext();
-                        amount = int.Parse(word.Current);
-                        break;
+                case "give":
+                    type = Type.Give;
+                    target = state.GetPlayer(words[1]);
+                    amount = int.Parse(words[2]);
+                    if (target == null)
+                        throw new ArgumentException("Player not recognized");
+                    break;
 
-                    case "give_property":
-                        type = Type.Give;
-                        word.MoveNext();
-                        target = state.GetPlayer(word.Current);
-                        word.MoveNext();
-                        property = state.GetPropertyState(word.Current);
-                        break;
+                case "give_property":
+                    type = Type.Give;
+                    target = state.GetPlayer(words[1]);
+                    property = state.GetPropertyState(words[2]);
+                    if (target == null)
+                        throw new ArgumentException("Player not recognized");
+                    if (property == null)
+                        throw new ArgumentException("Property not recognized");
+                    break;
 
-                    case "give_get_out_of_jail_free_card":
-                        type = Type.GiveGetOutOfJailFreeCard;
-                        break;
+                case "give_get_out_of_jail_free_card":
+                    type = Type.GiveGetOutOfJailFreeCard;
+                    target = state.GetPlayer(words[1]);
+                    if (target == null)
+                        throw new ArgumentException("Player not recognized");
+                    break;
 
-                    default:
-                        throw new ArgumentException("Action not recognized");
-                }
+                default:
+                    throw new ArgumentException("Action not recognized");
             }
         }
 
@@ -123,16 +132,16 @@ namespace Monopolio
         {
             switch (type)
             {
-                case Type.Skip:         return "skip";
-                case Type.Buy:          return "buy";
-                case Type.Build:        return "build_house";
-                case Type.PayJailFine:  return "pay_jail_fine";
-                case Type.UseGetOutOfJailFreeCard:  return "use_get_out_of_jail_free_card";
-                case Type.Mortgage:     return "mortgage \"" + property.Name + "\"";
-                case Type.Give:         return "give \"" + target.name + "\" " + amount;
+                case Type.Skip: return "skip";
+                case Type.Buy: return "buy";
+                case Type.Build: return "build_house";
+                case Type.PayJailFine: return "pay_jail_fine";
+                case Type.UseGetOutOfJailFreeCard: return "use_get_out_of_jail_free_card";
+                case Type.Mortgage: return "mortgage \"" + property.Name + "\"";
+                case Type.Give: return "give \"" + target.name + "\" " + amount;
                 case Type.GiveProperty: return "give_property \"" + target.name + "\" \"" + property.Name + "\"";
-                case Type.GiveGetOutOfJailFreeCard: return "give_get_out_of_jail_free_card";
-                default:                return null;
+                case Type.GiveGetOutOfJailFreeCard: return "give_get_out_of_jail_free_card \"" + target.name + "\"";
+                default: return null;
             }
         }
 

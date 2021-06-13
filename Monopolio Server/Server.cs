@@ -11,6 +11,8 @@ using System.Threading;
 using Newtonsoft.Json;
 using Monopolio_Server.Interfaces.Requests;
 using Monopolio_Server.Interfaces.Responses;
+using Monopolio;
+using System.IO;
 
 namespace Monopolio_Server
 {
@@ -44,6 +46,39 @@ namespace Monopolio_Server
         /// </summary>
         public static readonly int BufferSize = 65536;
 
+
+        private Thread inputThread;
+
+        /// <summary>
+        /// The board to be used in the new game
+        /// </summary>
+        private Board board;
+
+        /// <summary>
+        /// The game state
+        /// </summary>
+        public State State { get; private set; }
+
+        /// <summary>
+        /// Server with no game running (new game)
+        /// </summary>
+        public Server(Board b)
+        {
+            board = b;
+            inputThread = new Thread(Input);
+        }
+
+        /// <summary>
+        /// Server with a game state (load game)
+        /// </summary>
+        /// <param name="s">The loaded state</param>
+        public Server(State s)
+        {
+            board = s.board;
+            State = s;
+            inputThread = new Thread(Input);
+        }
+
         /// <summary>
         /// Opens and runs the server until closure
         /// </summary>
@@ -54,6 +89,7 @@ namespace Monopolio_Server
 
             serverSocket.Start();
             Console.WriteLine("Monopolio Server Started ....");
+            inputThread.Start();
 
             while (Running)
             {
@@ -71,9 +107,93 @@ namespace Monopolio_Server
 
             clientSocket.Close();
             serverSocket.Stop();
-            Console.WriteLine("exit");
-            Console.ReadLine();
         }
+
+        #region input
+
+        /// <summary>
+        /// The method running the keyboard input
+        /// </summary>
+        private void Input()
+        {
+            while (Running)
+            {
+                string s = Console.ReadLine();
+                int split = s.IndexOf(' ');
+                string op = s.Substring(0, split < 1 ? s.Length : split);
+                string args = s.Substring(split == s.Length - 1 ? split : split + 1);
+
+                if (s == "exit" || s == "close" || s == "stop")
+                    break;
+                else if (s == "start")
+                {
+                    if (State == null)
+                        Console.WriteLine("The game has already started");
+                    else
+                    {
+                        string[] players = new string[ClientsList.Count];
+                        int i = 0;
+
+                        foreach (var k in ClientsList.Keys)
+                            players[i++] = (string)k;
+
+                        State = new State(board, players);
+                        State.Start();
+                    }
+                }
+                else if (State == null)
+                    Console.WriteLine("The game has't started yet");
+                else if (split < 1 || split + 1 == s.Length)
+                    Console.WriteLine("Invalid instruction");
+                else if (op == "save")
+                {
+                    string file = args + ".json";
+                    if (File.Exists(file))
+                    {
+                        Console.WriteLine("File \"" + file + "\" already exists. Overwite? (y/n)");
+                        if (Console.ReadLine().ToLower() == "y")
+                            State.Save(file);
+                        else
+                            Console.WriteLine("Operation cancelled");
+                    }
+                    else
+                        State.Save(file);
+                }
+                else
+                {
+                    try
+                    {
+                        Monopolio.Action a = new Monopolio.Action(State, op, args);
+                        if (!State.Execute(a))
+                            Console.WriteLine("Action failed");
+                    }
+                    catch (ArgumentException)
+                    {
+                        try
+                        {
+                            Event e = new Event(args);
+                            Player p = State.GetPlayer(op);
+                            if (p != null)
+                                State.Execute(e, p);
+                            else
+                                Console.WriteLine("Player not recognized");
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.WriteLine("Invalid instruction");
+                        }
+                    }
+                }
+            }
+
+            if (Running)
+            {
+                //TODO: Stop server
+                Running = false;
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Broadcasts a server response
@@ -127,5 +247,5 @@ namespace Monopolio_Server
             HandleClient client = new HandleClient();
             client.StartClient(socket, request.SenderID);
         }
-    }     
+    }
 }

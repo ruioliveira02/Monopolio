@@ -152,5 +152,84 @@ namespace Monopolio
             X = x;
             Y = y;
         }
+
+        public Event(string text)
+        {
+            List<string> words = Action.WordSplit(text);
+            Arg = null;
+            X = 0;
+            Y = 0;
+
+            switch (words[0])
+            {
+                case "go_to_jail":
+                    Type = EventType.GoToJail;
+                    break;
+
+                case "advance_to_start":
+                    Type = EventType.AdvanceToStart;
+                    break;
+
+                case "advance_to_station":
+                    Type = EventType.AdvanceToStation;
+                    break;
+
+                case "advance_to":
+                    Type = EventType.AdvanceTo;
+                    Arg = words[1];
+                    break;
+
+                case "walk":
+                    Type = EventType.Walk;
+                    X = int.Parse(words[1]);
+                    break;
+
+                case "receive":
+                    Type = EventType.Receive;
+                    X = int.Parse(words[1]);
+                    break;
+
+                case "receive_from_each":
+                    Type = EventType.ReceiveFromEach;
+                    X = int.Parse(words[1]);
+                    break;
+
+                case "pay_x_rent":
+                    Type = EventType.PayXRent;
+                    X = int.Parse(words[1]);
+                    break;
+
+                case "repair_property":
+                    Type = EventType.RepairProperty;
+                    X = int.Parse(words[1]);
+                    Y = int.Parse(words[2]);
+                    break;
+
+                case "out_of_jail_free":
+                    Type = EventType.OutOfJailFree;
+                    break;
+
+                default:
+                    throw new ArgumentException("Event not recognized");
+            }
+        }
+
+        public override string ToString()
+        {
+            switch (Type)
+            {
+                case EventType.GoToJail: return "go_to_jail";
+                case EventType.AdvanceToStart: return "advance_to_start";
+                case EventType.AdvanceToStation: return "advance_to_station";
+                case EventType.AdvanceTo: return "advance_to " + Arg;
+                case EventType.Walk: return "walk " + X;
+                case EventType.Receive: return "receive " + X;
+                case EventType.ReceiveFromEach: return "receive_from_each " + X;
+                case EventType.PayXRent: return "pay_x_rent " + X;
+                case EventType.RepairProperty: return "repair_property " + X + Y;
+                case EventType.OutOfJailFree: return "out_of_jail_free";
+                default: return null;
+            }
+        }
     }
 }
