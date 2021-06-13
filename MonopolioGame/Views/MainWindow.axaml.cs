@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using System;
 
 namespace MonopolioGame.Views
 {
@@ -15,7 +17,7 @@ namespace MonopolioGame.Views
         }
 
         private void InitializeComponent()
-        {
+        {           
             AvaloniaXamlLoader.Load(this);
         }
     }

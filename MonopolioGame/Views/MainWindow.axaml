@@ -1,16 +1,16 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:MonopolioGame.ViewModels"
+        xmlns:local="clr-namespace:MonopolioGame.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MonopolioGame.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="MonopolioGame">
-
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
   <Grid>
     <Panel IsVisible="True">
       <Grid>
@@ -20,41 +20,578 @@
           <ColumnDefinition Width="10*"></ColumnDefinition>
           <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Panel Background="Red" Grid.Column="0"></Panel>
-        <Panel Background="Blue" Grid.Column="2" Margin="30">
-          <Grid>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="2*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="1*"></ColumnDefinition>
-              <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Panel Background="Red" Grid.Column="0">
+          <ItemsControl Items="{Binding PlayersVM}" Margin="0 30 0 0">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                  </Grid.RowDefinitions>
 
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Row="0" Grid.Column="1" FontSize="16" Text="{Binding Name}"></TextBlock>
+                  <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" Text="{Binding Money}" IsVisible="{Binding IsPlayer}"></TextBlock>
+                  <Panel Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="4" Background="{Binding PlayerImage}"></Panel>
+                  <Panel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="4" Background="Black" IsVisible="{Binding IsCurrentTurn}"></Panel>
+                  <Panel Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="4" Background="White" IsVisible="{Binding IsDisconnected}"></Panel>
+                </Grid>
+                
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </Panel>
+
+        <Grid Grid.Column="2" Margin="30" Background="Aqua">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+          </Grid.ColumnDefinitions>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+          </Grid.RowDefinitions>
+
+          <Grid Background="{Binding CornersVM[0].Color}" Grid.Row="{Binding CornersVM[0].Row}" Grid.Column="{Binding CornersVM[0].Column}"></Grid>
+          <Grid Background="{Binding CornersVM[1].Color}" Grid.Row="{Binding CornersVM[1].Row}" Grid.Column="{Binding CornersVM[1].Column}"></Grid>
+          <Grid Background="{Binding CornersVM[2].Color}" Grid.Row="{Binding CornersVM[2].Row}" Grid.Column="{Binding CornersVM[2].Column}"></Grid>
+          <Grid Background="{Binding CornersVM[3].Color}" Grid.Row="{Binding CornersVM[3].Row}" Grid.Column="{Binding CornersVM[3].Column}"></Grid>
+          <!--
+          
+          ////////////////////////////////////////
+          /////////////////Board//////////////////
+          ////////////////////////////////////////
+          
+          -->
+
+          <Grid Grid.Column="{Binding PropertiesVM[0].Column}" Grid.Row="{Binding PropertiesVM[0].Row}" Background="White">
             <Grid.RowDefinitions>
-              <RowDefinition Height="2*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>
-              <RowDefinition Height="1*"></RowDefinition>              
-              <RowDefinition Height="2*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Panel Background="GreenYellow" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="9" Grid.RowSpan="9"></Panel>
-            <Panel Background="Gray" Grid.Row="10" Grid.Column="2"></Panel>
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[0].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[0].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[0].Cost}"></TextBlock>
           </Grid>
-        </Panel>
+
+          <Grid Grid.Column="{Binding PropertiesVM[1].Column}" Grid.Row="{Binding PropertiesVM[1].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[1].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[1].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[1].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[2].Column}" Grid.Row="{Binding PropertiesVM[2].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[2].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[2].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[2].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[3].Column}" Grid.Row="{Binding PropertiesVM[3].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[3].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[3].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[3].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[4].Column}" Grid.Row="{Binding PropertiesVM[4].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[4].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[4].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[4].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[5].Column}" Grid.Row="{Binding PropertiesVM[5].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[5].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[5].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[5].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[6].Column}" Grid.Row="{Binding PropertiesVM[6].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[6].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[6].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[6].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[7].Column}" Grid.Row="{Binding PropertiesVM[7].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[7].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[7].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[7].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[8].Column}" Grid.Row="{Binding PropertiesVM[8].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[8].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[8].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[8].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[9].Column}" Grid.Row="{Binding PropertiesVM[9].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[9].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[9].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[9].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[10].Column}" Grid.Row="{Binding PropertiesVM[10].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[10].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[10].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[10].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[11].Column}" Grid.Row="{Binding PropertiesVM[11].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[11].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[11].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[11].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[12].Column}" Grid.Row="{Binding PropertiesVM[12].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[12].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[12].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[12].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[13].Column}" Grid.Row="{Binding PropertiesVM[13].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[13].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[13].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[13].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[14].Column}" Grid.Row="{Binding PropertiesVM[14].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[14].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[14].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[14].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[15].Column}" Grid.Row="{Binding PropertiesVM[15].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[15].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[15].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[15].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[16].Column}" Grid.Row="{Binding PropertiesVM[16].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[16].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[16].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[16].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[17].Column}" Grid.Row="{Binding PropertiesVM[17].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[17].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[17].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[17].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[18].Column}" Grid.Row="{Binding PropertiesVM[18].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[18].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[18].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[18].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[19].Column}" Grid.Row="{Binding PropertiesVM[19].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[19].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[19].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[19].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[20].Column}" Grid.Row="{Binding PropertiesVM[20].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[20].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[20].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[20].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[21].Column}" Grid.Row="{Binding PropertiesVM[21].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[21].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[21].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[21].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[22].Column}" Grid.Row="{Binding PropertiesVM[22].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[22].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[22].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[22].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[23].Column}" Grid.Row="{Binding PropertiesVM[23].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[23].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[23].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[23].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[24].Column}" Grid.Row="{Binding PropertiesVM[24].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[24].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[24].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[24].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[25].Column}" Grid.Row="{Binding PropertiesVM[25].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[25].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[25].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[25].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[26].Column}" Grid.Row="{Binding PropertiesVM[26].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[26].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[26].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[26].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[27].Column}" Grid.Row="{Binding PropertiesVM[27].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[27].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[27].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[27].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[28].Column}" Grid.Row="{Binding PropertiesVM[28].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[28].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[28].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[28].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[29].Column}" Grid.Row="{Binding PropertiesVM[29].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[29].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[29].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[29].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[30].Column}" Grid.Row="{Binding PropertiesVM[30].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[30].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[30].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[30].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[31].Column}" Grid.Row="{Binding PropertiesVM[31].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[31].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[31].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[31].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[32].Column}" Grid.Row="{Binding PropertiesVM[32].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[32].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[32].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[32].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[33].Column}" Grid.Row="{Binding PropertiesVM[33].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[33].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[33].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[33].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[34].Column}" Grid.Row="{Binding PropertiesVM[34].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[34].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[34].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[34].Cost}"></TextBlock>
+          </Grid>
+
+          <Grid Grid.Column="{Binding PropertiesVM[35].Column}" Grid.Row="{Binding PropertiesVM[35].Row}" Background="White">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="*"></RowDefinition>
+              <RowDefinition Height="3*"></RowDefinition>
+              <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Panel Grid.Row="0" Background="{Binding PropertiesVM[35].Color}"></Panel>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="1" Text="{Binding PropertiesVM[35].Name}"></TextBlock>
+            <TextBlock FontSize="12" TextWrapping="Wrap" HorizontalAlignment="Center"
+                       Grid.Row="2" Text="{Binding PropertiesVM[35].Cost}"></TextBlock>
+          </Grid>               
+        </Grid>  
       </Grid>
     </Panel>
     <Panel IsVisible="False">
@@ -94,5 +631,5 @@
         <Button Grid.Row="11" Grid.Column="1" Content="Conectar" HorizontalAlignment="Center" Command="{Binding ConnectCommand}"></Button>
       </Grid>
     </Panel>
-  </Grid>  
+  </Grid>
 </Window>

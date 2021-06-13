@@ -26,9 +26,9 @@ namespace Monopolio
             Red,
             Yellow,
             Green,
-            Blue,
-            Station,
-            Utility,
+            Blue//,
+            //Station,
+            //Utility,
         }
 
 
