@@ -51,8 +51,10 @@ namespace MonopolioGame.ViewModels
                     continue;
 
                 IBrush c = (i % 2 == 0) ? new SolidColorBrush(Colors.Red, 1) : new SolidColorBrush(Colors.Pink, 1);
-
-                temp.Add(new PropertyViewModel(c, i, i.ToString(), 1000));
+                var v = new PropertyViewModel(c, i, i.ToString(), 1000);
+                v.Players.Add(new ColorViewModel(Brushes.RosyBrown));
+                v.Players.Add(new ColorViewModel(Brushes.Pink));
+                temp.Add(v);
             }
 
             PropertiesVM = temp;
