@@ -6,6 +6,6 @@ namespace NetworkModel
 {
     public interface IChatRequest : IRequest
     {
-        string Message { get; set; }
+        string Msg { get; set; }
     }
 }

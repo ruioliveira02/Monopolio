@@ -18,16 +18,23 @@ namespace Monopolio
         public const int salary = 200;
         public const int jailFine = 50;
 
+        #region handlers
+
+        public delegate void TurnUpdate(int turn);
 
         //dice: length 2 with numbers from 1 to 6
         public delegate void DiceThrow(int[] dice);
 
-        //directly: as in "go directly to jail"
-        public delegate void PlayerMove(Player p, int startingPosition, bool directly);
-
         //deck: 1 -> chance | 2 -> community chest
         public delegate void CardDraw(Card card, int deck);
 
+        public delegate void MiddleMoneyUpdate(int middleMoney);
+
+        public delegate void PlayerUpdate(Player p);
+
+        public delegate void PropertyUpdate(PropertyState ps);
+
+        #endregion
 
         public static Random randomizer = new Random();
 
@@ -53,16 +60,31 @@ namespace Monopolio
 
         public int[] Dice { get; } //2-long array with integers from 1 to 6
 
-        public int MiddleMoney { get; private set; }
+        private int _middleMoney;
+        public int MiddleMoney { get => _middleMoney; private set {
+                _middleMoney = value;
+                MiddleMoneyUpdateHandler?.Invoke(_middleMoney);
+            } }
+
         public Deck Chance { get; }
         public Deck CommunityChest { get; }
 
+        #region handlers
+
+        [JsonIgnore]
+        public TurnUpdate TurnUpdateHandler { get; set; }
         [JsonIgnore]
         public DiceThrow DiceThrowHandler { get; set; }
         [JsonIgnore]
-        public PlayerMove PlayerMoveHandler { get; set; }
-        [JsonIgnore]
         public CardDraw CardDrawHandler { get; set; }
+        [JsonIgnore]
+        public MiddleMoneyUpdate MiddleMoneyUpdateHandler { get; set; }
+        [JsonIgnore]
+        public PlayerUpdate PlayerUpdateHandler { get; set; }
+        [JsonIgnore]
+        public PropertyUpdate PropertyUpdateHandler { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Creates a new game state (new game)
@@ -113,7 +135,7 @@ namespace Monopolio
             RepeatTurn = repeatTurn;
             RepeatedTurns = repeatedTurns;
             Dice = dice;
-            MiddleMoney = middleMoney;
+            _middleMoney = middleMoney;
             Chance = chance;
             CommunityChest = communityChest;
 
@@ -237,6 +259,30 @@ namespace Monopolio
 
         #region gameFlow
 
+        void CallUpdaters()
+        {
+            foreach (Player p in Players)
+            {
+                if (p.updated)
+                {
+                    PlayerUpdateHandler?.Invoke(p);
+                    p.updated = false;
+                }
+            }
+
+            foreach (PropertyGroup pg in Groups)
+            {
+                foreach (PropertyState ps in pg.properties)
+                {
+                    if (ps.updated)
+                    {
+                        PropertyUpdateHandler?.Invoke(ps);
+                        ps.updated = false;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Starts the game
         /// </summary>
@@ -269,6 +315,7 @@ namespace Monopolio
                 RepeatedTurns = 0;
             }
 
+            TurnUpdateHandler?.Invoke(Turn);
             ThrowDice();
             RepeatTurn = Dice[0] == Dice[1];
 
@@ -296,11 +343,7 @@ namespace Monopolio
                 return;
 
             if (DiceRoll())
-            {
-                int startingPosition = Players[Turn].Position;
                 board.SendToJail(Players[Turn]);
-                PlayerMoveHandler?.Invoke(Players[Turn], startingPosition, true);
-            }
             else if (Players[Turn].InJail > 0)
             {
                 if (Dice[0] == Dice[1])
@@ -322,11 +365,12 @@ namespace Monopolio
 
             if (Players[Turn].InJail == 0)
             {
-                int startingPosition = Players[Turn].Position;
                 board.Walk(Players[Turn], Dice[0] + Dice[1]);
-                PlayerMoveHandler?.Invoke(Players[Turn], startingPosition, false);
+                CallUpdaters();
                 CalculateSquare(Players[Turn]);
             }
+
+            CallUpdaters();
         }
 
         /// <summary>
@@ -377,9 +421,8 @@ namespace Monopolio
                     break;
 
                 case Square.Type.GoToJail:
-                    int startingPosition = p.Position;
                     board.SendToJail(p);
-                    PlayerMoveHandler?.Invoke(p, startingPosition, true);
+                    //TODO: 2 motions as 1 ?????
                     break;
             }
         }
@@ -495,6 +538,7 @@ namespace Monopolio
                     if (a.Player == Players[Turn] && a.Player.InJail == 1)
                     {
                         a.Player.InJail = 0;
+                        CallUpdaters();
                         NextTurn();
                         return true;
                     }
@@ -507,6 +551,7 @@ namespace Monopolio
                     if (a.Player == Players[Turn] && a.Player.InJail == 1)
                     {
                         a.Player.InJail = 0;
+                        CallUpdaters();
                         NextTurn();
                         return true;
                     }
@@ -542,12 +587,12 @@ namespace Monopolio
             if (a.IsGetOutOfJail)
             {
                 a.Player.InJail = 0;
-                int startingPosition = a.Player.Position;
                 board.Walk(a.Player, Dice[0] + Dice[1]);
-                PlayerMoveHandler?.Invoke(a.Player, startingPosition, false);
+                CallUpdaters();
                 CalculateSquare(a.Player);
             }
 
+            CallUpdaters();
             return true;
         }
 
@@ -561,35 +606,25 @@ namespace Monopolio
             switch (e.Type)
             {
                 case Event.EventType.GoToJail:
-                    int startingPosition = target.Position;
                     board.SendToJail(target);
-                    PlayerMoveHandler?.Invoke(target, startingPosition, true);
                     break;
 
                 case Event.EventType.AdvanceToStart:
-                    startingPosition = target.Position;
                     board.AdvanceToStart(target); //the 200€ salary is given by the board
-                    PlayerMoveHandler?.Invoke(target, startingPosition, false);
                     break;
 
                 case Event.EventType.AdvanceToStation:
-                    startingPosition = target.Position;
                     board.AdvanceToNearest(target, Property.Color.Station);
-                    PlayerMoveHandler?.Invoke(target, startingPosition, false);
                     CalculateSquare(target);
                     break;
 
                 case Event.EventType.AdvanceTo:
-                    startingPosition = target.Position;
                     board.AdvanceToProperty(target, e.Arg);
-                    PlayerMoveHandler?.Invoke(target, startingPosition, false);
                     CalculateSquare(target);
                     break;
 
                 case Event.EventType.Walk:
-                    startingPosition = target.Position;
                     board.Walk(target, e.X);
-                    PlayerMoveHandler?.Invoke(target, startingPosition, false);
                     CalculateSquare(target);
                     break;
 
@@ -639,6 +674,8 @@ namespace Monopolio
                 default:
                     throw new NotImplementedException("Event not implemented");
             }
+
+            CallUpdaters();
         }
 
         #endregion

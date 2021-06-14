@@ -24,8 +24,15 @@ namespace Monopolio
 
         //cannot contain any of the caracters listed above
         public readonly string name;
-        int money;
-        public int Position { get; set; } //position on the board
+
+        [JsonIgnore]    //is marked as false after every execute cycle
+        public bool updated;
+
+        private int money;
+        private int _position;  //position on the board
+        private int _inJail;    //number of turns the player has been in jail
+        private int _cards;     //the number of get-out-of-jail-free cards the player has
+        private bool _bankrupt; //true when the player loses
 
         [JsonIgnore]
         public Player Creditor { get; set; }
@@ -33,10 +40,7 @@ namespace Monopolio
         public string CreditorName { get => Creditor?.name; }
         readonly string creditorName;
 
-        public int InJail { get; set; } //number of turns the player has been in jail
-        public int GetOutOfJailFreeCards { get; set; } //wether the player has the "Get Out of Jail Free Card"
-
-        public bool Bankrupt { get; set; } //true when the player loses
+        #region getters
 
         public int Money
         {
@@ -51,9 +55,37 @@ namespace Monopolio
                         Creditor = null;
                 }
 
+                if (money != value)
+                    updated = true;
                 money = value;
             }
         }
+
+        public int Position { get => _position; set {
+                if (_position != value)
+                    updated = true;
+                _position = value;
+            } }
+
+        public int InJail { get => _inJail; set {
+                if (_inJail != value)
+                    updated = true;
+                _inJail = value;
+            } }
+
+        public int GetOutOfJailFreeCards { get => _cards; set {
+                if (_cards != value)
+                    updated = true;
+                _cards = value;
+            } }
+
+        public bool Bankrupt { get => _bankrupt; set {
+                if (_bankrupt != value)
+                    updated = true;
+                _bankrupt = value;
+            } }
+
+        #endregion
 
         /// <summary>
         /// Creates a new Player object
@@ -68,7 +100,7 @@ namespace Monopolio
                 throw new ArgumentException("name musn't contain any of the control characters listed");
 
             this.name = name;
-            Money = State.initialMoney;
+            money = State.initialMoney;
         }
 
         /// <summary>
@@ -88,11 +120,11 @@ namespace Monopolio
         {
             this.name = name;
             this.money = money;
-            Position = position;
+            _position = position;
             this.creditorName = creditorName;
-            InJail = inJail;
-            GetOutOfJailFreeCards = getOutOfJailFreeCards;
-            Bankrupt = bankrupt;
+            _inJail = inJail;
+            _cards = getOutOfJailFreeCards;
+            _bankrupt = bankrupt;
         }
 
         /// <summary>
@@ -125,6 +157,9 @@ namespace Monopolio
                 p.Money += amount;
 
             money -= amount;
+
+            if (amount != 0)
+                updated = true;
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Monopolio_Server.Interfaces.Responses
         public override string Message()
         {
             return string.Format("{0} was {1}accepted", User, (Accepted ? "" : "not "));
+            //TODO: if not accepted, why
         }
     }
 }

@@ -479,6 +479,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "Monopolio/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Monopolio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Monopolio.dll": {}
+        }
       }
     }
   },
@@ -2485,10 +2498,16 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "Monopolio/1.0.0": {
+      "type": "project",
+      "path": "../Monopolio/Monopolio.csproj",
+      "msbuildProject": "../Monopolio/Monopolio.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Monopolio >= 1.0.0",
       "NETStandard.Library >= 2.0.3",
       "Network >= 6.2.4.21",
       "Newtonsoft.Json >= 13.0.1"
@@ -2520,7 +2539,11 @@
       "frameworks": {
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

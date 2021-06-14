@@ -26,9 +26,9 @@ namespace Monopolio
             Red,
             Yellow,
             Green,
-            Blue//,
-            //Station,
-            //Utility,
+            Blue,
+            Station,
+            Utility,
         }
 
 
@@ -77,15 +77,48 @@ namespace Monopolio
     {
         [JsonIgnore]
         public Property Property { get; private set; }
-        public int Houses { get; set; }
-        public int Hotels { get; set; }
 
         [JsonIgnore]
-        public Player Owner { get; set; }
-        public bool Mortgaged { get; set; }
+        public bool updated;
+
+        private int _houses;
+        private int _hotels;
+        private Player _owner;
+        private bool _mortgaged;
+
+        #region getters
+
+        public int Houses { get => _houses; set {
+                if (_houses != value)
+                    updated = true;
+                _houses = value;
+            } }
+        public int Hotels { get => _hotels; set
+            {
+                if (_hotels != value)
+                    updated = true;
+                _hotels = value;
+            }
+        }
+
+        [JsonIgnore]
+        public Player Owner { get => _owner; set
+            {
+                if (_owner != value)
+                    updated = true;
+                _owner = value;
+            }
+        }
+        public bool Mortgaged { get => _mortgaged; set
+            {
+                if (_mortgaged != value)
+                    updated = true;
+                _mortgaged = value;
+            }
+        }
 
         //used for json serializing (to avoid wrong references and stuff. You don't want to know)
-        public string OwnerName { get => Owner?.name; }
+        public string OwnerName { get => _owner?.name; }
         readonly string ownerName;
 
         public string PropertyName { get => Property.name; }
@@ -102,6 +135,8 @@ namespace Monopolio
         public int Buildings { get => Houses + 5 * Hotels; } //since 4 houses are removed when 
                                                              //upgrading to a hotel, 1 hotel = 5 houses
 
+        #endregion
+
         /// <summary>
         /// Creates an empty property state for a given property (new game)
         /// </summary>
@@ -109,8 +144,8 @@ namespace Monopolio
         public PropertyState(Property property)
         {
             Property = property;
-            Houses = 0;
-            Hotels = 0;
+            _houses = 0;
+            _hotels = 0;
         }
 
         /// <summary>
@@ -128,9 +163,9 @@ namespace Monopolio
         {
             this.propertyName = propertyName;
             this.ownerName = ownerName;
-            Mortgaged = mortgaged;
-            Houses = houses;
-            Hotels = hotels;
+            _mortgaged = mortgaged;
+            _houses = houses;
+            _hotels = hotels;
         }
 
         /// <summary>
@@ -147,7 +182,7 @@ namespace Monopolio
             {
                 if (ownerName == p.name)
                 {
-                    Owner = p;
+                    _owner = p;
                     return;
                 }
             }

@@ -1248,10 +1248,24 @@
           "lib/netstandard2.0/Tmds.DBus.dll": {}
         }
       },
+      "Monopolio/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Monopolio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Monopolio.dll": {}
+        }
+      },
       "NetworkModel/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Monopolio": "1.0.0",
           "Network": "6.2.4.21",
           "Newtonsoft.Json": "13.0.1"
         },
@@ -4481,6 +4495,11 @@
         "tmds.dbus.0.9.0.nupkg.sha512",
         "tmds.dbus.nuspec"
       ]
+    },
+    "Monopolio/1.0.0": {
+      "type": "project",
+      "path": "../Monopolio/Monopolio.csproj",
+      "msbuildProject": "../Monopolio/Monopolio.csproj"
     },
     "NetworkModel/1.0.0": {
       "type": "project",

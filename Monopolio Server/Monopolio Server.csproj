@@ -80,8 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HandleClient.cs" />
+    <Compile Include="Interfaces\Requests\ChatRequest.cs" />
+    <Compile Include="Interfaces\Requests\CommandRequest.cs" />
     <Compile Include="Interfaces\Requests\IdentRequest.cs" />
     <Compile Include="Interfaces\Requests\Request.cs" />
+    <Compile Include="Interfaces\Responses\ChatResponse.cs" />
+    <Compile Include="Interfaces\Responses\CommandResponse.cs" />
     <Compile Include="Interfaces\Responses\IdentResponse.cs" />
     <Compile Include="Interfaces\Responses\Response.cs" />
     <Compile Include="Program.cs" />

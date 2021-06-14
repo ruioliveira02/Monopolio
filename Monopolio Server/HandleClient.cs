@@ -55,24 +55,31 @@ namespace Monopolio_Server
                 {
                     NetworkStream networkStream = ClientSocket.GetStream();
                     networkStream.Read(bytesFrom, 0, ClientSocket.ReceiveBufferSize);
-                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    string dataFromClient = Encoding.UTF8.GetString(bytesFrom);
 
                     JsonSerializerSettings settings = new JsonSerializerSettings
                     {
                         TypeNameHandling = TypeNameHandling.All // To allow derived types
                     };
                     Request request = JsonConvert.DeserializeObject<Request>(dataFromClient, settings);
-                    Console.WriteLine(request.Message());
+                    request.SenderID = ClNo;      //???????
+                    Server.Log(request.Message());
                     Response response = request.Execute();
 
-                    Console.WriteLine(response.Message());
-                    Server.Broadcast(response);
+                    if (response != null)
+                    {
+                        Server.Log(response.Message());
+                        Server.Broadcast(response);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.ToString());
+                    Server.LogErr(ClNo, ex);
                 }
             }
+
+            Server.Log(string.Format("{0} disconnected", ClNo));
+            ClientSocket.Close();
         }
     }
 }

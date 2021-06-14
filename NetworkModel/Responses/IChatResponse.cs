@@ -7,6 +7,6 @@ namespace NetworkModel
     public interface IChatResponse : IResponse
     {
         string Player { get; set; }
-        string Message { get; set; }
+        string Msg { get; set; }
     }
 }

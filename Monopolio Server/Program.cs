@@ -24,17 +24,14 @@ namespace Monopolio_Server
 
             Console.Write("Game: ");
             string game = Console.ReadLine() + ".json";
-            Server s;
 
             if (File.Exists(game))
-                s = new Server(State.LoadState(game));
+                Server.Run(State.LoadState(game));
             else
-                s = new Server(Board.LoadBoard(board));
-
-            s.Run();
+                Server.Run(Board.LoadBoard(board));
 
             Console.WriteLine("Saving game...");
-            s.State.Save(game);
+            Server.State.Save(game);
             Console.WriteLine("Press any key to close");
             Console.ReadKey();
 
