@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,11 @@ namespace MonopolioGame.ViewModels
 
         public string Cost { get; set; }
 
+        public ObservableCollection<ColorViewModel> Players { get; set; }
+        public IBrush ColorPlayer { get; set; }
         public PropertyViewModel(IBrush color, int index, string name, int cost)
         {
+            Players = new ObservableCollection<ColorViewModel>();
             Color = color;
 
             if(index < 10)
@@ -42,6 +46,7 @@ namespace MonopolioGame.ViewModels
             }
             Name = name;
             Cost = string.Format("{0} €", cost.ToString());
+            ColorPlayer = Brushes.Red;
             return;
         }
     }
