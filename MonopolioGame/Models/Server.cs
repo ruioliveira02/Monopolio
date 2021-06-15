@@ -3,6 +3,7 @@ using MonopolioGame.Interfaces.Responses;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -31,7 +32,7 @@ namespace MonopolioGame.Models
             }
             catch(Exception)
             {
-                return false; //TODO:: Only catch correct exception type
+                return false;
             }
 
             Thread ctThread = new Thread(GetResponses);
@@ -42,7 +43,14 @@ namespace MonopolioGame.Models
 
         public bool Send(Request request)
         {
-            serverStream = clientSocket.GetStream();
+            try
+            {
+               serverStream = clientSocket.GetStream();
+            }
+            catch(IOException)
+            {
+                return false;
+            }
 
             byte[] outStream = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(request));
             try

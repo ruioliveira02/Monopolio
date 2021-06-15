@@ -15,6 +15,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Monopolio\Monopolio.csproj" />
     <ProjectReference Include="..\NetworkModel\NetworkModel.csproj" />
   </ItemGroup>
 </Project>

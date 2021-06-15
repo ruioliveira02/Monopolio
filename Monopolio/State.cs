@@ -54,9 +54,9 @@ namespace Monopolio
         public PropertyGroup[] Groups { get; }
 
         public Player[] Players { get; }
-        public int Turn { get; private set; } //which player is currently playing
-        public bool RepeatTurn { get; private set; }
-        public int RepeatedTurns { get; private set; }
+        public int Turn { get; set; } //which player is currently playing
+        public bool RepeatTurn { get; set; }
+        public int RepeatedTurns { get; set; }
 
         public int[] Dice { get; } //2-long array with integers from 1 to 6
 

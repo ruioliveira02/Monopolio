@@ -278,3 +278,5 @@ C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGam
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\ref\MonopolioGame.dll
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.pdb
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.genruntimeconfig.cache
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\Monopolio.dll
+J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\Monopolio.pdb

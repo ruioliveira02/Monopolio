@@ -33,7 +33,8 @@ namespace MonopolioGame.Interfaces.Responses
 
         public override void Execute(GameState state)
         {
-            throw new NotImplementedException();
+            if (Accepted)
+                state.Connected = true;
         }
     }
 }

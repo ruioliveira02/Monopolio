@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media;
+using Monopolio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,16 @@ namespace MonopolioGame.ViewModels
             Name = name;
             PlayerImage = image;
             Money = string.Format("{0} €", money.ToString());
+        }
+
+        public PlayerViewModel(Player player, bool isPlayer, bool isCurrentTurn, bool isDisconnected)
+        {
+            IsPlayer = isPlayer;
+            IsCurrentTurn = isCurrentTurn;
+            IsDisconnected = isDisconnected;
+            Name = player.name;
+            PlayerImage = Brushes.Red; //TODO:: Change to player color
+            Money = string.Format("{0} €", player.Money.ToString());
         }
     }
 }
