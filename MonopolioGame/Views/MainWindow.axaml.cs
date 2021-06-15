@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
 using MonopolioGame.ViewModels;
 using System;
+using System.Threading;
 
 namespace MonopolioGame.Views
 {
@@ -25,7 +26,13 @@ namespace MonopolioGame.Views
         {           
             AvaloniaXamlLoader.Load(this);
             SetupBoard();
-        }       
+            RefreshUI(Content as Grid);
+        }
+
+        protected void RefreshUI(Grid window)
+        {
+            return;
+        }
 
         private void SetupBoard()
         {

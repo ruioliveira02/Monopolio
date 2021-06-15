@@ -19,3 +19,6 @@ C:\Users\ASUS\source\repos\Monopolio\NetworkModel\obj\Debug\netstandard2.0\Netwo
 C:\Users\ASUS\source\repos\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.dll
 C:\Users\ASUS\source\repos\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.pdb
 C:\Users\ASUS\source\repos\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.CopyComplete
+J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.dll
+J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.pdb
+J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.CopyComplete

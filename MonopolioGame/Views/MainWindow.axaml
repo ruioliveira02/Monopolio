@@ -12,7 +12,7 @@
     <vm:MainWindowViewModel/>
   </Design.DataContext>
   <Grid>
-    <Panel IsVisible="True">
+    <Panel IsVisible="{Binding GameScreen}">
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -45,6 +45,8 @@
               </DataTemplate>
             </ItemsControl.ItemTemplate>
           </ItemsControl>
+
+          <TextBlock Background="White" Height="50" Text="{Binding Chat}"></TextBlock>
         </Panel>
 
         <Grid x:Name="board" Grid.Column="2" Margin="30" Background="Aqua">
@@ -83,7 +85,7 @@
         </Grid>  
       </Grid>
     </Panel>
-    <Panel IsVisible="False">
+    <Panel IsVisible="{Binding LoginScreen}">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="1*"></RowDefinition>
@@ -118,6 +120,7 @@
         <TextBlock Grid.Row="7" Grid.Column="1" Text="Ip do servidor" HorizontalAlignment="Center"/>
         <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ServerIp}"></TextBox>
         <Button Grid.Row="11" Grid.Column="1" Content="Conectar" HorizontalAlignment="Center" Command="{Binding ConnectCommand}"></Button>
+        <TextBlock Grid.Row="13" Grid.Column="1" Foreground="Red" Text="Não foi possível conectar com o servidor" IsVisible="{Binding ConnectionAttemptedText}"  HorizontalAlignment="Center"/>
       </Grid>
     </Panel>
   </Grid>
