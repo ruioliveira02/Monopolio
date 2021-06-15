@@ -5,7 +5,7 @@ using Monopolio;
 
 namespace NetworkModel.Responses
 {
-    interface ICardDrawResponse : IResponse
+    public interface ICardDrawResponse : IResponse
     {
         //player?
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NetworkModel.Responses
 {
-    interface IMiddleMoneyResponse : IResponse
+    public interface IMiddleMoneyResponse : IResponse
     {
         int MiddleMoney { get; set; }
     }

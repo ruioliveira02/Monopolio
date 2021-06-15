@@ -28,14 +28,14 @@
 		},
 		{
 			"type": 4,
-			"name": "TODO",
+			"name": "Mensalidade do Dom Diogo",
 			"tax": 200
 		},
 		{
 			"type": 1,
 			"property": {
 				"color": 8,
-				"name": "TODO",
+				"name": "Estação de Braga",
 				"price": 200
 			}
 		},
@@ -118,7 +118,7 @@
 			"type": 1,
 			"property": {
 				"color": 8,
-				"name": "TODO",
+				"name": "Estação de Famacity",
 				"price": 200
 			}
 		},
@@ -196,7 +196,7 @@
 			"type": 1,
 			"property": {
 				"color": 8,
-				"name": "TODO",
+				"name": "Estação do Porto",
 				"price": 200
 			}
 		},
@@ -278,7 +278,7 @@
 			"type": 1,
 			"property": {
 				"color": 8,
-				"name": "TODO", //Estação de Famacity?
+				"name": "Estação de Guima",
 				"price": 200
 			}
 		},
@@ -297,7 +297,7 @@
 		},
 		{
 			"type": 4,
-			"name": "TODO",
+			"name": "É preciso amor para chamar estupor (e para pagar)",
 			"tax": 100
 		},
 		{
@@ -315,7 +315,7 @@
 	"chance": [
 		{
 			"name": "O Bueso diz penteia-te!",
-			"text": "Recua três casas para te afastares dele",
+			"text": "Recua três casas para te afastares",
 			"events": [
 				{
 					"type": 4,
@@ -359,7 +359,7 @@
 					"type":  9
 				}
 			]
-		}
+		},
 	],
 
 	"communityChest": [
@@ -393,6 +393,26 @@
 			]
 		},
 		{
+			"name": "Olhem que eu apalpo-vos!",
+			"text": "Ganha 50€ de indemnização por assédio",
+			"events": [
+				{
+					"type": 5,
+					"x": 50
+				}
+			]
+		},
+		{
+			"name": "Roubas o candeeiro da pizzaria",
+			"text": "Ficas com os 200€ lá escondidos",
+			"events": [
+				{
+					"type": 5,
+					"x": 200
+				}
+			]
+		},
+		{
 			"name": "É o teu aniversário!",
 			"text": "Recebes uma prenda conjunta. Cada jogador contribui com 10€",
 			"events": [
@@ -402,7 +422,16 @@
 				}
 			]
 		},
-
+		{
+			"name": "Vai comer à pizzaria",
+			"text": "As antas arrastam-te para comer na pizzaria. Paga 50€",
+			"events": [
+				{
+					"type": 5,
+					"x": -50
+				}
+			]
+		},
 		{
 			"name": "Festival em 2022",
 			"text": "Paga 67€ pelo bilhete do festival",
@@ -413,6 +442,16 @@
 				}
 			]
 		},
+		{
+			"name": "A tua conta bancária está a diluir-se",
+			"text": "Já não sabes onde começam os 100€ e acaba a conta",
+			"events": [
+				{
+					"type": 5,
+					"x": -100
+				}
+			]
+		}
 		/*{
 			"name": "Rodelas sem orégãos",
 			"text": "Pediste a mesma coisa que a Diana. Arrependeste-te. Paga 50€"

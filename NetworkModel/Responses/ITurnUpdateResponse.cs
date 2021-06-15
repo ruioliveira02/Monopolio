@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NetworkModel.Responses
 {
-    interface ITurnUpdateResponse : IResponse
+    public interface ITurnUpdateResponse : IResponse
     {
         int Turn { get; set; }
     }

@@ -1,7 +1,11 @@
-﻿using Network;
+﻿using Monopolio_Server.Interfaces.Requests;
+using Monopolio_Server.Interfaces.Responses;
+using Network;
 using NetworkModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -10,15 +14,64 @@ using System.Threading.Tasks;
 
 namespace ClientTest
 {
+    class AlternativeChatRequest : Request, IChatRequest
+    {
+        public string Msg { get; set; }
+
+        public override Response Execute()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Message()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     class Program
     {
+        static void Send(TcpClient socket, Request r)
+        {
+            NetworkStream s = socket.GetStream();
+            string inter = JsonConvert.SerializeObject(r);
+            Console.WriteLine(inter);
+            byte[] outStream = Encoding.UTF8.GetBytes(inter);
+
+            s.Write(outStream, 0, outStream.Length);
+            s.Flush();
+        }
+
         static void Main(string[] args)
         {
+            TcpClient clientSocket = new TcpClient();
+            clientSocket.Connect("127.0.0.1", 25565);
+
+            IdentRequest r = new IdentRequest();
+            r.SenderID = "Bace";
+
+            Send(clientSocket, r);
+
+            while (true)
+            {
+                AlternativeChatRequest chat = new AlternativeChatRequest();
+                chat.Msg = Console.ReadLine();
+                Send(clientSocket, chat);
+            }
+
+
+
+
+
+
+
+            /*
             Program p = new Program();
             p.button2_Click();
             p.button1_Click();
             Console.ReadLine();
-        }
+            */
+            }
 
         System.Net.Sockets.TcpClient clientSocket  = new System.Net.Sockets.TcpClient();
         NetworkStream serverStream  = default(NetworkStream);

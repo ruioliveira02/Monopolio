@@ -5,7 +5,7 @@ using Monopolio;
 
 namespace NetworkModel.Responses
 {
-    interface IPropertyUpdateResponse : IResponse
+    public interface IPropertyUpdateResponse : IResponse
     {
         PropertyState PropertyState { get; set; }
     }

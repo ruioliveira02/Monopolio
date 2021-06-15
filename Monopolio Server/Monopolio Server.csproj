@@ -84,10 +84,15 @@
     <Compile Include="Interfaces\Requests\CommandRequest.cs" />
     <Compile Include="Interfaces\Requests\IdentRequest.cs" />
     <Compile Include="Interfaces\Requests\Request.cs" />
+    <Compile Include="Interfaces\Responses\CardDrawResponse.cs" />
     <Compile Include="Interfaces\Responses\ChatResponse.cs" />
-    <Compile Include="Interfaces\Responses\CommandResponse.cs" />
+    <Compile Include="Interfaces\Responses\DiceThrowResponse.cs" />
     <Compile Include="Interfaces\Responses\IdentResponse.cs" />
+    <Compile Include="Interfaces\Responses\MiddleMoneyResponse.cs" />
+    <Compile Include="Interfaces\Responses\PlayerUpdateResponse.cs" />
+    <Compile Include="Interfaces\Responses\PropertyUpdateResponse.cs" />
     <Compile Include="Interfaces\Responses\Response.cs" />
+    <Compile Include="Interfaces\Responses\TurnUpdateResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />

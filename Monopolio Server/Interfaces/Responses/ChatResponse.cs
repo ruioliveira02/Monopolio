@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NetworkModel;
 using Monopolio;
+using NetworkModel;
 
 namespace Monopolio_Server.Interfaces.Responses
 {

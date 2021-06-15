@@ -30,8 +30,12 @@ namespace Monopolio_Server
             else
                 Server.Run(Board.LoadBoard(board));
 
-            Console.WriteLine("Saving game...");
-            Server.State.Save(game);
+            if (Server.State != null)
+            {
+                Console.WriteLine("Saving game...");
+                Server.State.Save(game);
+            }
+            
             Console.WriteLine("Press any key to close");
             Console.ReadKey();
 

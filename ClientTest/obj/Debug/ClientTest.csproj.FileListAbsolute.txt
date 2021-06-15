@@ -22,3 +22,34 @@ J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.cs
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CopyComplete
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.exe
 J:\Dados\Programação\Aplicações\Monopolio\ClientTest\obj\Debug\ClientTest.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ClientTest.exe.config
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ClientTest.exe
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ClientTest.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ConsoleTables.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Devices.Bluetooth.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Net.Personal.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio Server.exe
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Network.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\NetworkModel.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\System.ValueTuple.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio.dll
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio Server.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio Server.exe.config
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\NetworkModel.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ConsoleTables.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.xml
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Devices.Bluetooth.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Devices.Bluetooth.xml
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Net.Personal.xml
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Network.xml
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\System.ValueTuple.xml
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csprojAssemblyReference.cache
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CopyComplete
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.exe
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.pdb

@@ -993,8 +993,17 @@
           }
         }
       },
+      "Monopolio/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "Monopolio.dll": {}
+        }
+      },
       "NetworkModel/1.0.0": {
         "dependencies": {
+          "Monopolio": "1.0.0",
           "Network": "6.2.4.21",
           "Newtonsoft.Json": "13.0.1"
         },
@@ -1527,6 +1536,11 @@
       "sha512": "sha512-KcTWL9aKuob9Qo2sOTTKFePs1rKGTwZrcBvMFuGVIVR5RojX3oIFj5UBLYfSGjYgrcImC7LjQI3DdCFwUnhNXw==",
       "path": "tmds.dbus/0.9.0",
       "hashPath": "tmds.dbus.0.9.0.nupkg.sha512"
+    },
+    "Monopolio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "NetworkModel/1.0.0": {
       "type": "project",

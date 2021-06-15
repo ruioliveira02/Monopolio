@@ -9,6 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "NetworkModel/1.0.0": {
         "dependencies": {
+          "Monopolio": "1.0.0",
           "NETStandard.Library": "2.0.3",
           "Network": "6.2.4.21",
           "Newtonsoft.Json": "13.0.1"
@@ -355,6 +356,14 @@
             "fileVersion": "4.6.24705.1"
           }
         }
+      },
+      "Monopolio/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "Monopolio.dll": {}
+        }
       }
     }
   },
@@ -615,6 +624,11 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
+    "Monopolio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

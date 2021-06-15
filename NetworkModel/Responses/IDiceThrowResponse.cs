@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NetworkModel.Responses
 {
-    interface IDiceThrowResponse : IResponse
+    public interface IDiceThrowResponse : IResponse
     {
         //player?
 

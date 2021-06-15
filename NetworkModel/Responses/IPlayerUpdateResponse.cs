@@ -5,7 +5,7 @@ using Monopolio;
 
 namespace NetworkModel.Responses
 {
-    interface IPlayerUpdateResponse : IResponse
+    public interface IPlayerUpdateResponse : IResponse
     {
         Player Player { get; set; }
     }
