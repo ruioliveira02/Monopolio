@@ -1,4 +1,5 @@
-﻿using Monopolio_Server.Interfaces.Responses;
+﻿using Monopolio;
+using Monopolio_Server.Interfaces.Responses;
 using NetworkModel;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Monopolio_Server.Interfaces.Requests
     /// to the server
     /// </summary> 
     public class IdentRequest : Request, IIdentRequest
-    { 
+    {
         /// <summary>
         /// Executes the identification of the client
         /// </summary> 
@@ -27,7 +28,7 @@ namespace Monopolio_Server.Interfaces.Requests
                 && Server.ClientsList.Count < Server.MaxClients
                 && !Server.ClientsList.ContainsKey(SenderID);
 
-            return new IdentResponse(Accepted, SenderID);
+            return new IdentResponse(Accepted, SenderID, Server.State);
         }
         /// <summary>
         /// The message to display on the server's console to log this request

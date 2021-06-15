@@ -23,12 +23,19 @@ namespace Monopolio_Server
             string board = "default_board.json";
 
             Console.Write("Game: ");
-            string game = Console.ReadLine() + ".json";
+            string game = Console.ReadLine() + State.Extension;
 
             if (File.Exists(game))
+            {
+                Console.WriteLine("Loading save file...");
                 Server.Run(State.LoadState(game));
+            }
             else
+            {
+                Console.WriteLine("Save file not found, creating empty server");
                 Server.Run(Board.LoadBoard(board));
+            }
+                
 
             if (Server.State != null)
             {

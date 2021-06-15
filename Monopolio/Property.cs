@@ -121,12 +121,8 @@ namespace Monopolio
         public string OwnerName { get => _owner?.name; }
         readonly string ownerName;
 
-        public string PropertyName { get => Property.name; }
-        readonly string propertyName;
-
-
-        [JsonIgnore]
         public string Name { get => Property.name; }
+        readonly string name;
 
         [JsonIgnore]
         public Property.Color Color { get => Property.color; }
@@ -161,7 +157,7 @@ namespace Monopolio
         public PropertyState(string propertyName, string ownerName,
             bool mortgaged, int houses, int hotels) //saved game
         {
-            this.propertyName = propertyName;
+            this.name = propertyName;
             this.ownerName = ownerName;
             _mortgaged = mortgaged;
             _houses = houses;
@@ -196,7 +192,7 @@ namespace Monopolio
         /// </summary>
         /// <param name="board">The board</param>
         public void ResolveProperty(Board board)
-            => Property = board.GetProperty(propertyName);
+            => Property = board.GetProperty(name);
 
         /// <summary>
         /// Increases the number of buildings, following standart monopoly rules

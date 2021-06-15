@@ -145,6 +145,7 @@ namespace Monopolio
         /// <param name="arg">The string argument of the event</param>
         /// <param name="x">The first integer argument of the event</param>
         /// <param name="y">The second integer argument of the event</param>
+        [Newtonsoft.Json.JsonConstructor]
         public Event(EventType type, string arg = null, int x = 0, int y = 0)
         {
             Type = type;
@@ -155,6 +156,9 @@ namespace Monopolio
 
         public Event(string text)
         {
+            if (text == null)
+                throw new ArgumentNullException("text mustn't be null");
+
             List<string> words = Action.WordSplit(text);
             Arg = null;
             X = 0;

@@ -59,7 +59,14 @@ namespace Monopolio
         /// <param name="action">The action</param>
         public Action(State state, string playerName, string action)
         {
+            if (action == null)
+                throw new ArgumentNullException("action mustn't be null");
+
             Player = state.GetPlayer(playerName);
+
+            if (Player == null)
+                throw new ArgumentException("Player not recognized");
+
             List<string> words = WordSplit(action);
 
             switch (words[0])

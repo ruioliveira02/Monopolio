@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Monopolio;
+using NetworkModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ namespace Monopolio_Server.Interfaces.Responses
     /// <summary>
     /// The server's response to a <cref>IdentRequest</cref>
     /// </summary> 
-    public class IdentResponse : Response
+    public class IdentResponse : Response, IIdentResponse
     {
         /// <summary>
         /// Whether the user was accepted or not
@@ -19,15 +21,18 @@ namespace Monopolio_Server.Interfaces.Responses
         /// <summary>
         /// The name of the user who made the request
         /// </summary> 
-        public string User { get; set; }
+        public string Username { get; set; }
+
+        public State State { get; set; }
 
         /// <summary>
         /// Default constructor
         /// </summary> 
-        public IdentResponse(bool accepted, string user)
+        public IdentResponse(bool accepted, string user, State state)
         {
             Accepted = accepted;
-            User = user;
+            Username = user;
+            State = state;
         }
 
         /// <summary>
@@ -35,7 +40,7 @@ namespace Monopolio_Server.Interfaces.Responses
         /// </summary> 
         public override string Message()
         {
-            return string.Format("{0} was {1}accepted", User, (Accepted ? "" : "not "));
+            return string.Format("{0} was {1}accepted", Username, (Accepted ? "" : "not "));
             //TODO: if not accepted, why
         }
     }

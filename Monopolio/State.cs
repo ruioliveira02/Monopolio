@@ -11,6 +11,8 @@ namespace Monopolio
     /// </summary>
     public class State
     {
+        public const string Extension = ".mpy";
+
         public const int housesPerHotel = 4;
         public const int maxBuildings = 5;
 

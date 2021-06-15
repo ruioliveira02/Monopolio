@@ -24,25 +24,34 @@ namespace Monopolio_Server
         /// <summary>
         /// The socket the client is listening on
         /// </summary>
-        TcpClient ClientSocket { get; set; }
+        public TcpClient ClientSocket { get; }
 
         /// <summary>
         /// The client's name
         /// </summary>
-        string ClNo { get; set; }
+        public string ClNo { get; }
+
+        /// <summary>
+        /// The client's thread
+        /// </summary>
+        public Thread ClientThread { get; }
+
+        /// <summary>
+        /// Constructs a new HandleClientObject
+        /// </summary>
+        /// <param name="inClientSocket">The client's socket</param>
+        /// <param name="clientNo">The client's name/ID</param>
+        public HandleClient(TcpClient inClientSocket, string clientNo)
+        {
+            ClientSocket = inClientSocket;
+            ClNo = clientNo;
+            ClientThread = new Thread(Communicate);
+        }
 
         /// <summary>
         /// Starts the client communication
         /// </summary>
-        /// <param name="inClientSocket">The client's socket</param>
-        /// <param name="clientNo">The client's id</param>
-        public void StartClient(TcpClient inClientSocket, string clientNo)
-        {
-            ClientSocket = inClientSocket;
-            ClNo = clientNo;
-            Thread ctThread = new Thread(Communicate);
-            ctThread.Start();
-        }
+        public void Start() => ClientThread.Start();
 
         /// <summary>
         /// Communicates with the client, listening to its requests and responding to them until the server
@@ -52,17 +61,17 @@ namespace Monopolio_Server
         {
             byte[] bytesFrom = new byte[Server.BufferSize];
 
-            while (Server.Running && Server.ClientsList.ContainsKey(ClNo))
+            while (Server.Running && ClientSocket.Connected && Server.ClientsList.ContainsKey(ClNo))
             {
                 try
                 {
                     NetworkStream networkStream = ClientSocket.GetStream();
-                    networkStream.Read(bytesFrom, 0, ClientSocket.ReceiveBufferSize);
+                    int read = networkStream.Read(bytesFrom, 0, ClientSocket.ReceiveBufferSize);
 
                     if (!ClientSocket.Connected) //client disconnected
                         break;
 
-                    string dataFromClient = Encoding.UTF8.GetString(bytesFrom);
+                    string dataFromClient = Encoding.UTF8.GetString(bytesFrom, 0, read);
 
                     Request request = JsonConvert.DeserializeObject<Request>(dataFromClient, new RequestConverter());
                     request.SenderID = ClNo;
@@ -86,10 +95,11 @@ namespace Monopolio_Server
             }
 
             if (Server.ClientsList.ContainsKey(ClNo))
-            {
+                lock (Server.ClientsList)
+                    Server.ClientsList.Remove(ClNo);
+
+            if (ClientSocket.Connected)
                 ClientSocket.Close();
-                Server.ClientsList.Remove(ClNo);
-            }
 
             Server.Log(string.Format("{0} disconnected", ClNo));
         }

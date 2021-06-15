@@ -25,7 +25,7 @@ namespace Monopolio_Server
         /// <summary>
         /// The ip of the server we are using
         /// </summary>
-        private const string ip = "127.0.0.1";
+        private const string ip = "192.168.1.98";
 
         /// <summary>
         /// The port being used
@@ -60,7 +60,7 @@ namespace Monopolio_Server
         /// <summary>
         /// The table with all the currently connected clients, hashed by the username
         /// </summary>
-        public static Dictionary<string, TcpClient> ClientsList { get; }
+        public static Dictionary<string, HandleClient> ClientsList { get; }
 
         /// <summary>
         /// The board to be used in the new game
@@ -74,10 +74,15 @@ namespace Monopolio_Server
 
         static Server()
         {
-            ClientsList = new Dictionary<string, TcpClient>();
+            ClientsList = new Dictionary<string, HandleClient>();
         }
 
         #region input
+
+        /// <summary>
+        /// Indicates wether the input thread is currently running Console.ReadLine()
+        /// </summary>
+        static bool waitingInput = false;
 
         /// <summary>
         /// The method running the keyboard input
@@ -86,23 +91,37 @@ namespace Monopolio_Server
         {
             while (Running)
             {
-                if (RunCommand(Console.ReadLine()))
-                    Log("Command successfully run");
+                waitingInput = true;
+                string command = Console.ReadLine();
+                waitingInput = false;
+
+                if (!Running)
+                    break;
+
+                if (RunCommand(command))
+                    Log("Command successfully executed");
                 else
-                    Log("Command failed to run");
+                    Log("Command failed to execute");
             }
         }
 
+        /// <summary>
+        /// Runs the specified command as the server admin/console
+        /// </summary>
+        /// <param name="command">The specified command</param>
+        /// <returns></returns>
         public static bool RunCommand(string command)
         {
+            command = command.Trim();
             int split = command.IndexOf(' ');
             string op = command.Substring(0, split < 1 ? command.Length : split);
-            string args = command.Substring(split == command.Length - 1 ? split : split + 1);
+            string args = split == -1 ? null : command.Substring(split + 1);
 
             if (command == "exit" || command == "close" || command == "stop")
             {
                 Running = false;
                 ServerSocket.Stop();
+                KickAll();
             }
             else if (command == "start")
             {
@@ -116,12 +135,9 @@ namespace Monopolio_Server
                     foreach (string k in ClientsList.Keys)
                         players[i++] = k;
 
-                    lock (State)
-                    {
-                        State = new State(board, players);
-                        SetHandlers();
-                        State.Start();
-                    }
+                    State = new State(board, players);
+                    SetHandlers();
+                    State.Start();
                 }
             }
             else if (op == "say")
@@ -130,15 +146,31 @@ namespace Monopolio_Server
                 Log(chat.Message());
                 Broadcast(chat);
             }
-            else if (split < 1 || split + 1 == command.Length)
-                return false; //Invalid instruction
             else if (op == "kick")
-                return Kick(args);
+                return Kick(args) != null;
+            else if (op == "kickall")
+            {
+                KickAll();
+                return true;
+            }
+            else if (op == "list")
+            {
+                Log("Client list:");
+
+                foreach (string client in ClientsList.Keys)
+                    Log(string.Format("-{0}", client));
+            }
             else if (State == null)
-                return false; //The game has't started yet
+                return false; //The game hasn't started yet
             else if (op == "save")
             {
-                string file = args + ".json";
+                if (args == null)
+                {
+                    Console.Write("Save file name: ");
+                    args = Console.ReadLine();
+                }
+
+                string file = args + State.Extension;
                 if (File.Exists(file))
                 {
                     Console.WriteLine("File \"" + file + "\" already exists. Overwite? (y/n)");
@@ -154,6 +186,9 @@ namespace Monopolio_Server
             }
             else
             {
+                if (split < 1 || split + 1 == command.Length)
+                    return false; //Invalid instruction
+
                 try
                 {
                     Monopolio.Action a = new Monopolio.Action(State, op, args);
@@ -227,8 +262,9 @@ namespace Monopolio_Server
             Running = true;
             ServerSocket = new TcpListener(IPAddress.Parse(ip), port);
 
+            Log("Starting Monopolio Server...");
             ServerSocket.Start();
-            Log("Monopolio Server Started ....");
+            Log("Monopolio Server started");
 
             Thread inputThread = new Thread(Input);
             inputThread.Start();
@@ -250,6 +286,17 @@ namespace Monopolio_Server
             }
 
             ServerSocket.Stop();
+            List<HandleClient> list = KickAll();
+
+            foreach (HandleClient c in list)
+                if (c.ClientThread.IsAlive)
+                    c.ClientThread.Join();  //wait until client threads run to completion
+
+            if (waitingInput)
+            {
+                Log("The server closed unpromted. Press enter to exit.");
+                inputThread.Join();
+            }
         }
 
         #region handlers
@@ -327,14 +374,38 @@ namespace Monopolio_Server
 
         #endregion
 
-        public static bool Kick(string clientID)
+        static HandleClient Kick(string clientID)
         {
             if (!ClientsList.ContainsKey(clientID))
-                return false;
+                return null;
 
-            ClientsList[clientID].Close();
-            ClientsList.Remove(clientID);
-            return true;
+            HandleClient ans = ClientsList[clientID];
+
+            lock (ClientsList)
+            {
+                ans.ClientSocket.Close();
+                ClientsList.Remove(clientID);
+            }
+
+            return ans;
+        }
+
+        static List<HandleClient> KickAll()
+        {
+            List<HandleClient> ans = new List<HandleClient>();
+
+            lock (ClientsList)
+            {
+                foreach (HandleClient c in ClientsList.Values)
+                {
+                    c.ClientSocket.Close();
+                    ans.Add(c);
+                }
+
+                ClientsList.Clear();
+            }
+
+            return ans;
         }
 
         /// <summary>
@@ -348,13 +419,29 @@ namespace Monopolio_Server
         }
 
         /// <summary>
+        /// Wether the server should accept game actions from the clients.
+        /// True if the server has a game running and all the players are connected
+        /// </summary>
+        public static bool Playing { get {
+                if (State == null)
+                    return false;
+
+                foreach (Player p in State.Players)
+                    if (!ClientsList.ContainsKey(p.name))
+                        return false;
+
+                return true;
+            }
+        }
+
+        /// <summary>
         /// Broadcasts a server response
         /// </summary>
         public static void Broadcast(Response msg)
         {
-            foreach (TcpClient socket in ClientsList.Values)
+            foreach (HandleClient c in ClientsList.Values)
             {
-                NetworkStream broadcastStream = socket.GetStream();
+                NetworkStream broadcastStream = c.ClientSocket.GetStream();
 
                 byte[] broadcastBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(msg));
 
@@ -411,10 +498,13 @@ namespace Monopolio_Server
         /// 
         private static void AddClient(Request request, Response response, TcpClient socket)
         {
-            ClientsList.Add(request.SenderID, socket);
+            HandleClient client = new HandleClient(socket, request.SenderID);
+
+            lock (ClientsList)
+                ClientsList.Add(request.SenderID, client);
+
+            client.Start();
             Broadcast(response);
-            HandleClient client = new HandleClient();
-            client.StartClient(socket, request.SenderID);
         }
     }
 }
