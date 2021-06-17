@@ -15,7 +15,8 @@ namespace MonopolioGame.Interfaces.Responses
 
         public override void Execute(GameState game)
         {
-            game.Chat += string.Format("\n{0}: {1}", Player, Msg);
+            string playerText = (game.Player == Player) ? "Eu" : Player;
+            game.Chat += string.Format("\n{0}: {1}", playerText, Msg);
         }
     }
 }

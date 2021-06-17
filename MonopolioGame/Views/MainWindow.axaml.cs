@@ -26,12 +26,6 @@ namespace MonopolioGame.Views
         {           
             AvaloniaXamlLoader.Load(this);
             SetupBoard();
-            RefreshUI(Content as Grid);
-        }
-
-        protected void RefreshUI(Grid window)
-        {
-            return;
         }
 
         private void SetupBoard()

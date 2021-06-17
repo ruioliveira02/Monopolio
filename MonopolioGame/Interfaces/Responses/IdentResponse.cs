@@ -1,4 +1,6 @@
-﻿using MonopolioGame.Models;
+﻿using Monopolio;
+using MonopolioGame.Models;
+using NetworkModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace MonopolioGame.Interfaces.Responses
     /// <summary>
     /// The server's response to a <cref>IdentRequest</cref>
     /// </summary> 
-    public class IdentResponse : Response
+    public class IdentResponse : Response, IIdentResponse
     {
         /// <summary>
         /// Whether the user was accepted or not
@@ -20,21 +22,20 @@ namespace MonopolioGame.Interfaces.Responses
         /// <summary>
         /// The name of the user who made the request
         /// </summary> 
-        public string User { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
-        /// Default constructor
+        /// The current state of the game
         /// </summary> 
-        public IdentResponse(bool accepted, string user)
-        {
-            Accepted = accepted;
-            User = user;
-        }
+        public State State { get; set; }
+
 
         public override void Execute(GameState state)
         {
-            if (Accepted)
+            if (Accepted && Username == state.Player)
                 state.Connected = true;
+
+            state.CurrentState = State;
         }
     }
 }

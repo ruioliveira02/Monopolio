@@ -9,39 +9,41 @@ namespace MonopolioGame.Models
 {
     public class GameHandler
     {
-        Server server;
+        public Server Server { get; set; }
         public GameState State { get; set; }
 
         public event EventHandler DataChanged;
 
-        public GameHandler()
+        public GameHandler(string username)
         {
-            server = new Server();
-            server.NewResponseEvent += ((o, e) => { e.Execute(State); DataChanged(this, new EventArgs()); });
+            Server = new Server();
+            Server.NewResponseEvent += ((o, e) => { e.Execute(State); DataChanged(this, new EventArgs()); });
             State = new GameState(null);
+            State.Player = username;
         }
 
         public void Connect(string ip, int port, string username)
-        {
+        {            
             const int maxAttempts = 3;
             //Reset the state of the game
             State = new GameState(null);
+            State.Player = username;
 
             //Subscribe to response event
-            server.NewResponseEvent += new EventHandler<Interfaces.Responses.Response>((o, s) => s.Execute(State));
+            Server.NewResponseEvent += new EventHandler<Interfaces.Responses.Response>((o, s) => s.Execute(State));
 
             //TODO:: Reset board state            
 
             bool[] res = { false, false };
             for (int i = 0; i < maxAttempts && !res[0]; i++)
-                server.Connect(ip, port);
+                res[0] = Server.Connect(ip, port);
 
             if(res[0])
                 for (int i = 0; i < maxAttempts && !res[1]; i++)
-                    server.Send(new IdentRequest(username));
+                    res[1] = Server.Send(new IdentRequest(username));
 
-            State.Connected = (res[0] && res[1]);
-            State.ConnectionAttempt = !State.Connected;
+            //State.Connected = (res[0] && res[1]);
+            State.ConnectionAttempt = !(res[0] && res[1]);
         }
     }
 }
