@@ -68,12 +68,13 @@ namespace Monopolio_Server
                     NetworkStream networkStream = ClientSocket.GetStream();
                     int read = networkStream.Read(bytesFrom, 0, ClientSocket.ReceiveBufferSize);
 
-                    if (!ClientSocket.Connected) //client disconnected
+                    if (!ClientSocket.Connected || read == 0) //client disconnected
                         break;
 
                     string dataFromClient = Encoding.UTF8.GetString(bytesFrom, 0, read);
+                    dataFromClient = dataFromClient.Replace("MonopolioGame", "Monopolio_Server");
 
-                    Request request = JsonConvert.DeserializeObject<Request>(dataFromClient, new RequestConverter());
+                    Request request = JsonConvert.DeserializeObject(dataFromClient, Server.JsonSettings) as Request;
                     request.SenderID = ClNo;
                     Server.Log(request.Message());
                     Response response = request.Execute();
@@ -101,56 +102,9 @@ namespace Monopolio_Server
             if (ClientSocket.Connected)
                 ClientSocket.Close();
 
-            Server.Log(string.Format("{0} disconnected", ClNo));
+            DisconnectResponse r = new DisconnectResponse(ClNo);
+            Server.Log(r.Message());
+            Server.Broadcast(r);
         }
     }
-
-    #region jsonRequestConverter
-
-    public class RequestConverter : JsonConverter
-    {
-        static JsonSerializer Serializer = new JsonSerializer();
-        static Type[] types = Assembly.GetAssembly(typeof(Request)).GetTypes().Where(TheType => TheType.IsClass && !TheType.IsAbstract && TheType.IsSubclassOf(typeof(Request))).ToArray();
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            var jObject = JObject.Load(reader);
-
-            foreach (Type t in types.Where(TheType => TheType == objectType || TheType.IsSubclassOf(objectType)))
-            {
-                bool fits = true;
-
-                foreach (Type i in t.GetInterfaces())
-                {
-                    foreach (var pi in i.GetProperties())
-                    {
-                        if (!jObject.ContainsKey(pi.Name))
-                        {
-                            fits = false;
-                            break;
-                        }
-                    }
-
-                    if (!fits)
-                        break;
-                }
-
-                if (fits)
-                    return Serializer.Deserialize(jObject.CreateReader(), t);
-            }
-
-            throw new ArgumentException("No Request derived class match was found for the JSON object");
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof(Request) == objectType || typeof(Request).IsAssignableFrom(objectType);
-        }
-
-        public override bool CanWrite { get => false; }
-    }
-
-    #endregion
 }

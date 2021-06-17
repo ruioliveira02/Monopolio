@@ -29,14 +29,11 @@ C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ConsoleTables.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Devices.Bluetooth.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.Net.Personal.dll
-C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio Server.exe
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Network.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\NetworkModel.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\System.ValueTuple.dll
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio.dll
-C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio Server.pdb
-C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio Server.exe.config
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\NetworkModel.pdb
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\ConsoleTables.pdb
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\InTheHand.pdb
@@ -53,3 +50,6 @@ C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.Core
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CopyComplete
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.exe
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio_Server.exe
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio_Server.pdb
+C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio_Server.exe.config

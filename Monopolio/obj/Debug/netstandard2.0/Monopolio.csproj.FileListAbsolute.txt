@@ -15,4 +15,3 @@ J:\Dados\Programação\Aplicações\Monopolio\Monopolio\obj\Debug\netstandard2.0
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.csproj.CoreCompileInputs.cache
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.dll
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.pdb
-C:\Users\ASUS\source\repos\Monopolio\Monopolio\obj\Debug\netstandard2.0\Monopolio.csprojAssemblyReference.cache

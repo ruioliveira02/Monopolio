@@ -1,4 +1,5 @@
-﻿using NetworkModel.Responses;
+﻿using Monopolio;
+using NetworkModel.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Monopolio_Server.Interfaces.Responses
 {
     public class TurnUpdateResponse : Response, ITurnUpdateResponse
     {
-        public int Turn { get; set; }
+        public State State { get; set; }
 
-        public TurnUpdateResponse(int turn)
+        public TurnUpdateResponse(State state)
         {
-            Turn = turn;
+            State = state;
         }
 
         /*
@@ -23,6 +24,6 @@ namespace Monopolio_Server.Interfaces.Responses
         */
 
         public override string Message()
-            => string.Format("Begin turn of player {0}", Turn);
+            => string.Format("Begin turn of player {0}", State.Turn);
     }
 }

@@ -20,6 +20,7 @@ namespace Monopolio_Server
         /// <param name="args">The program's arguments</param>
         static void Main(string[] args)
         {
+            Console.Title = "Monopoly SERVER";
             string board = "default_board.json";
 
             Console.Write("Game: ");

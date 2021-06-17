@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Monopolio;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,6 @@ namespace NetworkModel.Responses
 {
     public interface ITurnUpdateResponse : IResponse
     {
-        int Turn { get; set; }
+        State State { get; set; }
     }
 }

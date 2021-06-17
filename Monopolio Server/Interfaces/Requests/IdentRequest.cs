@@ -22,14 +22,16 @@ namespace Monopolio_Server.Interfaces.Requests
         {
             Accepted = SenderID != null
                 && SenderID != ""
+                && SenderID != Server.ServerName
                 && SenderID.Length <= 16
                 && !SenderID.Contains('"')
                 && !SenderID.Contains('\n')
                 && Server.ClientsList.Count < Server.MaxClients
                 && !Server.ClientsList.ContainsKey(SenderID);
 
-            return new IdentResponse(Accepted, SenderID, Server.State);
+            return new IdentResponse(Accepted, SenderID, Accepted ? Server.State : null);
         }
+
         /// <summary>
         /// The message to display on the server's console to log this request
         /// </summary> 

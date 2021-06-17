@@ -4519,27 +4519,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Gaming\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
       "projectName": "MonopolioGame",
-      "projectPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
-      "packagesPath": "C:\\Users\\Gaming\\.nuget\\packages\\",
-      "outputPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\MonopolioGame\\obj\\",
+      "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Gaming\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -4552,11 +4545,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj": {
-              "projectPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\Monopolio\\Monopolio.csproj"
+            "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj"
             },
-            "J:\\Dados\\Programação\\Aplicações\\Monopolio\\NetworkModel\\NetworkModel.csproj": {
-              "projectPath": "J:\\Dados\\Programação\\Aplicações\\Monopolio\\NetworkModel\\NetworkModel.csproj"
+            "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj": {
+              "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj"
             }
           }
         }

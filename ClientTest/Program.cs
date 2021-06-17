@@ -16,78 +16,21 @@ using System.Threading.Tasks;
 
 namespace ClientTest
 {
-    class AlternativeChatRequest : Request, IChatRequest
-    {
-        public string Msg { get; set; }
-
-        public override Response Execute()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string Message()
-        {
-            return string.Format("You say {1}", SenderID, Msg);
-        }
-    }
-
-    #region jsonResponseConverter
-
-    public class ResponseConverter : JsonConverter
-    {
-        static JsonSerializer Serializer = new JsonSerializer();
-        static Type[] types = Assembly.GetAssembly(typeof(Response)).GetTypes().Where(TheType => TheType.IsClass && !TheType.IsAbstract && TheType.IsSubclassOf(typeof(Response))).ToArray();
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            var jObject = JObject.Load(reader);
-
-            foreach (Type t in types.Where(TheType => TheType == objectType || TheType.IsSubclassOf(objectType)))
-            {
-                bool fits = true;
-
-                foreach (Type i in t.GetInterfaces())
-                {
-                    foreach (var pi in i.GetProperties())
-                    {
-                        if (!jObject.ContainsKey(pi.Name))
-                        {
-                            fits = false;
-                            break;
-                        }
-                    }
-
-                    if (!fits)
-                        break;
-                }
-
-                if (fits)
-                    return Serializer.Deserialize(jObject.CreateReader(), t);
-            }
-
-            throw new ArgumentException("No Response derived class match was found for the JSON object");
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof(Response) == objectType || typeof(Response).IsAssignableFrom(objectType);
-        }
-
-        public override bool CanWrite { get => false; }
-    }
-
-    #endregion
-
     class Program
     {
         static TcpClient socket = new TcpClient();
 
+        static JsonSerializerSettings JsonSettings =
+            new JsonSerializerSettings
+            {
+                MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+                TypeNameHandling = TypeNameHandling.All
+            };
+
         static void Send(Request r)
         {
             NetworkStream s = socket.GetStream();
-            string inter = JsonConvert.SerializeObject(r);
+            string inter = JsonConvert.SerializeObject(r, JsonSettings);
             byte[] outStream = Encoding.UTF8.GetBytes(inter);
 
             Console.WriteLine(r.Message());
@@ -106,7 +49,9 @@ namespace ClientTest
                 int read = networkStream.Read(bytesFrom, 0, socket.ReceiveBufferSize);
 
                 string data = Encoding.UTF8.GetString(bytesFrom, 0, read);
-                Response r = JsonConvert.DeserializeObject<Response>(data, new ResponseConverter());
+                //data = data.Replace("Monopolio_Server", "ClientTest"); //no need since
+                                                        //we're using the server's classes
+                Response r = JsonConvert.DeserializeObject(data, JsonSettings) as Response;
 
                 Console.WriteLine(r.Message());
             }
@@ -124,7 +69,7 @@ namespace ClientTest
 
             while (true)
             {
-                AlternativeChatRequest chat = new AlternativeChatRequest();
+                ChatRequest chat = new ChatRequest();
                 chat.Msg = Console.ReadLine();
                 Send(chat);
             }

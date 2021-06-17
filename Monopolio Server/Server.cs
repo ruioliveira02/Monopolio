@@ -48,6 +48,18 @@ namespace Monopolio_Server
         public const string ServerName = "SERVER";
 
         /// <summary>
+        /// The json settings used by the server to
+        /// serialize/deserialize requests and responses
+        /// </summary>
+        public static readonly JsonSerializerSettings JsonSettings =
+            new JsonSerializerSettings
+        {
+            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+            TypeNameHandling = TypeNameHandling.All
+        };
+
+
+        /// <summary>
         /// Whether the server is still running or not
         /// </summary>
         public static bool Running;
@@ -121,7 +133,10 @@ namespace Monopolio_Server
             {
                 Running = false;
                 ServerSocket.Stop();
-                KickAll();
+                List<HandleClient> list = KickAll();
+                foreach (HandleClient c in list)
+                    if (c.ClientThread.IsAlive)
+                        c.ClientThread.Join();
             }
             else if (command == "start")
             {
@@ -175,14 +190,12 @@ namespace Monopolio_Server
                 {
                     Console.WriteLine("File \"" + file + "\" already exists. Overwite? (y/n)");
                     if (Console.ReadLine().ToLower() == "y")
-                        lock (State)
-                            State.Save(file);
+                        State.Save(file);
                     else
                         Console.WriteLine("Operation cancelled");
                 }
                 else
-                    lock (State)
-                        State.Save(file);
+                    State.Save(file);
             }
             else
             {
@@ -293,10 +306,10 @@ namespace Monopolio_Server
                     c.ClientThread.Join();  //wait until client threads run to completion
 
             if (waitingInput)
-            {
                 Log("The server closed unpromted. Press enter to exit.");
+
+            if (inputThread.IsAlive)
                 inputThread.Join();
-            }
         }
 
         #region handlers
@@ -339,7 +352,7 @@ namespace Monopolio_Server
             });
             State.TurnUpdateHandler = new State.TurnUpdate((int turn) =>
             {
-                Response r = new TurnUpdateResponse(turn);
+                Response r = new TurnUpdateResponse(State);
                 Log(r.Message());
                 Broadcast(r);
             });
@@ -443,7 +456,8 @@ namespace Monopolio_Server
             {
                 NetworkStream broadcastStream = c.ClientSocket.GetStream();
 
-                byte[] broadcastBytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(msg));
+                string text = JsonConvert.SerializeObject(msg, JsonSettings);
+                byte[] broadcastBytes = Encoding.UTF8.GetBytes(text);
 
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);
                 broadcastStream.Flush();
@@ -467,6 +481,7 @@ namespace Monopolio_Server
                     byte[] bytesFrom = new byte[BufferSize];
 
                     NetworkStream networkStream = clientSocket.GetStream();
+                    //networkStream.ReadTimeout = 100; //100 ms
                     networkStream.Read(bytesFrom, 0, clientSocket.ReceiveBufferSize);
                     string dataFromClient = Encoding.UTF8.GetString(bytesFrom);
 
