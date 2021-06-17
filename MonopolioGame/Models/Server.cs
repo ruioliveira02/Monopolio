@@ -17,6 +17,12 @@ namespace MonopolioGame.Models
         public event EventHandler<Response> NewResponseEvent;
         TcpClient clientSocket;
         NetworkStream? serverStream;
+        
+        static JsonSerializerSettings Settings = new JsonSerializerSettings
+        {
+            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
+            TypeNameHandling = TypeNameHandling.All
+        };
 
         public Server()
         {
@@ -30,7 +36,7 @@ namespace MonopolioGame.Models
                 clientSocket.Connect(ip, port);
                 serverStream = clientSocket.GetStream();
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 return false;
             }
@@ -52,7 +58,7 @@ namespace MonopolioGame.Models
                 return false;
             }
 
-            byte[] outStream = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(request));
+            byte[] outStream = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(request, Settings));
             try
             {
                 serverStream.Write(outStream, 0, outStream.Length);
@@ -75,8 +81,11 @@ namespace MonopolioGame.Models
                 int buffSize = 0;
                 byte[] inStream = new byte[bufferSize];
                 buffSize = clientSocket.ReceiveBufferSize;
-                serverStream.Read(inStream, 0, buffSize);
-                string data = Encoding.ASCII.GetString(inStream);
+                int read = serverStream.Read(inStream, 0, buffSize);
+                if (read == 0)
+                    continue;
+
+                string data = Encoding.UTF8.GetString(inStream, 0, read);
 
                 if (data != null && data != "")
                 {
@@ -87,17 +96,13 @@ namespace MonopolioGame.Models
 
         private bool ProcessData(string data)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                TypeNameHandling = TypeNameHandling.All
-            };
+            
             //Change namespaces in JSON of response
             //If this isn't done the Json API will not recognize the types
-            data = data.Replace("MonopolioServer", "MonopolioGame").Replace("Monopolio Server", "MonopolioGame");
+            data = data.Replace("Monopolio_Server", "MonopolioGame").Replace("Monopolio Server", "MonopolioGame");
             try
             {
-                if (JsonConvert.DeserializeObject(data, settings) is Response response)
+                if (JsonConvert.DeserializeObject(data, Settings) is Response response)
                     NewResponseEvent(this, response);
             }
             catch (JsonException)

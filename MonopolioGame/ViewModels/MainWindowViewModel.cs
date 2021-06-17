@@ -1,5 +1,6 @@
 using Avalonia.Media;
 using Monopolio;
+using MonopolioGame.Interfaces.Requests;
 using MonopolioGame.Models;
 using ReactiveUI;
 using System;
@@ -13,6 +14,7 @@ namespace MonopolioGame.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        #region Properties
         /// <summary>
         /// The list of viewmodels for the list of players
         /// </summary>
@@ -71,6 +73,20 @@ namespace MonopolioGame.ViewModels
             {
                 _chat = value;
                 Raise(this, nameof(Chat));
+            }
+        }
+
+        private string _chatMessage;
+        public string ChatMessage
+        {
+            get
+            {
+                return _chatMessage;
+            }
+            set
+            {
+                _chatMessage = value;
+                Raise(this, nameof(ChatMessage));
             }
         }
 
@@ -145,8 +161,8 @@ namespace MonopolioGame.ViewModels
         }
 
 
-        GameHandler handler = new GameHandler();
-
+        GameHandler Handler { get; set; }
+        #endregion
         public MainWindowViewModel()
         {
             Username = "Anta";
@@ -156,22 +172,28 @@ namespace MonopolioGame.ViewModels
             ConnectionAttemptedText = false;
             SetBoard();
             SetPlayers();
-
-            handler.DataChanged += ((s,e) => UpdateData());
+            Handler = new GameHandler("");
+            Handler.DataChanged += ((s, e) => UpdateData());
         }
-        
 
+        #region Commands
         public void ConnectCommand()
         {
             string[] split = ServerIp.Split(":");
             if (split.Length != 2 || !int.TryParse(split[1], out _)) //Invalid IP
                 return;//TODO:: Do stuff
             else
-                handler.Connect(split[0], int.Parse(split[1]), Username);
+                Handler.Connect(split[0], int.Parse(split[1]), Username);
 
             UpdateData();
         }
 
+        public void SendChatMessage()
+        {
+            Handler.Server.Send(new ChatRequest(Username, ChatMessage));
+            ChatMessage = "";
+        }
+        #endregion
         private void SetBoard()
         {
             var temp = new ObservableCollection<PropertyViewModel>();
@@ -211,12 +233,12 @@ namespace MonopolioGame.ViewModels
 
         protected void UpdateData()
         {
-            LoginScreen = !handler.State.Connected;
-            GameScreen = handler.State.Connected;
-            ConnectionAttemptedText = handler.State.ConnectionAttempt;
-            Chat = handler.State.Chat;
+            LoginScreen = !Handler.State.Connected;
+            GameScreen = Handler.State.Connected;
+            ConnectionAttemptedText = Handler.State.ConnectionAttempt;
+            Chat = Handler.State.Chat;
 
-            if (handler.State.CurrentState == null)
+            if (Handler.State.CurrentState == null)
                 return;
 
             UpdatePlayers();
@@ -227,11 +249,11 @@ namespace MonopolioGame.ViewModels
         {
             ObservableCollection<PlayerViewModel> temp = new ObservableCollection<PlayerViewModel>();
 
-            foreach(Player player in handler.State.CurrentState.Players)
+            foreach(Player player in Handler.State.CurrentState.Players)
             {
                 temp.Add(new PlayerViewModel(player, player.name == Username, false, false));
             }
-            temp[handler.State.CurrentState.Turn].IsCurrentTurn = true;
+            temp[Handler.State.CurrentState.Turn].IsCurrentTurn = true;
 
             PlayersVM = temp;
         }
@@ -245,7 +267,7 @@ namespace MonopolioGame.ViewModels
                 property.Players = new ObservableCollection<ColorViewModel>();
             }
 
-            foreach(Player player in handler.State.CurrentState.Players)
+            foreach(Player player in Handler.State.CurrentState.Players)
             {
                 temp[player.Position].Players.Add(new ColorViewModel(Brushes.Red)); //TODO:: Change to player image
             }
