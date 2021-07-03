@@ -29,7 +29,6 @@ namespace Monopolio
             GiveGetOutOfJailFreeCard    //you're a big boy, you can figure it out
         }
 
-        public Player Player { get; }
         public Type type;
 
         //arguments
@@ -57,15 +56,10 @@ namespace Monopolio
         /// <param name="state">The current game state</param>
         /// <param name="playerName">The name of the player executing the action</param>
         /// <param name="action">The action</param>
-        public Action(State state, string playerName, string action)
+        public Action(State state, string action)
         {
             if (action == null)
                 throw new ArgumentNullException("action mustn't be null");
-
-            Player = state.GetPlayer(playerName);
-
-            if (Player == null)
-                throw new ArgumentException("Player not recognized");
 
             List<string> words = WordSplit(action);
 

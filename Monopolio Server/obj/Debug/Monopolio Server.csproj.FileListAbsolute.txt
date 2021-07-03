@@ -26,7 +26,6 @@ J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Newtons
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Newtonsoft.Json.xml
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Monopolio.dll
 J:\Dados\Programação\Aplicações\Monopolio\Monopolio Server\bin\Debug\Monopolio.pdb
-C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.csprojAssemblyReference.cache
 C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\bin\Debug\ConsoleTables.dll
 C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\bin\Debug\InTheHand.Devices.Bluetooth.dll
@@ -54,3 +53,4 @@ C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\bin\Debug\Monopolio_Server
 C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\bin\Debug\Monopolio_Server.pdb
 C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\obj\Debug\Monopolio_Server.exe
 C:\Users\ASUS\source\repos\Monopolio\Monopolio Server\obj\Debug\Monopolio_Server.pdb
+C:\Users\Asus\source\repos\Monopolio\Monopolio Server\obj\Debug\Monopolio Server.csproj.AssemblyReference.cache

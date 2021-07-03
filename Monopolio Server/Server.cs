@@ -170,10 +170,16 @@ namespace Monopolio_Server
             }
             else if (op == "list")
             {
-                Log("Client list:");
 
-                foreach (string client in ClientsList.Keys)
-                    Log(string.Format("-{0}", client));
+
+                if (ClientsList.Keys.Count > 0)
+                {
+                    Log("Client list:");
+                    foreach (string client in ClientsList.Keys)
+                        Log(string.Format("-{0}", client));
+                }
+                else
+                    Log("There are no clients connected");
             }
             else if (State == null)
                 return false; //The game hasn't started yet
@@ -204,9 +210,9 @@ namespace Monopolio_Server
 
                 try
                 {
-                    Monopolio.Action a = new Monopolio.Action(State, op, args);
+                    Monopolio.Action a = new Monopolio.Action(State, args);
                     lock (State)
-                        if (!State.Execute(a))
+                        if (!State.Execute(a, State.GetPlayer(op)))
                             return false; //Action failed
                 }
                 catch (ArgumentException)

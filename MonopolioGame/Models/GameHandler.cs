@@ -17,20 +17,21 @@ namespace MonopolioGame.Models
         public GameHandler(string username)
         {
             Server = new Server();
-            Server.NewResponseEvent += ((o, e) => { e.Execute(State); DataChanged(this, new EventArgs()); });
-            State = new GameState(null);
-            State.Player = username;
+            Server.NewResponseEvent += (o, e) =>
+            {
+                e.Execute(State);
+                DataChanged?.Invoke(this, new EventArgs());
+            };
+            State = new GameState(username);
         }
 
         public void Connect(string ip, int port, string username)
-        {            
+        {
+            /*
             const int maxAttempts = 3;
             //Reset the state of the game
             State = new GameState(null);
             State.Player = username;
-
-            //Subscribe to response event
-            Server.NewResponseEvent += new EventHandler<Interfaces.Responses.Response>((o, s) => s.Execute(State));
 
             //TODO:: Reset board state            
 
@@ -44,6 +45,12 @@ namespace MonopolioGame.Models
 
             //State.Connected = (res[0] && res[1]);
             State.ConnectionAttempt = !(res[0] && res[1]);
+            */
+
+            State.ConnectionAttempt = Server.Connect(ip, port)
+                && Server.Send(new IdentRequest(username));
         }
+
+        public void Disconnect() => Server.Disconnect();
     }
 }

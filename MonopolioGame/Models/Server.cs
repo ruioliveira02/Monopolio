@@ -17,7 +17,8 @@ namespace MonopolioGame.Models
         public event EventHandler<Response> NewResponseEvent;
         TcpClient clientSocket;
         NetworkStream? serverStream;
-        
+        Thread ctThread;
+
         static JsonSerializerSettings Settings = new JsonSerializerSettings
         {
             MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
@@ -27,6 +28,7 @@ namespace MonopolioGame.Models
         public Server()
         {
             clientSocket = new TcpClient();
+            ctThread = new Thread(GetResponses);
         }
 
         public bool Connect(string ip, int port)
@@ -36,31 +38,23 @@ namespace MonopolioGame.Models
                 clientSocket.Connect(ip, port);
                 serverStream = clientSocket.GetStream();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return false;
             }
 
-            Thread ctThread = new Thread(GetResponses);
             ctThread.Start();
-
             return true;
         }
 
+        public void Disconnect() => clientSocket.Close();
+
         public bool Send(Request request)
         {
-            try
-            {
-               serverStream = clientSocket.GetStream();
-            }
-            catch(IOException)
-            {
-                return false;
-            }
-
             byte[] outStream = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(request, Settings));
             try
             {
+                serverStream = clientSocket.GetStream();
                 serverStream.Write(outStream, 0, outStream.Length);
                 serverStream.Flush();
             }
@@ -75,28 +69,34 @@ namespace MonopolioGame.Models
         {
             bool over = false;
             const int bufferSize = 65536;
-            while (!over)
+            while (!over && clientSocket.Connected)
             {
-                serverStream = clientSocket.GetStream();
-                int buffSize = 0;
-                byte[] inStream = new byte[bufferSize];
-                buffSize = clientSocket.ReceiveBufferSize;
-                int read = serverStream.Read(inStream, 0, buffSize);
-                if (read == 0)
-                    continue;
-
-                string data = Encoding.UTF8.GetString(inStream, 0, read);
-
-                if (data != null && data != "")
+                try
                 {
-                    over = !ProcessData(data);          
-                }            
+                    serverStream = clientSocket.GetStream();
+                    byte[] inStream = new byte[bufferSize];
+                    int buffSize = clientSocket.ReceiveBufferSize;
+                    int read = serverStream.Read(inStream, 0, buffSize);
+                    if (read == 0)
+                        continue;
+
+                    string data = Encoding.UTF8.GetString(inStream, 0, read);
+
+                    if (data != null && data != "")
+                        over = !ProcessData(data);
+                }
+                catch (Exception)
+                {
+                    over = true;
+                }
             }
+
+            if (clientSocket.Connected)
+                clientSocket.Close();
         }
 
         private bool ProcessData(string data)
         {
-            
             //Change namespaces in JSON of response
             //If this isn't done the Json API will not recognize the types
             data = data.Replace("Monopolio_Server", "MonopolioGame").Replace("Monopolio Server", "MonopolioGame");

@@ -9,7 +9,7 @@ namespace MonopolioGame.Models
 {
     public class GameState
     {
-        public State? CurrentState { get; set; }
+        public State CurrentState { get; set; }
 
         public string Chat { get; set; }
         
@@ -17,17 +17,12 @@ namespace MonopolioGame.Models
         public bool Connected { get; set; }
 
         public bool ConnectionAttempt { get; set; }
-        public GameState()
+        public GameState(string username)
         {
             CurrentState = null;
             Chat = "";
-            Player = "";
+            Player = username;
             Connected = false;
-        }
-        public GameState(State state)
-        {
-            CurrentState = state;
-            Chat = "";
         }
     }
 }

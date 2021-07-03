@@ -32,8 +32,8 @@ namespace MonopolioGame.Interfaces.Responses
 
         public override void Execute(GameState state)
         {
-            if (Accepted && Username == state.Player)
-                state.Connected = true;
+            if (Username == state.Player)
+                state.Connected = Accepted;
 
             state.CurrentState = State;
         }

@@ -23,7 +23,9 @@ namespace MonopolioGame.Views
         }
 
         private void InitializeComponent()
-        {           
+        {
+            Closing += (s, e) => (DataContext as MainWindowViewModel)?.Closing();
+
             AvaloniaXamlLoader.Load(this);
             SetupBoard();
         }

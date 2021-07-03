@@ -485,7 +485,7 @@ namespace Monopolio
         /// </summary>
         /// <param name="a">The given action</param>
         /// <returns>True if the Action was successfully executed</returns>
-        public bool Execute(Action a)
+        public bool Execute(Action a, Player player)
         {
             //it ain't started yet
             if (Turn == -1)
@@ -496,15 +496,15 @@ namespace Monopolio
                 return false;
 
             //dead men tell no tales
-            if (a.Player.Bankrupt)
+            if (player.Bankrupt)
                 return false;
 
             //wait for your turn
-            if (a.IsTurnAction && a.Player != Players[Turn])
+            if (a.IsTurnAction && player != Players[Turn])
                 return false;
 
             //can't get out if you're already out
-            if (a.IsGetOutOfJail && a.Player.InJail == 0)
+            if (a.IsGetOutOfJail && player.InJail == 0)
                 return false;
 
             switch (a.type)
@@ -520,26 +520,26 @@ namespace Monopolio
                         return false;
 
                     PropertyState ps = GetPropertyState(s.property);
-                    if (ps.Owner != null || a.Player.Money < s.property.price)
+                    if (ps.Owner != null || player.Money < s.property.price)
                         return false;
 
-                    a.Player.Money -= s.property.price;
-                    ps.Owner = a.Player;
+                    player.Money -= s.property.price;
+                    ps.Owner = player;
                     break;
 
                 case Action.Type.Build:
-                    if (a.property.Owner != a.Player
+                    if (a.property.Owner != player
                         || !Groups[(int)a.property.Color].Build(a.property))
                         return false;
                     break;
 
                 case Action.Type.PayJailFine:
-                    if (a.Player.Money < jailFine)
+                    if (player.Money < jailFine)
                         return false;
-                    a.Player.Money -= jailFine;
-                    if (a.Player == Players[Turn] && a.Player.InJail == 1)
+                    player.Money -= jailFine;
+                    if (player == Players[Turn] && player.InJail == 1)
                     {
-                        a.Player.InJail = 0;
+                        player.InJail = 0;
                         CallUpdaters();
                         NextTurn();
                         return true;
@@ -547,12 +547,12 @@ namespace Monopolio
                     break;
 
                 case Action.Type.UseGetOutOfJailFreeCard:
-                    if (a.Player.GetOutOfJailFreeCards == 0)
+                    if (player.GetOutOfJailFreeCards == 0)
                         return false;
-                    a.Player.GetOutOfJailFreeCards--;
-                    if (a.Player == Players[Turn] && a.Player.InJail == 1)
+                    player.GetOutOfJailFreeCards--;
+                    if (player == Players[Turn] && player.InJail == 1)
                     {
-                        a.Player.InJail = 0;
+                        player.InJail = 0;
                         CallUpdaters();
                         NextTurn();
                         return true;
@@ -560,38 +560,38 @@ namespace Monopolio
                     break;
 
                 case Action.Type.Mortgage:
-                    if (a.property.Owner != a.Player
+                    if (a.property.Owner != player
                         || !Groups[(int)a.property.Color].Mortgage(a.property))
                         return false;
                     break;
 
                 case Action.Type.Give:
-                    if (a.amount < 0 || a.Player.Money < a.amount)
+                    if (a.amount < 0 || player.Money < a.amount)
                         return false;
-                    a.Player.Give(a.amount, a.target);
+                    player.Give(a.amount, a.target);
                     break;
 
                 case Action.Type.GiveProperty:
-                    if (a.property.Owner != a.Player)
+                    if (a.property.Owner != player)
                         return false;
                     //TODO: pay interest if new owner doesn't immediately lift mortgage
                     a.property.Owner = a.target;
                     break;
 
                 case Action.Type.GiveGetOutOfJailFreeCard:
-                    if (a.Player.GetOutOfJailFreeCards == 0)
+                    if (player.GetOutOfJailFreeCards == 0)
                         return false;
-                    a.Player.GetOutOfJailFreeCards--;
+                    player.GetOutOfJailFreeCards--;
                     a.target.GetOutOfJailFreeCards++;
                     break;
             }
 
             if (a.IsGetOutOfJail)
             {
-                a.Player.InJail = 0;
-                board.Walk(a.Player, Dice[0] + Dice[1]);
+                player.InJail = 0;
+                board.Walk(player, Dice[0] + Dice[1]);
                 CallUpdaters();
-                CalculateSquare(a.Player);
+                CalculateSquare(player);
             }
 
             CallUpdaters();

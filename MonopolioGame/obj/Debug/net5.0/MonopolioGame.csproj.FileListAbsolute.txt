@@ -268,7 +268,6 @@ C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\bin\Debug\net5.0\Monopolio.dl
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\bin\Debug\net5.0\NetworkModel.dll
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\bin\Debug\net5.0\NetworkModel.pdb
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\bin\Debug\net5.0\Monopolio.pdb
-C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.csprojAssemblyReference.cache
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.AssemblyInfoInputs.cache
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.AssemblyInfo.cs
@@ -280,3 +279,4 @@ C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGam
 C:\Users\ASUS\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.genruntimeconfig.cache
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\Monopolio.dll
 J:\Dados\Programação\Aplicações\Monopolio\MonopolioGame\bin\Debug\net5.0\Monopolio.pdb
+C:\Users\Asus\source\repos\Monopolio\MonopolioGame\obj\Debug\net5.0\MonopolioGame.csproj.AssemblyReference.cache

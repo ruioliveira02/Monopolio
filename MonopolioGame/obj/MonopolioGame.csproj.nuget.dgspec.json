@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj": {}
+    "C:\\Users\\Asus\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj": {
+    "C:\\Users\\Asus\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
         "projectName": "MonopolioGame",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\MonopolioGame\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\MonopolioGame\\MonopolioGame.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\MonopolioGame\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +32,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj"
+              "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
+                "projectPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj"
               },
-              "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj"
+              "C:\\Users\\Asus\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj": {
+                "projectPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj"
               }
             }
           }
@@ -83,21 +87,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
+    "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
         "projectName": "Monopolio",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -144,21 +152,25 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj": {
+    "C:\\Users\\Asus\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj",
         "projectName": "NetworkModel",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\NetworkModel\\obj\\",
+        "projectPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\NetworkModel\\NetworkModel.csproj",
+        "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\NetworkModel\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -172,8 +184,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj"
+              "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj": {
+                "projectPath": "C:\\Users\\Asus\\source\\repos\\Monopolio\\Monopolio\\Monopolio.csproj"
               }
             }
           }
@@ -213,7 +225,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

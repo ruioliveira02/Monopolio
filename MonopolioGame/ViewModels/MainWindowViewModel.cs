@@ -21,10 +21,7 @@ namespace MonopolioGame.ViewModels
         private ObservableCollection<PlayerViewModel> _playersVM; 
         public ObservableCollection<PlayerViewModel> PlayersVM
         {
-            get
-            {
-                return _playersVM;
-            }
+            get => _playersVM;
             set
             {
                 _playersVM = value;
@@ -36,10 +33,7 @@ namespace MonopolioGame.ViewModels
         private ObservableCollection<PropertyViewModel> _propertiesVM;
         public ObservableCollection<PropertyViewModel> PropertiesVM
         {
-            get
-            {
-                return _propertiesVM;
-            }
+            get => _propertiesVM;
             set
             {
                 _propertiesVM = value;
@@ -50,10 +44,7 @@ namespace MonopolioGame.ViewModels
         private ObservableCollection<SpecialPlaceViewModel> _cornersVM;
         public ObservableCollection<SpecialPlaceViewModel> CornersVM 
         { 
-            get
-            {
-                return _cornersVM;
-            }
+            get => _cornersVM;
             set
             {
                 _cornersVM = value;
@@ -65,10 +56,7 @@ namespace MonopolioGame.ViewModels
         private string _chat;
         public string Chat
         {
-            get
-            {
-                return _chat;
-            }
+            get => _chat;
             set
             {
                 _chat = value;
@@ -79,10 +67,7 @@ namespace MonopolioGame.ViewModels
         private string _chatMessage;
         public string ChatMessage
         {
-            get
-            {
-                return _chatMessage;
-            }
+            get => _chatMessage;
             set
             {
                 _chatMessage = value;
@@ -93,10 +78,7 @@ namespace MonopolioGame.ViewModels
         private string _username;
         public string Username
         {
-            get
-            {
-                return _username;
-            }
+            get => _username;
             set
             {
                 _username = value;
@@ -107,10 +89,7 @@ namespace MonopolioGame.ViewModels
         private string _serverIp;
         public string ServerIp // "2.80.236.204:25565"
         {
-            get
-            {
-                return _serverIp;
-            }
+            get => _serverIp;
             set
             {
                 _serverIp = value;
@@ -118,41 +97,111 @@ namespace MonopolioGame.ViewModels
             }
         }
 
-        private bool _loginScreen;
+        /// <summary>
+        /// DO NOT TOUCH THIS!!! EVER!!!
+        /// Use the individual screen setters instead
+        /// (changing one to true will change the others to false)
+        /// </summary>
+        private int _screen;    //-1 -> undefined
+                                //0  -> login
+                                //1  -> game
+                                //2  -> error
+
         public bool LoginScreen
         {
-            get
-            {
-                return _loginScreen;
-            }
+            get => _screen == 0;
             set
             {
-                _loginScreen = value;
-                Raise(this, nameof(LoginScreen));
+                if (value)
+                {
+                    _screen = 0;
+                    Raise(this, nameof(LoginScreen));
+                }
+                else if (_screen == 0)
+                    _screen = -1;
+            }
+        }
+        public bool GameScreen
+        {
+            get => _screen == 1;
+            set
+            {
+                if (value)
+                {
+                    _screen = 1;
+                    Raise(this, nameof(GameScreen));
+                }
+                else if (_screen == 0)
+                    _screen = -1;
             }
         }
 
-        private bool _gameScreen;
-        public bool GameScreen
+        #region gameScreenProperties
+
+        private int _selectedSquareIndex;
+        public int SelectedSquareIndex
         {
-            get
-            {
-                return _gameScreen;
-            }
+            get => _selectedSquareIndex;
             set
             {
-                _gameScreen = value;
-                Raise(this, nameof(GameScreen));
+                if (_selectedSquareIndex != value)
+                {
+                    _selectedSquareIndex = value;
+                    Raise(this, nameof(PropertySelected));
+                    Raise(this, nameof(ChanceSelected));
+                    Raise(this, nameof(CommunityChestSelected));
+                    Raise(this, nameof(TaxSelected));
+                    Raise(this, nameof(StartSelected));
+                    Raise(this, nameof(JailSelected));
+                    Raise(this, nameof(FreeParkingSelected));
+                    Raise(this, nameof(GoToJailSelected));
+                }
             }
         }
+        public Square? SelectedSquare { get => Handler?.State?.CurrentState?.board?.GetSquare(SelectedSquareIndex); }
+
+        public bool PropertySelected { get => SelectedSquare?.type == Square.Type.Property; }
+        public bool ChanceSelected { get => SelectedSquare?.type == Square.Type.Chance; }
+        public bool CommunityChestSelected { get => SelectedSquare?.type == Square.Type.CommunityChest; }
+        public bool TaxSelected { get => SelectedSquare?.type == Square.Type.Tax; }
+        public bool StartSelected { get => SelectedSquare?.type == Square.Type.Start; }
+        public bool JailSelected { get => SelectedSquare?.type == Square.Type.Jail; }
+        public bool FreeParkingSelected { get => SelectedSquare?.type == Square.Type.FreeParking; }
+        public bool GoToJailSelected { get => SelectedSquare?.type == Square.Type.GoToJail; }
+
+        #endregion
+
+        public bool ErrorScreen
+        {
+            get => _screen == 2;
+            set
+            {
+                if (value)
+                {
+                    _screen = 2;
+                    Raise(this, nameof(ErrorScreen));
+                }
+                else if (_screen == 0)
+                    _screen = -1;
+            }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                Raise(this, nameof(ErrorMessage));
+            }
+        }
+        
 
         private bool _connectionAttemptedText;
         public bool ConnectionAttemptedText
         {
-            get
-            { 
-                return _connectionAttemptedText; 
-            }
+            get => _connectionAttemptedText; 
             set
             { 
                 _connectionAttemptedText = value;
@@ -186,6 +235,18 @@ namespace MonopolioGame.ViewModels
                 Handler.Connect(split[0], int.Parse(split[1]), Username);
 
             UpdateData();
+        }
+
+        public void ErrorOK()
+        {
+            //Return to login screen
+            Handler.Disconnect();
+            LoginScreen = true;
+        }
+
+        public void Closing()
+        {
+            Handler.Disconnect();
         }
 
         public void SendChatMessage()

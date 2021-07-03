@@ -12,16 +12,16 @@
     <vm:MainWindowViewModel/>
   </Design.DataContext>
   <Grid>
-    <Panel IsVisible="{Binding GameScreen}">
-      <Grid>
+    <!--<Panel IsVisible="{Binding GameScreen}">-->
+	<Panel IsVisible="True">
+	  <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="3*"></ColumnDefinition>
-          <ColumnDefinition Width="1*"></ColumnDefinition>
           <ColumnDefinition Width="10*"></ColumnDefinition>
-          <ColumnDefinition Width="2*"></ColumnDefinition>
+          <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
  
-        <Panel Background="Red" Grid.Column="0" Grid.RowSpan="4">
+        <Panel Background="Red" Grid.Column="0">
           <Grid>
             <Grid.RowDefinitions>
               <RowDefinition Height="4*"></RowDefinition>
@@ -54,13 +54,13 @@
               </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <TextBlock Grid.Row="1" Background="White" Height="500" Text="{Binding Chat}"></TextBlock>
+            <TextBlock Grid.Row="1" Background="White" Text="{Binding Chat}"></TextBlock>
             <TextBox Grid.Row="2" Height="50" Text="{Binding ChatMessage}"></TextBox>
-            <Button Grid.Row="3" Content="Enviar" Height="20" Width="200" Command="{Binding SendChatMessage}"></Button>
+            <Button Grid.Row="3" Content="Enviar" Height="30" Width="200" Command="{Binding SendChatMessage}"></Button>
           </Grid>        
         </Panel>
 
-        <Grid x:Name="board" Grid.Column="2" Margin="30" Background="Aqua">
+        <Grid x:Name="board" Grid.Column="1" Margin="30" Background="Aqua">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -94,9 +94,65 @@
           <Grid Background="{Binding CornersVM[2].Color}" Grid.Row="{Binding CornersVM[2].Row}" Grid.Column="{Binding CornersVM[2].Column}"></Grid>
           <Grid Background="{Binding CornersVM[3].Color}" Grid.Row="{Binding CornersVM[3].Row}" Grid.Column="{Binding CornersVM[3].Column}"></Grid>
         </Grid>
+
+		<Panel Background="Red" Grid.Column="2">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="3*"></RowDefinition>
+					<RowDefinition Height="2*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<Panel Grid.Row="0" Margin="10 10 10 5" Background="Green">
+					<!--Properties-->
+					<Panel IsVisible="{Binding PropertySelected}">
+						
+					</Panel>
+
+					<!--Chance-->
+					<DockPanel IsVisible="{Binding ChanceSelected}">
+						<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" Margin="7" Text="Cartas da Sorte"></TextBlock>
+						<TextBlock DockPanel.Dock="Bottom" Margin="7" FontSize="10" TextWrapping="WrapWithOverflow" Text="Tem coisas boas e más aqui. Num momento estás a lançar os dados, no outro estás a dar um quadrado no Porto!"></TextBlock>
+					</DockPanel>
+
+					<!--Community chest-->
+					<DockPanel IsVisible="{Binding CommunityChestSelected}">
+						<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" Margin="7" Text="Baú da Comunidade"></TextBlock>
+						<TextBlock DockPanel.Dock="Bottom" Margin="7" FontSize="10" TextWrapping="WrapWithOverflow" Text="Tem coisas boas e más aqui. Num momento estás a lançar os dados, no outro estás a dar um quadrado no Porto!"></TextBlock>
+					</DockPanel>
+
+					<!--Tax-->
+					<Panel>
+
+					</Panel>
+
+					<!--Start-->
+					<Panel>
+
+					</Panel>
+
+					<!--Jail-->
+					<Panel>
+
+					</Panel>
+					
+					<!--Free parking-->
+					<Panel>
+
+					</Panel>
+
+					<!--Go to jail-->
+					<Panel>
+
+					</Panel>
+				</Panel>
+				<Panel Grid.Row="1" Margin="10 5 10 10" Background="Green">
+					
+				</Panel>
+			</Grid>
+		</Panel>
       </Grid>
     </Panel>
-    <Panel IsVisible="{Binding LoginScreen}">
+	<!--<Panel IsVisible="{Binding LoginScreen}">-->
+	<Panel IsVisible="False">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="1*"></RowDefinition>
@@ -134,5 +190,12 @@
         <TextBlock Grid.Row="13" Grid.Column="1" Foreground="Red" Text="Não foi possível conectar com o servidor" IsVisible="{Binding ConnectionAttemptedText}"  HorizontalAlignment="Center"/>
       </Grid>
     </Panel>
+
+
+	<!--<DockPanel Margin="100" IsVisible="{Binding ErrorScreen}">-->
+	<Panel Margin="100" IsVisible="False">
+		<TextBlock TextAlignment="Center" FontSize="25" Text="{Binding ErrorMessage}"></TextBlock>
+		<Button HorizontalAlignment="Center" Content="OK" Command="{Binding ErrorOK}"></Button>
+	</Panel>
   </Grid>
 </Window>
