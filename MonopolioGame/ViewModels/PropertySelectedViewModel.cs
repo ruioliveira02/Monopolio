@@ -193,6 +193,8 @@ namespace MonopolioGame.ViewModels
                 Property.Color.Yellow => Brushes.Yellow,
                 Property.Color.Green => Brushes.Green,
                 Property.Color.Blue => Brushes.Blue,
+                Property.Color.Station => Brushes.White,
+                Property.Color.Utility => Brushes.White,
                 _ => throw new ArgumentException("The view model cannot be used with corner squares"),
             };
         }

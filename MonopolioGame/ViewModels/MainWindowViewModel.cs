@@ -15,6 +15,7 @@ namespace MonopolioGame.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         #region Properties
+
         /// <summary>
         /// The list of viewmodels for the list of players
         /// </summary>
@@ -313,6 +314,21 @@ namespace MonopolioGame.ViewModels
 
         protected void UpdateData()
         {
+            if (Handler.State.CurrentState == null)
+                return;
+
+            foreach (var a in Handler.State.CurrentState.Groups)
+            {
+                foreach (var b in a.properties)
+                {
+                    b.ResolveOwner(Handler.State.CurrentState.Players);
+                    b.ResolveProperty(Handler.State.CurrentState.board);
+                }
+            }
+
+            foreach (Player p in Handler.State.CurrentState.Players)
+                p.ResolveCreditor(Handler.State.CurrentState.Players);
+
             LoginScreen = !Handler.State.Connected;
             GameScreen = Handler.State.Connected;
             ConnectionAttemptedText = Handler.State.ConnectionAttempt;
@@ -328,6 +344,7 @@ namespace MonopolioGame.ViewModels
         protected void UpdateBoard()
         {
             PropertiesVM = new ObservableCollection<PropertyViewModel>();
+
             for(int i = 0; i < 40; i++)
             {
                 Square square = Handler.State.CurrentState.board.GetSquare(i);
@@ -337,7 +354,7 @@ namespace MonopolioGame.ViewModels
                 {
                     PropertiesVM.Add(new PropertyViewModel(
                         PropertySelectedViewModel.ColorConverter(square.property.color),
-                        i, square.property.name, square.property.price));
+                        i, square.Name, square.property.price));
                 }
             }
             UpdatePlayersPosition();

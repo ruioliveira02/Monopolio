@@ -8,12 +8,16 @@ using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Media;
 using MonopolioGame.ViewModels;
 using System;
+using System.Linq;
 using System.Threading;
 
 namespace MonopolioGame.Views
 {
     public partial class MainWindow : Window
     {
+        readonly int[] Chance =  { 7, 22, 36 };
+        readonly int[] Chest = { 2, 17, 33 };
+        readonly int[] Others = { 0, 4, 10, 12, 20, 28, 38 };
         public MainWindow()
         {
             InitializeComponent();
@@ -24,9 +28,8 @@ namespace MonopolioGame.Views
 
         private void InitializeComponent()
         {
-            Closing += (s, e) => (DataContext as MainWindowViewModel)?.Closing();
-
-            AvaloniaXamlLoader.Load(this);
+            Closing += (s, e) => (DataContext as MainWindowViewModel)?.Closing();            
+            AvaloniaXamlLoader.Load(this);           
             SetupBoard();
         }
 
@@ -34,23 +37,43 @@ namespace MonopolioGame.Views
         {
             Grid boardGrid = this.FindControl<Grid>("board");
 
+            int i = 0;
             for(int j = 0; j < 40; j++)
             {
-                int i = j - (j / 10) - 1; //Exclude the corners from the index
-                //Ignore the corners of the board, as those are already done
-                if (j % 10 == 0)
-                    continue;
-                Grid grid = new Grid();
-                grid.Tag = i.ToString();
-                SetGridPosition(grid, j);
-                CreateTopPanel(grid, i);
-                CreateNameTB(grid, i);
-                CreatePriceTB(grid, i);
-                CreateBottomPanel(grid, i);
-                grid.Tapped += (o,e) => (grid.DataContext as MainWindowViewModel).
-                                PropertyClicked((GetGridIndex(o as Grid)));
-                boardGrid.Children.Add(grid);                
-            }
+                if(IsProperty(j))
+                {
+                    if (j % 10 == 0)
+                        continue;
+                    Grid grid = new Grid();
+                    grid.Tag = i.ToString();
+                    SetGridPosition(grid, j);
+                    CreateTopPanel(grid, i);
+                    CreateNameTB(grid, i);
+                    CreatePriceTB(grid, i);
+                    CreateBottomPanel(grid, i);
+                    grid.Tapped += (o, e) => (grid.DataContext as MainWindowViewModel).
+                                    PropertyClicked((GetGridIndex(o as Grid)));
+                    boardGrid.Children.Add(grid);
+                    i++;
+                }                           
+            }           
+        }
+
+        private bool IsProperty(int index)
+        {
+            foreach (int i in Chest)
+                if (i == index)
+                    return false;
+
+            foreach (int i in Chance)
+                if (i == index)
+                    return false;
+
+            foreach (int i in Others)
+                if (i == index)
+                    return false;
+
+            return true;
         }
 
         private int GetGridIndex(Grid grid)
