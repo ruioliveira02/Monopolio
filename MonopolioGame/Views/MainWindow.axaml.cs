@@ -41,16 +41,23 @@ namespace MonopolioGame.Views
                 if (j % 10 == 0)
                     continue;
                 Grid grid = new Grid();
-
+                grid.Tag = i.ToString();
                 SetGridPosition(grid, j);
                 CreateTopPanel(grid, i);
                 CreateNameTB(grid, i);
                 CreatePriceTB(grid, i);
                 CreateBottomPanel(grid, i);
-
+                grid.Tapped += (o,e) => (grid.DataContext as MainWindowViewModel).
+                                PropertyClicked((GetGridIndex(o as Grid)));
                 boardGrid.Children.Add(grid);                
             }
         }
+
+        private int GetGridIndex(Grid grid)
+        {
+            return int.Parse(grid.Tag.ToString());
+        }
+
         #region BoardSetupAux
         private static Tuple<int, int> GetCoords(int index)
         {

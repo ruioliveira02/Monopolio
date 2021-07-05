@@ -116,6 +116,8 @@ namespace MonopolioGame.ViewModels
                 {
                     _screen = 0;
                     Raise(this, nameof(LoginScreen));
+                    Raise(this, nameof(GameScreen));
+                    Raise(this, nameof(ErrorScreen));
                 }
                 else if (_screen == 0)
                     _screen = -1;
@@ -129,9 +131,11 @@ namespace MonopolioGame.ViewModels
                 if (value)
                 {
                     _screen = 1;
+                    Raise(this, nameof(LoginScreen));
                     Raise(this, nameof(GameScreen));
+                    Raise(this, nameof(ErrorScreen));
                 }
-                else if (_screen == 0)
+                else if (_screen == 1)
                     _screen = -1;
             }
         }
@@ -179,10 +183,12 @@ namespace MonopolioGame.ViewModels
                 if (value)
                 {
                     _screen = 2;
+                    Raise(this, nameof(LoginScreen));
+                    Raise(this, nameof(GameScreen));
                     Raise(this, nameof(ErrorScreen));
                 }
-                else if (_screen == 0)
-                    _screen = -1;
+                //else if (_screen == 2)
+                //     _screen = -1;
             }
         }
 
@@ -209,6 +215,7 @@ namespace MonopolioGame.ViewModels
             }
         }
 
+        public PropertySelectedViewModel PropertySelectedVM { get; set; }
 
         GameHandler Handler { get; set; }
         #endregion
@@ -217,15 +224,27 @@ namespace MonopolioGame.ViewModels
             Username = "Anta";
             ServerIp = "2.80.236.204:25565";
             LoginScreen = true;
-            GameScreen = false;
             ConnectionAttemptedText = false;
+            _screen = 0;
+            Handler = new GameHandler("");
             SetBoard();
             SetPlayers();
-            Handler = new GameHandler("");
             Handler.DataChanged += ((s, e) => UpdateData());
+            PropertySelectedVM = new PropertySelectedViewModel(Handler.State);
         }
 
         #region Commands
+
+        public void PropertyClicked(int index)
+        {
+            try
+            {
+                PropertySelectedVM.ChangeProperty(Handler.State.CurrentState.GetPropertyState(
+                Handler.State.CurrentState.board.Squares[index].property));
+            }
+            catch(NullReferenceException) { } //If board isnt set
+        }
+
         public void ConnectCommand()
         {
             string[] split = ServerIp.Split(":");
@@ -298,12 +317,48 @@ namespace MonopolioGame.ViewModels
             GameScreen = Handler.State.Connected;
             ConnectionAttemptedText = Handler.State.ConnectionAttempt;
             Chat = Handler.State.Chat;
-
             if (Handler.State.CurrentState == null)
                 return;
 
             UpdatePlayers();
             UpdatePlayersProperties();
+            UpdateBoard();
+        }
+
+        protected void UpdateBoard()
+        {
+            PropertiesVM = new ObservableCollection<PropertyViewModel>();
+            for(int i = 0; i < 40; i++)
+            {
+                Square square = Handler.State.CurrentState.board.GetSquare(i);
+
+                //TODO:: Corner squares
+                if(square.type == Square.Type.Property)
+                {
+                    PropertiesVM.Add(new PropertyViewModel(
+                        PropertySelectedViewModel.ColorConverter(square.property.color),
+                        i, square.property.name, square.property.price));
+                }
+            }
+            UpdatePlayersPosition();
+            Raise(this, nameof(PropertiesVM));
+        }
+
+        protected void UpdatePlayersPosition()
+        {
+            foreach (PropertyViewModel propertyViewModel in PropertiesVM)
+            {
+                propertyViewModel.ColorPlayer = Brushes.White;
+            }
+
+            foreach (Player player in Handler.State.CurrentState.Players)
+            {
+                foreach (PropertyViewModel propertyViewModel in PropertiesVM)
+                {
+                    if (player.Position == propertyViewModel.Index)
+                        propertyViewModel.ColorPlayer = Brushes.Black;
+                }
+            }           
         }
 
         protected void UpdatePlayers()

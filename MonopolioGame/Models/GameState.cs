@@ -17,6 +17,7 @@ namespace MonopolioGame.Models
         public bool Connected { get; set; }
 
         public bool ConnectionAttempt { get; set; }
+
         public GameState(string username)
         {
             CurrentState = null;
