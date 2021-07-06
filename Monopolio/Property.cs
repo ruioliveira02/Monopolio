@@ -148,16 +148,16 @@ namespace Monopolio
         /// Creates a property state from a previously saved state
         /// (used for JSON deserialization)
         /// </summary>
-        /// <param name="propertyName">The name of the property</param>
+        /// <param name="name">The name of the property</param>
         /// <param name="ownerName">The owner's name</param>
         /// <param name="mortgaged">Wether the property is mortgaged</param>
         /// <param name="houses">The number of houses on the property</param>
         /// <param name="hotels">The number of hotels on the property</param>
         [JsonConstructor]
-        public PropertyState(string propertyName, string ownerName,
+        public PropertyState(string name, string ownerName,
             bool mortgaged, int houses, int hotels) //saved game
         {
-            this.name = propertyName;
+            this.name = name;
             this.ownerName = ownerName;
             _mortgaged = mortgaged;
             _houses = houses;

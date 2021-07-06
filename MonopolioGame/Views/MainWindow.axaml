@@ -125,24 +125,28 @@
 					</Panel>
 
 					<!--Start-->
-					<Panel>
-
-					</Panel>
+					<DockPanel IsVisible="{Binding StartSelected}">
+						<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" Margin="7" Text="Ponto de Partida"></TextBlock>
+						<TextBlock DockPanel.Dock="Bottom" Margin="7" FontSize="10" TextWrapping="WrapWithOverflow" Text="Quem quer ganhar 200€? Porque é isso que este quadrado faz, quer caias nele ou simplemente passes por ele."></TextBlock>
+					</DockPanel>
 
 					<!--Jail-->
-					<Panel>
-
-					</Panel>
+					<DockPanel IsVisible="{Binding JailSelected}">
+						<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" Margin="7" Text="Dom Diogo"></TextBlock>
+						<TextBlock DockPanel.Dock="Bottom" Margin="7" FontSize="10" TextWrapping="WrapWithOverflow" Text="Parece que alguém está na idade da escolaridade obrigatória... A não ser que estejas só a visitar, aí está tudo bem. Se estás no Dom Diogo, só podes sair se lançares o mesmo valor nos dados, pagares 50€ ou usares uma carta anti-Dom Diogo."></TextBlock>
+					</DockPanel>
 					
 					<!--Free parking-->
-					<Panel>
-
-					</Panel>
+					<DockPanel IsVisible="{Binding FreeParkingSelected}">
+						<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" Margin="7" Text="Iate"></TextBlock>
+						<TextBlock DockPanel.Dock="Bottom" Margin="7" FontSize="10" TextWrapping="WrapWithOverflow" Text="Nunca te cansas desta sociedade capitalista? Descansa um bocado no iate! (E aproveita para ficar com o dinheiro dos impostos. É isso que os ricos fazem, não é?)"></TextBlock>
+					</DockPanel>
 
 					<!--Go to jail-->
-					<Panel>
-
-					</Panel>
+					<DockPanel IsVisible="{Binding GoToJailSelected}">
+						<TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" Margin="7" Text="Vai para o Dom Diogo"></TextBlock>
+						<TextBlock DockPanel.Dock="Bottom" Margin="7" FontSize="10" TextWrapping="WrapWithOverflow" Text="Ups! Parece que tens um teste hoje. Vai para o Dom Diogo!"></TextBlock>
+					</DockPanel>
 				</Panel>
 				<Panel Grid.Row="1" Margin="10 5 10 10" Background="Green">
 					

@@ -462,7 +462,7 @@ namespace Monopolio_Server
             {
                 NetworkStream broadcastStream = c.ClientSocket.GetStream();
 
-                string text = JsonConvert.SerializeObject(msg, JsonSettings);
+                string text = JsonConvert.SerializeObject(msg, JsonSettings) + '\0';
                 byte[] broadcastBytes = Encoding.UTF8.GetBytes(text);
 
                 broadcastStream.Write(broadcastBytes, 0, broadcastBytes.Length);

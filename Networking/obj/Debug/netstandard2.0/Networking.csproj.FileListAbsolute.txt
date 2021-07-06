@@ -1,9 +1,0 @@
-J:\Dados\Programação\Aplicações\Monopolio\Networking\bin\Debug\netstandard2.0\Networking.deps.json
-J:\Dados\Programação\Aplicações\Monopolio\Networking\bin\Debug\netstandard2.0\Networking.dll
-J:\Dados\Programação\Aplicações\Monopolio\Networking\bin\Debug\netstandard2.0\Networking.pdb
-J:\Dados\Programação\Aplicações\Monopolio\Networking\obj\Debug\netstandard2.0\Networking.csprojAssemblyReference.cache
-J:\Dados\Programação\Aplicações\Monopolio\Networking\obj\Debug\netstandard2.0\Networking.AssemblyInfoInputs.cache
-J:\Dados\Programação\Aplicações\Monopolio\Networking\obj\Debug\netstandard2.0\Networking.AssemblyInfo.cs
-J:\Dados\Programação\Aplicações\Monopolio\Networking\obj\Debug\netstandard2.0\Networking.csproj.CoreCompileInputs.cache
-J:\Dados\Programação\Aplicações\Monopolio\Networking\obj\Debug\netstandard2.0\Networking.dll
-J:\Dados\Programação\Aplicações\Monopolio\Networking\obj\Debug\netstandard2.0\Networking.pdb

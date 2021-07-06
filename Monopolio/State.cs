@@ -48,7 +48,21 @@ namespace Monopolio
         public static State LoadState(string file)
         {
             string json = File.ReadAllText(file);
-            return JsonConvert.DeserializeObject<State>(json);
+            State state = JsonConvert.DeserializeObject<State>(json);
+
+            foreach (var a in state.Groups)
+            {
+                foreach (var b in a.properties)
+                {
+                    b.ResolveOwner(state.Players);
+                    b.ResolveProperty(state.board);
+                }
+            }
+
+            foreach (Player p in state.Players)
+                p.ResolveCreditor(state.Players);
+
+            return state;
         }
 
 

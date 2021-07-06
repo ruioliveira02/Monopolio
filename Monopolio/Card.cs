@@ -63,7 +63,7 @@ namespace Monopolio
         /// <param name="drawn">An array with already drawn cards</param>
         /// <param name="undrawn">An array with the undrawn cards</param>
         [Newtonsoft.Json.JsonConstructor]
-        public Deck(Card[] drawn, Card[] undrawn)
+        public Deck(List<Card> drawn, List<Card> undrawn)
         {
             Drawn = new List<Card>(drawn);
             Undrawn = new List<Card>(undrawn);

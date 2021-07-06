@@ -45,7 +45,6 @@ C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Network.xml
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\System.ValueTuple.xml
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio.pdb
-C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csprojAssemblyReference.cache
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.CopyComplete
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.exe
@@ -53,3 +52,4 @@ C:\Users\ASUS\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.pdb
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio_Server.exe
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio_Server.pdb
 C:\Users\ASUS\source\repos\Monopolio\ClientTest\bin\Debug\Monopolio_Server.exe.config
+C:\Users\Asus\source\repos\Monopolio\ClientTest\obj\Debug\ClientTest.csproj.AssemblyReference.cache
