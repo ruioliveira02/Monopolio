@@ -22,3 +22,15 @@ J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.pdb
 J:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.CopyComplete
 C:\Users\Asus\source\repos\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.AssemblyReference.cache
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.deps.json
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.dll
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\NetworkModel.pdb
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.dll
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\bin\Debug\netstandard2.0\Monopolio.pdb
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.AssemblyReference.cache
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.AssemblyInfoInputs.cache
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.AssemblyInfo.cs
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.CoreCompileInputs.cache
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.csproj.CopyComplete
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.dll
+F:\Dados\Programação\Aplicações\Monopolio\NetworkModel\obj\Debug\netstandard2.0\NetworkModel.pdb

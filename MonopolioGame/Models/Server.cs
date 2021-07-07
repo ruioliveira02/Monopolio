@@ -100,12 +100,18 @@ namespace MonopolioGame.Models
             //Change namespaces in JSON of response
             //If this isn't done the Json API will not recognize the types
             data = data.Replace("Monopolio_Server", "MonopolioGame").Replace("Monopolio Server", "MonopolioGame");
+            string[] split = data.Split('\0');
             try
             {
-                if (JsonConvert.DeserializeObject(data, Settings) is Response response)
-                    NewResponseEvent(this, response);
+                foreach (string s in split)
+                {                   
+                    if (s == "")
+                        continue;
+                    else if (JsonConvert.DeserializeObject(split[0], Settings) is Response response)
+                        NewResponseEvent(this, response);
+                }                  
             }
-            catch (JsonException)
+            catch (JsonException e)
             {
                 return false;
                 //TODO:: Add Notification to UI

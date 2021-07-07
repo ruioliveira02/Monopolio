@@ -27,7 +27,7 @@ namespace MonopolioGame.Models
 
         public void Connect(string ip, int port, string username)
         {
-            /*
+            
             const int maxAttempts = 3;
             //Reset the state of the game
             State = new GameState(null);
@@ -45,10 +45,6 @@ namespace MonopolioGame.Models
 
             //State.Connected = (res[0] && res[1]);
             State.ConnectionAttempt = !(res[0] && res[1]);
-            */
-
-            State.ConnectionAttempt = Server.Connect(ip, port)
-                && Server.Send(new IdentRequest(username));
         }
 
         public void Disconnect() => Server.Disconnect();

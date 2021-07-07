@@ -10,6 +10,7 @@ namespace MonopolioGame.ViewModels
 {
     public class PropertyViewModel : ViewModelBase
     {
+        public int Index { get; set; }
         public IBrush Color { get; set; }
         public int Row { get; set; }
         public int Column { get; set; }
@@ -21,6 +22,7 @@ namespace MonopolioGame.ViewModels
         public IBrush ColorPlayer { get; set; }
         public PropertyViewModel(IBrush color, int index, string name, int cost)
         {
+            Index = index;
             Players = new ObservableCollection<ColorViewModel>();
             Color = color;
 

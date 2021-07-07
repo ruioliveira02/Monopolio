@@ -36,6 +36,7 @@ namespace MonopolioGame.Interfaces.Responses
                 state.Connected = Accepted;
 
             state.CurrentState = State;
+            state.Chat += string.Format("{0} entrou no jogo.\n", Username);
         }
     }
 }

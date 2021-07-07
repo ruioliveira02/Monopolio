@@ -23,7 +23,8 @@ namespace MonopolioGame.Interfaces.Responses
 
         public override void Execute(GameState game)
         {
-            game.CurrentState.Turn = Turn;
+            game.CurrentState = State;
+            game.Chat += string.Format("É a vez de {0}.\n", game.CurrentState.Players[Turn].name);
         }
     }
 }

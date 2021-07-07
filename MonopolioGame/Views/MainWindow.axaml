@@ -12,8 +12,8 @@
     <vm:MainWindowViewModel/>
   </Design.DataContext>
   <Grid>
-    <!--<Panel IsVisible="{Binding GameScreen}">-->
-	<Panel IsVisible="True">
+    <Panel IsVisible="{Binding GameScreen}">
+      <!--Panel IsVisible="True"-->
 	  <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -103,9 +103,30 @@
 				</Grid.RowDefinitions>
 				<Panel Grid.Row="0" Margin="10 10 10 5" Background="Green">
 					<!--Properties-->
-					<Panel IsVisible="{Binding PropertySelected}">
-						
-					</Panel>
+          <!--<Panel IsVisible="{Binding PropertySelected}">-->
+          <Panel IsVisible="{Binding PropertySelected}" DataContext="{Binding PropertySelectedVM}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+              </Grid.RowDefinitions>
+
+              <Panel Grid.Row="0"  Background="{Binding Color}"></Panel>
+              <TextBlock Grid.Row="1" Text="{Binding PropertyName}"></TextBlock>
+              <TextBlock Grid.Row="2" Text="{Binding Owner}"></TextBlock>
+              <TextBlock Grid.Row="3" Text="{Binding Price}"></TextBlock>
+              <TextBlock Grid.Row="4" Text="{Binding Rent}"></TextBlock>
+              <TextBlock Grid.Row="5" Text="{Binding Houses}"></TextBlock>
+              <Button Grid.Row="6" Content="{Binding SellOption}"></Button>
+              <Button Grid.Row="7" Content="Construir" IsVisible="{Binding BuildVisible}"></Button>
+            </Grid>                   
+          </Panel>
 
 					<!--Chance-->
 					<DockPanel IsVisible="{Binding ChanceSelected}">
@@ -155,8 +176,8 @@
 		</Panel>
       </Grid>
     </Panel>
-	<!--<Panel IsVisible="{Binding LoginScreen}">-->
-	<Panel IsVisible="False">
+	<Panel IsVisible="{Binding LoginScreen}">
+    <!--<Panel IsVisible="False">-->
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="1*"></RowDefinition>
